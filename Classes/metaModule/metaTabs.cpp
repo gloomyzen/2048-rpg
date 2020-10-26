@@ -1,7 +1,7 @@
 #include "metaTabs.h"
 #include "cocos2d.h"
 
-using namespace mb::metaModule;
+using namespace sr::metaModule;
 using namespace cocos2d;
 using namespace ui;
 

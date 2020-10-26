@@ -1,6 +1,6 @@
 #include "testWidget.h"
 
-using namespace mb::interfaceModule;
+using namespace sr::interfaceModule;
 
 
 testWidget::testWidget() {

@@ -1,16 +1,16 @@
-#ifndef MERCENARY_BATTLES_MENUBUTTON_H
-#define MERCENARY_BATTLES_MENUBUTTON_H
+#ifndef SWIPE_RPG_MENUBUTTON_H
+#define SWIPE_RPG_MENUBUTTON_H
 
 #include "cocos2d.h"
 #include "ui/CocosGUI.h"
-#include "coreModule/nodes/nodeProperties.h"
+#include "common/coreModule/nodes/nodeProperties.h"
 
-namespace mb {
+namespace sr {
 	namespace metaModule {
 		using namespace cocos2d;
 		using namespace ui;
 
-		class menuButton : public Button, public coreModule::nodeProperties {
+	class menuButton : public Button, public common::coreModule::nodeProperties {
 		public:
 			menuButton();
 			~menuButton();
@@ -24,6 +24,6 @@ namespace mb {
 
 		};
 	}
-}//mb::metaModule
+}//sr::metaModule
 
-#endif //MERCENARY_BATTLES_MENUBUTTON_H
+#endif //SWIPE_RPG_MENUBUTTON_H

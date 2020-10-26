@@ -1,18 +1,19 @@
-#ifndef MERCENARY_BATTLES_METATABS_H
-#define MERCENARY_BATTLES_METATABS_H
+#ifndef SWIPE_RPG_METATABS_H
+#define SWIPE_RPG_METATABS_H
 
 #include "cocos2d.h"
 #include "ui/CocosGUI.h"
-#include "coreModule/nodes/nodeProperties.h"
+#include "common/coreModule/nodes/nodeProperties.h"
 #include "metaModule/tabs/simpleTab.h"
 #include "metaModule/widgets/menuButton.h"
 #include <vector>
 #include <string>
 
-namespace mb {
+namespace sr {
 	namespace metaModule {
 		using namespace cocos2d;
 		using namespace ui;
+		using namespace common;
 
 		struct tabsElement {
 			int index;
@@ -42,7 +43,7 @@ namespace mb {
 
 		};
 	}
-}//mb::metaModule
+}//sr::metaModule
 
 
-#endif //MERCENARY_BATTLES_METATABS_H
+#endif //SWIPE_RPG_METATABS_H

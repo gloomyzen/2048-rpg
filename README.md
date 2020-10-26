@@ -16,7 +16,7 @@ For example, for Win32 -> unzip to `C:/bin/cocos2dx`, for MacOs `/Application/De
 #### Build from sources :
 ```bash
 cd 2048-rpg
-cmake ..
+cmake .. -DDEBUG=1
 make -j$(nproc)
 ```
 
@@ -24,7 +24,7 @@ make -j$(nproc)
 For XCode - mac project
 ```bash
 cd 2084-rpg/proj.ios_mac/mac/
-cmake ../.. -GXcode
+cmake ../.. -GXcode -DDEBUG=1
 sudo xcode-select --reset
 ```
 For XCode - ios project
@@ -36,6 +36,6 @@ sudo xcode-select --reset
 For Visual Studio
 ```bash
 cd 2084-rpg/proj.win32/
-cmake .. -G "Visual Studio 16 2019" -AWin32
+cmake .. -G "Visual Studio 16 2019" -AWin32 -DDEBUG=1
 and open .sln file from `proj.win32` folder
 ```

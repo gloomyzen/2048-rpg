@@ -1,8 +1,8 @@
 #include "AppDelegate.h"
-#include "coreModule/gameManager.h"
-#include "coreModule/enums/statesEnums.h"
-#include "coreModule/scenes/scenesFactory/scenesFactoryInstance.h"
-#include "coreModule/resources/settings/settingManager.h"
+#include "common/coreModule/gameManager.h"
+#include "common/coreModule/enums/statesEnums.h"
+#include "common/coreModule/scenes/scenesFactory/scenesFactoryInstance.h"
+#include "common/coreModule/resources/settings/settingManager.h"
 #include "metaModule/metaTabs.h"
 
 // #define USE_AUDIO_ENGINE 1
@@ -39,7 +39,7 @@ static int register_all_packages() {
 }
 
 bool AppDelegate::applicationDidFinishLaunching() {
-	auto setting = mb::coreModule::settingManager::load();
+	auto setting = common::coreModule::settingManager::load();
 	// initialize director
 	auto director = Director::getInstance();
 	auto glview = director->getOpenGLView();
@@ -66,7 +66,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 #endif
 
 	register_all_packages();
-	GET_SCENES_FACTORY().registerState(mb::coreModule::eGameStates::BATTLE_SCENE, [](Layer* node)->Layer*{
+	GET_SCENES_FACTORY().registerState(common::coreModule::eGameStates::BATTLE_SCENE, [](Layer* node)->Layer*{
 		auto _background = cocos2d::Sprite::create("images/ui/windows/testWindow/background.png");
 		_background->setName("background");
 		_background->setAnchorPoint(Vec2(0.f, 0.f));
@@ -77,18 +77,18 @@ bool AppDelegate::applicationDidFinishLaunching() {
 		return node;
 	});
 
-	GET_SCENES_FACTORY().registerState(mb::coreModule::eGameStates::MAIN_MENU, [](Layer* node)->Layer*{
+	GET_SCENES_FACTORY().registerState(common::coreModule::eGameStates::MAIN_MENU, [](Layer* node)->Layer*{
 		auto _background = cocos2d::Sprite::create("images/ui/windows/testWindow/background.png");
 		_background->setName("background");
 		_background->setAnchorPoint(Vec2(0.f, 0.f));
 		node->addChild(_background);
-		auto meta = new mb::metaModule::metaTabs();
+		auto meta = new sr::metaModule::metaTabs();
 		node->addChild(meta);
 
 		return node;
 	});
 
-	GET_GAME_MANAGER().run(mb::coreModule::eGameStates::MAIN_MENU);
+	GET_GAME_MANAGER().run(common::coreModule::eGameStates::MAIN_MENU);
 
 	return true;
 }

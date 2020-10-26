@@ -1,6 +1,6 @@
 #include "menuButton.h"
 
-using namespace mb::metaModule;
+using namespace sr::metaModule;
 
 menuButton::menuButton() {
 	this->setName("menuButton");

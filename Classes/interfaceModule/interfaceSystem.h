@@ -1,9 +1,9 @@
-#ifndef MERCENARY_BATTLES_INTERFACESYSTEM_H
-#define MERCENARY_BATTLES_INTERFACESYSTEM_H
+#ifndef SWIPE_RPG_INTERFACESYSTEM_H
+#define SWIPE_RPG_INTERFACESYSTEM_H
 
 #include "cocos2d.h"
 
-namespace mb {
+namespace sr {
 	namespace interfaceModule {
 		using namespace cocos2d;
 
@@ -12,7 +12,7 @@ namespace mb {
 		};
 
 	}
-}//mb::interfaceModule
+}//sr::interfaceModule
 
 
-#endif //MERCENARY_BATTLES_INTERFACESYSTEM_H
+#endif //SWIPE_RPG_INTERFACESYSTEM_H

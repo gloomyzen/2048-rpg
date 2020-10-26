@@ -1,6 +1,6 @@
 #include "simpleTab.h"
 
-using namespace mb::metaModule;
+using namespace sr::metaModule;
 
 
 simpleTab::simpleTab() {

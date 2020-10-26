@@ -1,12 +1,13 @@
-#ifndef MERCENARY_BATTLES_TESTWIDGET_H
-#define MERCENARY_BATTLES_TESTWIDGET_H
+#ifndef SWIPE_RPG_TESTWIDGET_H
+#define SWIPE_RPG_TESTWIDGET_H
 
 #include "cocos2d.h"
-#include "coreModule/nodes/nodeProperties.h"
+#include "common/coreModule/nodes/nodeProperties.h"
 
-namespace mb {
+namespace sr {
 	namespace interfaceModule {
 		using namespace cocos2d;
+		using namespace common;
 
 		class testWidget : public coreModule::nodeProperties, public Node {
 		public:
@@ -30,7 +31,7 @@ namespace mb {
 
 		};
 	}
-}
+}//sr::interfaceModule
 
 
-#endif //MERCENARY_BATTLES_TESTWIDGET_H
+#endif //SWIPE_RPG_TESTWIDGET_H
