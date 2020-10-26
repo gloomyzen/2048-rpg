@@ -58,7 +58,7 @@ if (${DEBUG})
 endif ()
 
 #------------------------------------------------------------------------------
-#                               Rapidjson
+#                               deprecated: Rapidjson
 #------------------------------------------------------------------------------
 #if (NOT EXISTS ${CMAKE_SOURCE_DIR}/lib/rapidjson/include)
 #    message(FATAL_ERROR "Rapidjson not found, download lib/rapidjson or use 'git submodules update'.")
