@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.6)
 
-set(APP_NAME 2048-rpg)
+set(APP_NAME swipe-rpg)
 
 project(${APP_NAME})
 
