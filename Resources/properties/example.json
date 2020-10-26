@@ -1,0 +1,35 @@
+{
+  "example": {
+    "TransformComponent": {
+      "position": [ 200, 200 ],
+      "size": [ 128, 128 ],
+      "scale": 1
+    }
+  },
+  "spriteNode": {
+    "TransformComponent": {
+      "position": [ 128, 128 ],
+      "size": [ 128, 128 ],
+      "scale": 1
+    },
+    "SpriteComponent": {
+      "image": "images/testTiles/tile_3.png"
+    }
+  },
+  "labelNode": {
+    "TransformComponent": {
+      "anchor": [ 0.5, 0.5 ],
+      "scale": 1
+    },
+    "LabelComponent": {
+      "text": "Label Node Text",
+      "fontType": "ttf",
+      "fontSize": 24.0,
+      "fontFile": "fonts/Marker Felt.ttf",
+      "bold": true,
+      "italics": true,
+      "alight": "center",
+      "maxLineWidth": 200
+    }
+  }
+}

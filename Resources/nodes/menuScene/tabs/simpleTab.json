@@ -1,0 +1,14 @@
+{
+  "type": "layout",
+  "name": "simpleTab",
+  "child": [
+    {
+      "type": "label",
+      "name": "comingSoon"
+    },
+    {
+      "type": "dragonbones",
+      "name": "dbtest"
+    }
+  ]
+}

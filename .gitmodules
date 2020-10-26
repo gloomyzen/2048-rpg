@@ -1,0 +1,12 @@
+[submodule "lib/imgui"]
+	path = lib/imgui
+	url = git@gitlab.com:gloomyzen/cocos2d-x-imgui.git
+[submodule "lib/dragonBones"]
+	path = lib/dragonBones
+	url = git@gitlab.com:gloomyzen/cocos2d-dragonbones.git
+[submodule "cocos2d"]
+	path = cocos2d
+	url = git@gitlab.com:gloomyzen/cocos2d.git
+[submodule "Classes/common"]
+	path = Classes/common
+	url = git@gitlab.com:gloomyzen/cocos2d-common.git

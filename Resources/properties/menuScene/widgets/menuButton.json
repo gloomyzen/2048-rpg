@@ -1,0 +1,13 @@
+{
+  "menuButton": {
+    "TransformComponent": {
+      "anchor": [ 0.0, 0.0 ],
+      "scale": 1
+    },
+    "ButtonComponent": {
+      "normalImage": "images/ui/kit/Button03.png",
+      "selectedImage": "images/ui/kit/Button04.png",
+      "disabledImage": "images/ui/kit/Button02.png"
+    }
+  }
+}

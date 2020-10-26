@@ -1,0 +1,33 @@
+{
+  "simpleTab": {
+    "TransformComponent": {
+      "anchor": [ 0.5, 0.5 ]
+    }
+  },
+  "comingSoon": {
+    "TransformComponent": {
+      "anchor": [ 0.5, 0.5 ],
+      "scale": 1
+    },
+    "LabelComponent": {
+      "text": "Coming Soon",
+      "fontType": "ttf",
+      "fontSize": 24,
+      "fontFile": "fonts/Marker Felt.ttf",
+      "bold": true,
+      "alight": "center",
+      "maxLineWidth": 200
+    }
+  },
+  "dbtest": {
+    "TransformComponent": {
+      "anchor": [ 0.5, 0.5 ],
+      "scale": 1
+    },
+    "DragonbonesComponent": {
+      "name": "GoblinAxe",
+      "skeFile": "images/characters/anim/axe_goblin/GoblinAxe_ske.json",
+      "texFile": "images/characters/anim/axe_goblin/GoblinAxe_tex.json"
+    }
+  }
+}
