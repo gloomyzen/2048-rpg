@@ -3,18 +3,15 @@
 #------------------------------------------------------------------------------
 include(${CMAKE_SOURCE_DIR}/cmake/StandardProjectSettings.cmake)
 # General dependency target
-add_library(project_dependency ${CMAKE_SOURCE_DIR}/lib/empty.cpp)
+add_library(project_dependency ${CMAKE_SOURCE_DIR}/lib/empty.h ${CMAKE_SOURCE_DIR}/lib/empty.cpp)
 #add_library(project_options ${CMAKE_SOURCE_DIR}/lib/empty.cpp)
-add_library(project_warning ${CMAKE_SOURCE_DIR}/lib/empty.cpp)
+add_library(project_warning ${CMAKE_SOURCE_DIR}/lib/empty.h ${CMAKE_SOURCE_DIR}/lib/empty.cpp)
 
 #------------------------------------------------------------------------------
 #                         CMake modules and options
 #------------------------------------------------------------------------------
 
 include(ExternalProject)
-
-# enable cache system
-include(${CMAKE_SOURCE_DIR}/cmake/Cache.cmake)
 
 # sanitizer options if supported by compiler
 #include(${CMAKE_SOURCE_DIR}/cmake/Sanitizers.cmake)
@@ -29,12 +26,14 @@ include(${CMAKE_SOURCE_DIR}/cmake/StaticAnalyzers.cmake)
 
 #TODO change target to project files
 # Add as many warning as possible:
-target_compile_features(project_warning INTERFACE cxx_std_17)
-target_compile_options(project_warning INTERFACE -Wall)
-include(${CMAKE_SOURCE_DIR}/cmake/CompilerWarnings.cmake)
-set_project_warnings(project_warning)
-target_link_libraries(project_warning INTERFACE ${PROJECT_NAME})
+#target_compile_features(project_warning INTERFACE cxx_std_17)
+#target_compile_options(project_warning INTERFACE -Wall)
+#include(${CMAKE_SOURCE_DIR}/cmake/CompilerWarnings.cmake)
+#set_project_warnings(project_warning)
+#target_link_libraries(project_warning INTERFACE ${PROJECT_NAME})
 
+# enable cache system
+#include(${CMAKE_SOURCE_DIR}/cmake/Cache.cmake)
 # Very basic PCH example
 option(ENABLE_PCH "Enable Precompiled Headers" ON)
 if (ENABLE_PCH AND NOT IOS)
@@ -90,4 +89,25 @@ target_link_libraries(project_dependency INTERFACE dragonbones_target)
 #------------------------------------------------------------------------------
 target_include_directories(project_dependency INTERFACE
         $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/lib/>
+        )
+
+#------------------------------------------------------------------------------
+#                               Change library paths
+#------------------------------------------------------------------------------
+set_target_properties(project_dependency
+        PROPERTIES
+        ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+        LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+        )
+
+set_target_properties(project_warning
+        PROPERTIES
+        ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+        LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+        )
+
+set_target_properties(dragonbones_target
+        PROPERTIES
+        ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+        LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
         )
