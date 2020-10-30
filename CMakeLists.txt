@@ -4,10 +4,14 @@ set(APP_NAME swipe-rpg)
 
 project(${APP_NAME})
 
-if (${DEBUG})
-    add_definitions(-DDEBUG=1)
-else ()
+if (ANDROID OR IOS)
     add_definitions(-DRELEASE=1)
+else()
+    if (${DEBUG})
+        add_definitions(-DDEBUG=1)
+    else ()
+        add_definitions(-DRELEASE=1)
+    endif ()
 endif ()
 
 if(XCODE)
@@ -122,6 +126,12 @@ if(APPLE)
     elseif(IOS)
         set_xcode_property(${APP_NAME} INFOPLIST_FILE "${CMAKE_CURRENT_SOURCE_DIR}/proj.ios_mac/ios/Info.plist")
         set_xcode_property(${APP_NAME} ASSETCATALOG_COMPILER_APPICON_NAME "AppIcon")
+        set_xcode_property(${APP_NAME} PRODUCT_BUNDLE_IDENTIFIER "com.efreyu.swipe-rpg")
+#        set_xcode_property(${APP_NAME} CODE_SIGN_STYLE "Manual")
+        set_xcode_property(${APP_NAME} CODE_SIGN_IDENTITY "Apple Development")
+        set_xcode_property(${APP_NAME} DEVELOPMENT_TEAM[variant=Debug] "Artur Barilo")#XYP5P695DT
+#        set_xcode_property(${APP_NAME} DEVELOPMENT_TEAM[variant=Debug] "V8CR4A82QX")#XYP5P695DT
+#        set_xcode_property(${APP_NAME} PROVISIONING_PROFILE_SPECIFIER[variant=Debug] "Artur Barilo")
     endif()
 
     # For code-signing, set the DEVELOPMENT_TEAM:

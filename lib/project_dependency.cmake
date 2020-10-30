@@ -1,15 +1,17 @@
 #------------------------------------------------------------------------------
 #                       General Projects Settings
 #------------------------------------------------------------------------------
-#include(${CMAKE_SOURCE_DIR}/cmake/StandardProjectSettings.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/StandardProjectSettings.cmake)
 # General dependency target
 add_library(project_dependency ${CMAKE_SOURCE_DIR}/lib/empty.cpp)
+#add_library(project_options ${CMAKE_SOURCE_DIR}/lib/empty.cpp)
+add_library(project_warning ${CMAKE_SOURCE_DIR}/lib/empty.cpp)
 
 #------------------------------------------------------------------------------
 #                         CMake modules and options
 #------------------------------------------------------------------------------
 
-#include(ExternalProject)
+include(ExternalProject)
 
 # enable cache system
 include(${CMAKE_SOURCE_DIR}/cmake/Cache.cmake)
@@ -23,26 +25,26 @@ include(${CMAKE_SOURCE_DIR}/cmake/Cache.cmake)
 #enable_doxygen()
 
 # allow for static analysis options
-#include(${CMAKE_SOURCE_DIR}/cmake/StaticAnalyzers.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/StaticAnalyzers.cmake)
 
 #TODO change target to project files
 # Add as many warning as possible:
-#add_library(project_warning INTERFACE)
-#target_compile_features(project_warning INTERFACE cxx_std_17)
-#target_compile_options(project_warning INTERFACE -Wall)
-#include(${CMAKE_SOURCE_DIR}/cmake/CompilerWarnings.cmake)
-#set_project_warnings(project_warning)
-#target_link_libraries(project_warning INTERFACE ${PROJECT_NAME})
+target_compile_features(project_warning INTERFACE cxx_std_17)
+target_compile_options(project_warning INTERFACE -Wall)
+include(${CMAKE_SOURCE_DIR}/cmake/CompilerWarnings.cmake)
+set_project_warnings(project_warning)
+target_link_libraries(project_warning INTERFACE ${PROJECT_NAME})
 
 # Very basic PCH example
-#option(ENABLE_PCH "Enable Precompiled Headers" OFF)
-#if (ENABLE_PCH)
+option(ENABLE_PCH "Enable Precompiled Headers" ON)
+if (ENABLE_PCH AND NOT IOS)
     # This sets a global PCH parameter, each project will build its own PCH, which
     # is a good idea if any #define's change
     #
     # consider breaking this out per project as necessary
-#    target_precompile_headers(${PROJECT_NAME} PRIVATE <vector> <array> <string> <map> <utility> <memory> <algorithm> <bitset>)
-#endif ()
+    target_precompile_headers(${PROJECT_NAME} PRIVATE <vector> <array> <string> <map> <utility> <memory> <algorithm> <bitset> "${CMAKE_SOURCE_DIR}/lib/empty.h")
+endif ()
+target_link_libraries(project_dependency INTERFACE project_warning)
 
 #------------------------------------------------------------------------------
 #                        ImGui, included for debugging only
