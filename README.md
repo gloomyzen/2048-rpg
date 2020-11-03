@@ -23,19 +23,19 @@ make -j$(nproc)
 #### Generate project file (VS, Xcode, Android studio) :
 For XCode - mac project
 ```bash
-cd 2084-rpg/proj.ios_mac/mac/
+cd 2048-rpg/proj.ios_mac/mac/
 cmake ../.. -GXcode -DDEBUG=1
 sudo xcode-select --reset
 ```
 For XCode - ios project
 ```bash
-cd 2084-rpg/proj.ios_mac/ios/
+cd 2048-rpg/proj.ios_mac/ios/
 cmake ../.. -GXcode -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_SYSROOT=iphoneos
 sudo xcode-select --reset
 ```
 For Visual Studio
 ```bash
-cd 2084-rpg/proj.win32/
+cd 2048-rpg/proj.win32/
 cmake .. -G "Visual Studio 16 2019" -AWin32 -DDEBUG=1
 and open .sln file from `proj.win32` folder
 ```
