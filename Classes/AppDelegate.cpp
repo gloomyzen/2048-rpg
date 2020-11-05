@@ -45,9 +45,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	auto glview = director->getOpenGLView();
 	if (!glview) {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
-		glview = GLViewImpl::createWithRect("Mercenary Battles", cocos2d::Rect(0, 0, setting.largeResolutionSize.width, setting.largeResolutionSize.height));
+		glview = GLViewImpl::createWithRect("Swipe RPG", cocos2d::Rect(0, 0, setting.largeResolutionSize.width, setting.largeResolutionSize.height), 1.f, true);
 #else
-		glview = GLViewImpl::create("Mercenary Battles");
+		glview = GLViewImpl::create("Swipe RPG");
 #endif
 		director->setOpenGLView(glview);
 	}
@@ -60,9 +60,11 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 	// Set the design resolution
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
-	director->setContentScaleFactor(1);
+	director->setContentScaleFactor(1.f);
+	glview->setFrameZoomFactor(1.f);
+	glview->setResolutionPolicy(ResolutionPolicy::FIXED_WIDTH);
 #else
-	glview->setDesignResolutionSize(setting.frameResolutionSize.width, setting.frameResolutionSize.height, ResolutionPolicy::FIXED_HEIGHT);
+	glview->setDesignResolutionSize(setting.frameResolutionSize.width, setting.frameResolutionSize.height, ResolutionPolicy::FIXED_WIDTH);
 #endif
 
 	register_all_packages();
