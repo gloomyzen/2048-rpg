@@ -1,3 +1,4 @@
+#include <battleModule/battleCore.h>
 #include "AppDelegate.h"
 #include "common/coreModule/gameManager.h"
 #include "common/coreModule/enums/statesEnums.h"
@@ -14,8 +15,7 @@ using namespace cocos2d::experimental;
 
 USING_NS_CC;
 
-AppDelegate::AppDelegate() {
-}
+AppDelegate::AppDelegate() {}
 
 AppDelegate::~AppDelegate() {
 #if USE_AUDIO_ENGINE
@@ -71,8 +71,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
 		_background->setName("background");
 		_background->setAnchorPoint(Vec2(0.f, 0.f));
 		node->addChild(_background);
-		auto label = Label::createWithTTF("Battle scene", "fonts/Marker Felt.ttf", 24);
-		node->addChild(label);
+		auto battle = new sr::battleModule::battleCore();
+		node->addChild(battle);
 
 		return node;
 	});
@@ -88,7 +88,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 		return node;
 	});
 
-	GET_GAME_MANAGER().run(common::coreModule::eGameStates::MAIN_MENU);
+	GET_GAME_MANAGER().run(common::coreModule::eGameStates::BATTLE_SCENE);
 
 	return true;
 }

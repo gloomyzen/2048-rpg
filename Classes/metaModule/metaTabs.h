@@ -28,7 +28,7 @@ namespace sr {
 			~metaTabs();
 			CREATE_FUNC(metaTabs);
 			static Node *createNode() { return metaTabs::create(); }
-			bool init() {
+			bool init() override {
 				if (!Node::init()) {
 					return false;
 				}
