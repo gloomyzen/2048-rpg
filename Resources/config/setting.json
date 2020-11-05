@@ -1,6 +1,6 @@
 {
-  "frameResolution":{ "x":1136, "y":768 },
-  "largeResolution":{ "x":1366, "y":768 },
+  "frameResolution":{ "x":768, "y":1136 },
+  "largeResolution":{ "x":768, "y":1366 },
 
   "showDisplayStats" : true
 }
