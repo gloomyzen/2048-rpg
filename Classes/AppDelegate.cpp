@@ -1,4 +1,5 @@
-#include <battleModule/battleCore.h>
+#include "battleModule/battleCore.h"
+#include "interfaceModule/customNodeTypes.h"
 #include "AppDelegate.h"
 #include "common/coreModule/gameManager.h"
 #include "common/coreModule/enums/statesEnums.h"
@@ -15,7 +16,9 @@ using namespace cocos2d::experimental;
 
 USING_NS_CC;
 
-AppDelegate::AppDelegate() {}
+AppDelegate::AppDelegate() {
+	sr::interfaceModule::customNodeTypes::registerAllCustomNodes();
+}
 
 AppDelegate::~AppDelegate() {
 #if USE_AUDIO_ENGINE

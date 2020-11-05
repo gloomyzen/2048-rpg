@@ -2,6 +2,4 @@
 
 using namespace sr::battleModule;
 
-battleCore::battleCore() {
-
-}
+battleCore::battleCore() {}

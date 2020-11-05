@@ -9,7 +9,7 @@ namespace sr {
 	using namespace cocos2d;
 	using namespace common;
 
-		class battleCore : public coreModule::nodeProperties, public Node {
+		class battleCore : public Node {
 		public:
 			battleCore();
 			~battleCore() = default;
