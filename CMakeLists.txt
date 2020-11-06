@@ -15,9 +15,7 @@ else()
 endif ()
 
 if(XCODE)
-    if(NOT DEFINED CMAKE_XCODE_ATTRIBUTE_IPHONEOS_DEPLOYMENT_TARGET)
-        SET (CMAKE_XCODE_ATTRIBUTE_IPHONEOS_DEPLOYMENT_TARGET 8.0)
-    endif()
+    SET (CMAKE_XCODE_ATTRIBUTE_IPHONEOS_DEPLOYMENT_TARGET 11.0)
 endif()
 
 if(NOT DEFINED BUILD_ENGINE_DONE) # to test cocos-db into root project
@@ -124,18 +122,14 @@ if(APPLE)
     if(MACOSX)
         set_xcode_property(${APP_NAME} INFOPLIST_FILE "${CMAKE_CURRENT_SOURCE_DIR}/proj.ios_mac/mac/Info.plist")
     elseif(IOS)
+        include(${CMAKE_SOURCE_DIR}/cmake/IOSHelper.cmake)
         set_xcode_property(${APP_NAME} INFOPLIST_FILE "${CMAKE_CURRENT_SOURCE_DIR}/proj.ios_mac/ios/Info.plist")
         set_xcode_property(${APP_NAME} ASSETCATALOG_COMPILER_APPICON_NAME "AppIcon")
-        set_xcode_property(${APP_NAME} PRODUCT_BUNDLE_IDENTIFIER "com.efreyu.swipe-rpg")
-#        set_xcode_property(${APP_NAME} CODE_SIGN_STYLE "Manual")
-        set_xcode_property(${APP_NAME} CODE_SIGN_IDENTITY "Apple Development")
-        set_xcode_property(${APP_NAME} DEVELOPMENT_TEAM[variant=Debug] "Artur Barilo")#XYP5P695DT
-#        set_xcode_property(${APP_NAME} DEVELOPMENT_TEAM[variant=Debug] "V8CR4A82QX")#XYP5P695DT
-#        set_xcode_property(${APP_NAME} PROVISIONING_PROFILE_SPECIFIER[variant=Debug] "Artur Barilo")
+        #Deployment
+        set_attr_to_all_target(INSTALL_PATH "/" "all")
+        set_attr_to_all_target(SKIP_INSTALL "YES" "not_project")
+        set_attr_to_all_target(SKIP_INSTALL "NO" "project")
     endif()
-
-    # For code-signing, set the DEVELOPMENT_TEAM:
-    #set_xcode_property(${APP_NAME} DEVELOPMENT_TEAM "GRLXXXX2K9")
 elseif(WINDOWS)
     cocos_copy_target_dll(${APP_NAME})
 endif()
