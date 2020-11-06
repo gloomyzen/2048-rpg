@@ -1,5 +1,5 @@
-#ifndef SWIPE_RPG_BOARD_H
-#define SWIPE_RPG_BOARD_H
+#ifndef SWIPE_RPG_BOARDNODE_H
+#define SWIPE_RPG_BOARDNODE_H
 
 #include "cocos2d.h"
 #include "common/coreModule/nodes/nodeProperties.h"
@@ -9,12 +9,12 @@ namespace sr {
 		using namespace cocos2d;
 		using namespace common;
 
-		class board : public coreModule::nodeProperties, public Node {
+		class boardNode : public coreModule::nodeProperties, public Sprite {
 		public:
-			board();
-			~board() = default;
-			CREATE_FUNC(board);
-			static Node *createNode() { return board::create(); }
+			boardNode();
+			~boardNode();
+			CREATE_FUNC(boardNode);
+			static Node *createNode() { return boardNode::create(); }
 			bool init() override {
 				if (!Node::init()) {
 					return false;
@@ -27,4 +27,4 @@ namespace sr {
 	}
 }
 
-#endif //SWIPE_RPG_BOARD_H
+#endif //SWIPE_RPG_BOARDNODE_H

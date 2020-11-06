@@ -1,0 +1,10 @@
+{
+  "type": "sprite",
+  "name": "boardNode",
+  "child": [
+    {
+      "type": "label",
+      "name": "labelNode"
+    }
+  ]
+}

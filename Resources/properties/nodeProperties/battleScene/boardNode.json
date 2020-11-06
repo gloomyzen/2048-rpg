@@ -1,0 +1,26 @@
+{
+  "boardNode": {
+    "TransformComponent": {
+      "anchor": [ 0.003, -0.3 ]
+    },
+    "SpriteComponent": {
+      "image": "images/board/board_1.png"
+    }
+  },
+  "labelNode": {
+    "TransformComponent": {
+      "position": [ 70, -78 ],
+      "anchor": [ 0.5, 0.5 ],
+      "stretch": [ 1.0, 0.5 ]
+    },
+    "LabelComponent": {
+      "text": "Label Node Text",
+      "fontType": "ttf",
+      "fontSize": 24.0,
+      "fontFile": "fonts/Marker Felt.ttf",
+      "bold": true,
+      "italics": true,
+      "alight": "center"
+    }
+  }
+}
