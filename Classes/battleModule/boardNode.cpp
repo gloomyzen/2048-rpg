@@ -39,6 +39,7 @@ void boardNode::initBoard() {
 			data.tile->setPosition(data.pos);
 			addChild(data.tile);
 			position.y += BOARD_TILE_H;
+			tileList.push_back(data);
 		}
 		position.x += BOARD_TILE_W;
 	}
