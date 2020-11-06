@@ -9,7 +9,7 @@ namespace sr {
 		using namespace cocos2d;
 		using namespace common;
 
-		class tileNode : public coreModule::nodeProperties, public Node {
+		class tileNode : public coreModule::nodeProperties, public Sprite {
 		public:
 			tileNode();
 			~tileNode() = default;
