@@ -9,7 +9,20 @@ battleCore::battleCore() {
 	auto atp = AsyncTaskPool::getInstance();
 	atp->enqueue(AsyncTaskPool::TaskType::TASK_OTHER, [](void*){}, nullptr,
 				 [this]() {
-					 board = dynamic_cast<boardNode*>(findNode("boardNode", this));
+					 board = new boardNode();
+					 auto rect = board->getBoundingBox();
+					 Vec2 origin = rect.origin;
+					 Vec2 destination;
+					 auto boardSize = board->getContentSize();
+					 destination.x = rect.origin.x + rect.size.width;
+					 destination.y = rect.origin.y + rect.size.height;
+					 clippingNode = ClippingNode::create();
+					 DrawNode * stencil = DrawNode::create();
+					 stencil->setName("clipperStencil");
+					 stencil->drawSolidRect(origin, destination, Color4F::MAGENTA);
+					 clippingNode->setStencil(stencil);
+					 addChild(clippingNode);
+					 clippingNode->addChild(board);
 				 }
 	);
 }

@@ -18,6 +18,7 @@ namespace sr {
 
 		private:
 			boardNode* board = nullptr;
+			ClippingNode* clippingNode = nullptr;
 		};
 	}
 }
