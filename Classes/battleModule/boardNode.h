@@ -21,13 +21,6 @@ namespace sr {
 			boardNode();
 			~boardNode();
 			CREATE_FUNC(boardNode);
-			static Node *createNode() { return boardNode::create(); }
-			bool init() override {
-				if (!Node::init()) {
-					return false;
-				}
-				return true;
-			}
 
 		private:
 			void initBoard();

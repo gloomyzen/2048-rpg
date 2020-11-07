@@ -15,13 +15,6 @@ namespace sr {
 			battleCore();
 			~battleCore() = default;
 			CREATE_FUNC(battleCore);
-			static Node *createNode() { return battleCore::create(); }
-			bool init() override {
-				if (!Node::init()) {
-					return false;
-				}
-				return true;
-			}
 
 		private:
 			boardNode* board = nullptr;

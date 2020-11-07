@@ -10,7 +10,6 @@ battleCore::battleCore() {
 	atp->enqueue(AsyncTaskPool::TaskType::TASK_OTHER, [](void*){}, nullptr,
 				 [this]() {
 					 board = dynamic_cast<boardNode*>(findNode("boardNode", this));
-					 auto test = "";
 				 }
 	);
 }

@@ -14,13 +14,6 @@ namespace sr {
 			tileNode();
 			~tileNode() = default;
 			CREATE_FUNC(tileNode);
-			static Node *createNode() { return tileNode::create(); }
-			bool init() override {
-				if (!Node::init()) {
-					return false;
-				}
-				return true;
-			}
 
 		private:
 		};
