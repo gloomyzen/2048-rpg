@@ -13,6 +13,7 @@ boardNode::~boardNode() {}
 void boardNode::initBoard() {
 	clearTiles();
 	setDefaultPosition();
+	initHandling();
 }
 
 void boardNode::clearTiles() {
@@ -45,4 +46,36 @@ void boardNode::setDefaultPosition() {
 		tileList.push_back(row);
 		position.x += BOARD_TILE_W;
 	}
+}
+
+void boardNode::initHandling() {
+	auto listener = EventListenerTouchOneByOne::create();
+	listener->setSwallowTouches(true);
+	listener->onTouchBegan = [this](Touch* touch, Event*){
+		if (!isTouch) {
+			isTouch = true;
+			lastTouchInfo = touch;
+			return true;
+		}
+		return false;
+	};
+	listener->onTouchMoved = [this](Touch* touch, Event* event){
+		touchUpdate(touch, event);
+		return true;
+	};
+	listener->onTouchEnded = [this](Touch* touch, Event* event){
+		touchUpdate(touch, event);
+		return true;
+	};
+	listener->onTouchCancelled = [this](Touch* touch, Event* event){
+		touchUpdate(touch, event);
+		return true;
+	};
+	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
+}
+
+void boardNode::touchUpdate(Touch* touch, Event* event) {
+	//todo check distance and event
+	isTouch = false;
+	CCLOG("touchUpdate");
 }

@@ -33,7 +33,12 @@ namespace sr {
 			void initBoard();
 			void clearTiles();
 			void setDefaultPosition();
+			void initHandling();
+			void touchUpdate(Touch*, Event*);
+
 			std::vector<std::vector<sTileData>> tileList;;
+			Touch* lastTouchInfo = nullptr;
+			bool isTouch = false;
 		};
 	}
 }
