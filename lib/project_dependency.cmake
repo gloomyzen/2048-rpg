@@ -5,7 +5,7 @@ include(${CMAKE_SOURCE_DIR}/cmake/StandardProjectSettings.cmake)
 # General dependency target
 add_library(project_dependency ${CMAKE_SOURCE_DIR}/lib/empty.h ${CMAKE_SOURCE_DIR}/lib/empty.cpp)
 #add_library(project_options ${CMAKE_SOURCE_DIR}/lib/empty.cpp)
-add_library(project_warning ${CMAKE_SOURCE_DIR}/lib/empty.h ${CMAKE_SOURCE_DIR}/lib/empty.cpp)
+#add_library(project_warning ${CMAKE_SOURCE_DIR}/lib/empty.h ${CMAKE_SOURCE_DIR}/lib/empty.cpp)
 
 #------------------------------------------------------------------------------
 #                         CMake modules and options
@@ -25,12 +25,22 @@ include(ExternalProject)
 include(${CMAKE_SOURCE_DIR}/cmake/StaticAnalyzers.cmake)
 
 #TODO change target to project files
-# Add as many warning as possible:
-#target_compile_features(project_warning INTERFACE cxx_std_17)
-#target_compile_options(project_warning INTERFACE -Wall)
-#include(${CMAKE_SOURCE_DIR}/cmake/CompilerWarnings.cmake)
-#set_project_warnings(project_warning)
-#target_link_libraries(project_warning INTERFACE ${PROJECT_NAME})
+# Add as many warning as possible in debug:
+#if (DEBUG)
+#    add_library(project_warning ${CMAKE_SOURCE_DIR}/lib/empty.h ${CMAKE_SOURCE_DIR}/lib/empty.cpp)
+#    target_compile_features(project_warning INTERFACE cxx_std_17)
+#    target_compile_options(project_warning INTERFACE -Wall)
+#    include(${CMAKE_SOURCE_DIR}/cmake/CompilerWarnings.cmake)
+#    set_project_warnings(project_warning)
+#    target_link_libraries(project_warning INTERFACE ${APP_NAME})
+#    target_link_libraries(project_dependency INTERFACE project_warning)
+#
+#    set_target_properties(project_warning
+#            PROPERTIES
+#            ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+#            LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+#            )
+#endif()
 
 # enable cache system
 #include(${CMAKE_SOURCE_DIR}/cmake/Cache.cmake)
@@ -43,7 +53,6 @@ if (ENABLE_PCH AND NOT IOS)
     # consider breaking this out per project as necessary
     target_precompile_headers(${PROJECT_NAME} PRIVATE <vector> <array> <string> <map> <utility> <memory> <algorithm> <bitset> "${CMAKE_SOURCE_DIR}/lib/empty.h")
 endif ()
-target_link_libraries(project_dependency INTERFACE project_warning)
 
 #------------------------------------------------------------------------------
 #                        ImGui, included for debugging only
@@ -95,12 +104,6 @@ target_include_directories(project_dependency INTERFACE
 #                               Change library paths
 #------------------------------------------------------------------------------
 set_target_properties(project_dependency
-        PROPERTIES
-        ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
-        LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
-        )
-
-set_target_properties(project_warning
         PROPERTIES
         ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
         LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
