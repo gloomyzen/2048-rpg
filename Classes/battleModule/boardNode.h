@@ -12,6 +12,7 @@
 #define BOARD_COUNT_Y 5
 #define BOARD_TILE_W 148
 #define BOARD_TILE_H 148
+#define BOARD_TOUCH_FORCE 75
 
 namespace sr {
 	namespace battleModule {

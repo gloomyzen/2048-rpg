@@ -59,16 +59,18 @@ void boardNode::initHandling() {
 		}
 		return false;
 	};
-	listener->onTouchMoved = [this](Touch* touch, Event* event){
-		touchUpdate(touch, event);
-		return true;
-	};
+//	listener->onTouchMoved = [this](Touch* touch, Event* event){
+//		touchUpdate(touch, event);
+//		return true;
+//	};
 	listener->onTouchEnded = [this](Touch* touch, Event* event){
 		touchUpdate(touch, event);
+		isTouch = false;
 		return true;
 	};
 	listener->onTouchCancelled = [this](Touch* touch, Event* event){
 		touchUpdate(touch, event);
+		isTouch = false;
 		return true;
 	};
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
@@ -76,6 +78,13 @@ void boardNode::initHandling() {
 
 void boardNode::touchUpdate(Touch* touch, Event* event) {
 	//todo check distance and event
-	isTouch = false;
-	CCLOG("touchUpdate");
+	if (touch->getStartLocation().x > touch->getLocation().x && touch->getStartLocation().x - BOARD_TOUCH_FORCE > touch->getLocation().x) {
+		CCLOG("LEFT SWIPE");
+	} else if (touch->getStartLocation().x < touch->getLocation().x && touch->getStartLocation().x + BOARD_TOUCH_FORCE < touch->getLocation().x) {
+		CCLOG("RIGHT SWIPE");
+	} else if (touch->getStartLocation().y > touch->getLocation().y && touch->getStartLocation().y - BOARD_TOUCH_FORCE > touch->getLocation().y) {
+		CCLOG("DOWN SWIPE");
+	} else if (touch->getStartLocation().y < touch->getLocation().y && touch->getStartLocation().y + BOARD_TOUCH_FORCE < touch->getLocation().y) {
+		CCLOG("UP SWIPE");
+	}
 }
