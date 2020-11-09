@@ -1,0 +1,24 @@
+{
+  "types": {
+    "food": {
+      "restore": [
+        "hp"
+      ]
+    },
+    "shield": {
+      "restore": [
+        "armor"
+      ]
+    },
+    "tree": {
+      "damage": [
+        "axe"
+      ]
+    },
+    "axe": {
+      "restore": [
+        "axe"
+      ]
+    }
+  }
+}

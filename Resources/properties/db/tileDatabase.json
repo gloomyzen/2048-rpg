@@ -1,0 +1,51 @@
+{
+  "types": {
+    "none": {
+      "attack": 0,
+      "armor": 0,
+      "isCollect": false,
+      "isHero": false,
+      "isEnemy": false,
+      "count": {
+        "1": {
+          "bg": "images/tiles/bg/rec_green.png",
+          "image": ""
+        }
+      }
+    },
+    "hero": {
+      "attack": 0,
+      "armor": 0,
+      "isCollect": false,
+      "isHero": true,
+      "isEnemy": false,
+      "count": {
+        "1": {
+          "bg": "images/tiles/bg/rec_green.png",
+          "image": "images/tiles/units/swipe_rpg_05.png"
+        },
+        "5": {
+          "bg": "images/tiles/bg/rec_red.png",
+          "image": "images/tiles/units/swipe_rpg_09.png"
+        }
+      }
+    },
+    "slime": {
+      "attack": 0,
+      "armor": 0,
+      "isCollect": false,
+      "isHero": false,
+      "isEnemy": true,
+      "count": {
+        "1": {
+          "bg": "images/tiles/bg/rec_red.png",
+          "image": "images/tiles/units/swipe_rpg_07.png"
+        },
+        "5": {
+          "bg": "images/tiles/bg/rec_green.png",
+          "image": "images/tiles/units/swipe_rpg_07.png"
+        }
+      }
+    }
+  }
+}

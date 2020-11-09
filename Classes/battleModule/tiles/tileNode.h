@@ -9,13 +9,23 @@ namespace sr {
 		using namespace cocos2d;
 		using namespace common;
 
+		enum class eTileType {
+			NONE = 0,
+			HERO,
+			ENVIRONMENT,
+			ENEMY
+		};
+
 		class tileNode : public coreModule::nodeProperties, public Sprite {
 		public:
 			tileNode();
 			~tileNode() = default;
 			CREATE_FUNC(tileNode);
 
+			void createTile(eTileType _type);
+
 		private:
+			eTileType type = eTileType::NONE;
 		};
 	}
 }

@@ -59,10 +59,7 @@ void boardNode::initHandling() {
 		}
 		return false;
 	};
-//	listener->onTouchMoved = [this](Touch* touch, Event* event){
-//		touchUpdate(touch, event);
-//		return true;
-//	};
+//	listener->onTouchMoved = [](Touch*, Event*){ return true; };
 	listener->onTouchEnded = [this](Touch* touch, Event* event){
 		touchUpdate(touch, event);
 		isTouch = false;
