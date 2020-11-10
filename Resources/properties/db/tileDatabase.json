@@ -1,6 +1,7 @@
 {
   "types": {
-    "none": {
+    "empty_1": {
+      "type": "none",
       "attack": 0,
       "armor": 0,
       "isCollect": false,
@@ -13,7 +14,8 @@
         }
       }
     },
-    "hero": {
+    "sebastian_hero": {
+      "type": "hero",
       "attack": 0,
       "armor": 0,
       "isCollect": false,
@@ -30,7 +32,8 @@
         }
       }
     },
-    "slime": {
+    "slime_enemy": {
+      "type": "enemy",
       "attack": 0,
       "armor": 0,
       "isCollect": false,

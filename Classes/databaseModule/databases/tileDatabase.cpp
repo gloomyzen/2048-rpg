@@ -31,10 +31,17 @@ void tileDatabase::load(const rapidjson::Document& data) {
 		return;
 	}
 	for (const auto& tileType : tileTypesMap) {
+		//todo remove find element by key
 		auto row = typesIter->value.FindMember(tileType.first.c_str());
 		if (row == typesIter->value.MemberEnd() || !row->value.IsObject()) continue;
 		//todo
 		// 1 add struct for tileTypes - done
-		// 2 parse json by struct
+		// 2 parse json by struct - wip
+		sTilesTypes item;
+		item.type = tileType.second;
+		auto armorIter = row->value.FindMember("armor");
+		if (armorIter != row->value.MemberEnd() && armorIter->value.IsInt()) {
+			item.armor = armorIter->value.GetInt();
+		}
 	}
 }
