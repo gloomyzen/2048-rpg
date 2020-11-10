@@ -16,8 +16,8 @@
     },
     "sebastian_hero": {
       "type": "hero",
-      "attack": 0,
-      "armor": 0,
+      "attack": 1,
+      "armor": 1,
       "isCollect": false,
       "isHero": true,
       "isEnemy": false,
@@ -34,8 +34,8 @@
     },
     "slime_enemy": {
       "type": "enemy",
-      "attack": 0,
-      "armor": 0,
+      "attack": 1,
+      "armor": 1,
       "isCollect": false,
       "isHero": false,
       "isEnemy": true,

@@ -11,7 +11,8 @@ namespace sr {
 	namespace databaseModule {
 
 		enum class eTileTypes {
-			NONE = 0,
+			UNDEFINED = 0,
+			NONE,
 			HERO,
 			ITEM,
 			ENEMY
@@ -23,12 +24,13 @@ namespace sr {
 		};
 
 		struct sTilesTypes {
-			eTileTypes type;
-			int attack;
-			int armor;
-			bool isCollect;
-			bool isHero;
-			bool isEnemy;
+			std::string name;
+			eTileTypes type = eTileTypes::UNDEFINED;
+			int attack = 0;
+			int armor = 0;
+			bool isCollect = false;
+			bool isHero = false;
+			bool isEnemy = false;
 			std::map<int, sTilesUpgrade> tileUpgrade;
 		};
 
