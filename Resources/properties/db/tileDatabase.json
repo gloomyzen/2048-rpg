@@ -6,7 +6,7 @@
       "isCollect": false,
       "isHero": false,
       "isEnemy": false,
-      "count": {
+      "upgrade": {
         "1": {
           "bg": "images/tiles/bg/rec_green.png",
           "image": ""
@@ -19,7 +19,7 @@
       "isCollect": false,
       "isHero": true,
       "isEnemy": false,
-      "count": {
+      "upgrade": {
         "1": {
           "bg": "images/tiles/bg/rec_green.png",
           "image": "images/tiles/units/swipe_rpg_05.png"
@@ -36,7 +36,7 @@
       "isCollect": false,
       "isHero": false,
       "isEnemy": true,
-      "count": {
+      "upgrade": {
         "1": {
           "bg": "images/tiles/bg/rec_red.png",
           "image": "images/tiles/units/swipe_rpg_07.png"

@@ -5,6 +5,7 @@
 #include "json/document.h"
 #include "json/ostreamwrapper.h"
 #include <string>
+#include <map>
 
 namespace sr {
 	namespace databaseModule {
@@ -14,6 +15,21 @@ namespace sr {
 			HERO,
 			ITEM,
 			ENEMY
+		};
+
+		struct sTilesUpgrade {
+			std::string bg;
+			std::string icon;
+		};
+
+		struct sTilesTypes {
+			eTileTypes type;
+			int attack;
+			int armor;
+			bool isCollect;
+			bool isHero;
+			bool isEnemy;
+			std::map<int, sTilesUpgrade> tileUpgrade;
 		};
 
 		class tileDatabase : public databaseInterface {

@@ -34,7 +34,7 @@ void tileDatabase::load(const rapidjson::Document& data) {
 		auto row = typesIter->value.FindMember(tileType.first.c_str());
 		if (row == typesIter->value.MemberEnd() || !row->value.IsObject()) continue;
 		//todo
-		// 1 add struct for tileTypes
+		// 1 add struct for tileTypes - done
 		// 2 parse json by struct
 	}
 }
