@@ -24,6 +24,17 @@ tileDatabase::tileDatabase(const std::string& path) {
 
 tileDatabase::~tileDatabase() {}
 
-void tileDatabase::load(const rapidjson::Document&) {
-	//1 check errors
+void tileDatabase::load(const rapidjson::Document& data) {
+	const auto typesIter = data.FindMember("types");
+	if (typesIter == data.MemberEnd() || !typesIter->value.IsObject()) {
+		//todo log warning
+		return;
+	}
+	for (const auto& tileType : tileTypesMap) {
+		auto row = typesIter->value.FindMember(tileType.first.c_str());
+		if (row == typesIter->value.MemberEnd() || !row->value.IsObject()) continue;
+		//todo
+		// 1 add struct for tileTypes
+		// 2 parse json by struct
+	}
 }
