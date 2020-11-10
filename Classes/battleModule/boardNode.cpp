@@ -1,4 +1,5 @@
 #include "boardNode.h"
+#include "databaseModule/databaseManager.h"
 
 using namespace sr::battleModule;
 
@@ -14,6 +15,8 @@ void boardNode::initBoard() {
 	clearTiles();
 	setDefaultPosition();
 	initHandling();
+	//todo only for test, remove after testing
+	auto test = GET_DATABASE_MANAGER().getTileDatabase();
 }
 
 void boardNode::clearTiles() {
