@@ -67,8 +67,42 @@ void tileDatabase::load(const rapidjson::Document& data) {
 		if (enemyIter != iter->value.MemberEnd() && enemyIter->value.IsBool()) {
 			item.isEnemy = enemyIter->value.GetBool();
 		}
-		//todo
-		// 1 add parse other params
-		// 2 parse upgrade
+		///Upgrade
+		auto upgIter = iter->value.FindMember("upgrade");
+		if (upgIter != iter->value.MemberEnd() && upgIter->value.IsArray()) {
+			auto upg = sTilesUpgrade(upgIter->value);
+			//todo move loop here!
+		}
+
+	}
+}
+
+sTilesUpgrade::sTilesUpgrade(const rapidjson::Value& obj) {
+	if (!obj.IsArray()) {
+		//todo log warning
+		return;
+	}
+	for (auto iter = obj.Begin(); iter != obj.End(); ++iter) {
+		///id
+		auto idIter = iter->FindMember("id");
+		if (idIter != iter->MemberEnd() && idIter->value.IsInt()) {
+			id = idIter->value.GetInt();
+		} else {
+			//todo log warning
+		}
+		///bg
+		auto bgIter = iter->FindMember("bg");
+		if (bgIter != iter->MemberEnd() && bgIter->value.IsString()) {
+			bg = bgIter->value.GetString();
+		} else {
+			//todo log warning
+		}
+		///icon
+		auto iconIter = iter->FindMember("icon");
+		if (iconIter != iter->MemberEnd() && iconIter->value.IsString()) {
+			icon = iconIter->value.GetString();
+		} else {
+			//todo log warning
+		}
 	}
 }

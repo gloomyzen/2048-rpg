@@ -7,12 +7,13 @@
       "isCollect": false,
       "isHero": false,
       "isEnemy": false,
-      "upgrade": {
-        "1": {
+      "upgrade": [
+        {
+          "id": 1,
           "bg": "images/tiles/bg/rec_green.png",
-          "image": ""
+          "icon": ""
         }
-      }
+      ]
     },
     "sebastian_hero": {
       "type": "hero",
@@ -21,16 +22,18 @@
       "isCollect": false,
       "isHero": true,
       "isEnemy": false,
-      "upgrade": {
-        "1": {
+      "upgrade": [
+        {
+          "id": 1,
           "bg": "images/tiles/bg/rec_green.png",
-          "image": "images/tiles/units/swipe_rpg_05.png"
+          "icon": "images/tiles/units/swipe_rpg_05.png"
         },
-        "5": {
+        {
+          "id": 5,
           "bg": "images/tiles/bg/rec_red.png",
-          "image": "images/tiles/units/swipe_rpg_09.png"
+          "icon": "images/tiles/units/swipe_rpg_09.png"
         }
-      }
+      ]
     },
     "slime_enemy": {
       "type": "enemy",
@@ -39,16 +42,18 @@
       "isCollect": false,
       "isHero": false,
       "isEnemy": true,
-      "upgrade": {
-        "1": {
+      "upgrade": [
+        {
+          "id": 1,
           "bg": "images/tiles/bg/rec_red.png",
-          "image": "images/tiles/units/swipe_rpg_07.png"
+          "icon": "images/tiles/units/swipe_rpg_07.png"
         },
-        "5": {
+        {
+          "id": 5,
           "bg": "images/tiles/bg/rec_green.png",
-          "image": "images/tiles/units/swipe_rpg_07.png"
+          "icon": "images/tiles/units/swipe_rpg_07.png"
         }
-      }
+      ]
     }
   }
 }

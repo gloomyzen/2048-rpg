@@ -19,8 +19,10 @@ namespace sr {
 		};
 
 		struct sTilesUpgrade {
+			int id = 0;
 			std::string bg;
 			std::string icon;
+			explicit sTilesUpgrade(const rapidjson::Value&);
 		};
 
 		struct sTilesTypes {
