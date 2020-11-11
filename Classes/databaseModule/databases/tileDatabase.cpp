@@ -32,11 +32,40 @@ void tileDatabase::load(const rapidjson::Document& data) {
 	}
 	for (auto iter = typesIter->value.MemberBegin(); iter != typesIter->value.MemberEnd(); ++iter) {
 		sTilesTypes item;
-//		item.type = tileType.second;
 		item.name = iter->name.GetString();
+		///Type
+		auto typeIter = iter->value.FindMember("type");
+		if (typeIter != iter->value.MemberEnd() && typeIter->value.IsString()) {
+			auto type = typeIter->value.GetString();
+			auto it = tileTypesMap.find(type);
+			if (it != tileTypesMap.end()) {
+				item.type = it->second;
+			}
+		}
+		///Attack
+		auto attackIter = iter->value.FindMember("attack");
+		if (attackIter != iter->value.MemberEnd() && attackIter->value.IsInt()) {
+			item.attack = attackIter->value.GetInt();
+		}
+		///Armor
 		auto armorIter = iter->value.FindMember("armor");
 		if (armorIter != iter->value.MemberEnd() && armorIter->value.IsInt()) {
 			item.armor = armorIter->value.GetInt();
+		}
+		///isCollect
+		auto collectIter = iter->value.FindMember("isCollect");
+		if (collectIter != iter->value.MemberEnd() && collectIter->value.IsBool()) {
+			item.isCollect = collectIter->value.GetBool();
+		}
+		///isHero
+		auto heroIter = iter->value.FindMember("isHero");
+		if (heroIter != iter->value.MemberEnd() && heroIter->value.IsBool()) {
+			item.isHero = heroIter->value.GetBool();
+		}
+		///isEnemy
+		auto enemyIter = iter->value.FindMember("isEnemy");
+		if (enemyIter != iter->value.MemberEnd() && enemyIter->value.IsBool()) {
+			item.isEnemy = enemyIter->value.GetBool();
 		}
 		//todo
 		// 1 add parse other params
