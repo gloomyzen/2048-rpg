@@ -8,10 +8,10 @@ cd 2048-rpg
 
 #### Install cocos2d v4:
 1. Install CMake on your system
-2. Install VS for win32 or XCode for macOs
-1. Download Cocos2d-x (cocos2d-x-4.0.zip) from www.cocos2d-x.org and unzip it in a folder that you want.
-For example, for Win32 -> unzip to `C:/bin/cocos2dx`, for MacOs `/Application/Develpment/cocos2dx`
-2. Install Python 2.7 on your system and just run `python setyp.py` in cocos2dx folder
+2. Install VS for win32 or XCode for macOS
+3. ~~Download Cocos2d-x (cocos2d-x-4.0.zip) from www.cocos2d-x.org and unzip it in a folder that you want.
+For example, for Win32 -> unzip to C:/bin/cocos2dx, for MacOs /Application/Develpment/cocos2dx~~
+4. ~~Install Python 2.7 on your system and just run `python setyp.py` in cocos2dx folder~~
 
 #### Build from sources :
 ```bash
