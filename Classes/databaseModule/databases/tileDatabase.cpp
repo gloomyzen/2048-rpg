@@ -70,18 +70,17 @@ void tileDatabase::load(const rapidjson::Document& data) {
 		///Upgrade
 		auto upgIter = iter->value.FindMember("upgrade");
 		if (upgIter != iter->value.MemberEnd() && upgIter->value.IsArray()) {
-			auto upg = sTilesUpgrade(upgIter->value);
+//			auto upg = sTilesUpgrade(upgIter->value);
 			//todo move loop here!
+			for (auto upgradeIt = upgIter->value.Begin(); upgradeIt != upgIter->value.End(); ++upgradeIt) {
+				auto upg = sTilesUpgrade(upgradeIt->GetObject());
+			}
 		}
 
 	}
 }
 
-sTilesUpgrade::sTilesUpgrade(const rapidjson::Value& obj) {
-	if (!obj.IsArray()) {
-		//todo log warning
-		return;
-	}
+sTilesUpgrade::sTilesUpgrade(rapidjson::Document obj) {
 	for (auto iter = obj.Begin(); iter != obj.End(); ++iter) {
 		///id
 		auto idIter = iter->FindMember("id");
@@ -105,4 +104,8 @@ sTilesUpgrade::sTilesUpgrade(const rapidjson::Value& obj) {
 			//todo log warning
 		}
 	}
+}
+
+sTilesUpgrade::sTilesUpgrade(const rapidjson::GenericValue<rapidjson::UTF8<char>>::ConstObject& object) {
+	//todo need leek test
 }
