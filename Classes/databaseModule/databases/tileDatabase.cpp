@@ -79,8 +79,20 @@ void tileDatabase::load(const rapidjson::Document& data) {
 			}
 		}
 		tileList.insert({item.name, item});
-
 	}
+}
+
+sTilesTypes tileDatabase::getTileByName(const std::string &name) {
+	auto it = tileList.find(name);
+	if (it != tileList.end()) {
+		return it->second;
+	}
+	return sTilesTypes();
+}
+
+bool tileDatabase::tileExist(const std::string &name) {
+	auto it = tileList.find(name);
+	return it != tileList.end();
 }
 
 sTilesUpgrade::sTilesUpgrade(const rapidjson::GenericValue<rapidjson::UTF8<char>>::ConstObject& object) {

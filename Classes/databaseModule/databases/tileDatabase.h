@@ -46,6 +46,8 @@ namespace sr {
 			explicit tileDatabase(const std::string&);
 			~tileDatabase();
 			void load(const rapidjson::Document&) override;
+			sTilesTypes getTileByName(const std::string &name);
+			bool tileExist(const std::string &name);
 
 		private:
 			std::map<std::string, sTilesTypes> tileList;
