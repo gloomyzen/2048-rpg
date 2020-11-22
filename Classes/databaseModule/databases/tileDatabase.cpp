@@ -25,6 +25,7 @@ tileDatabase::tileDatabase(const std::string& path) {
 tileDatabase::~tileDatabase() {}
 
 void tileDatabase::load(const rapidjson::Document& data) {
+	//types to method
 	const auto typesIter = data.FindMember("types");
 	if (typesIter == data.MemberEnd() || !typesIter->value.IsObject()) {
 		//todo log warning
@@ -70,42 +71,38 @@ void tileDatabase::load(const rapidjson::Document& data) {
 		///Upgrade
 		auto upgIter = iter->value.FindMember("upgrade");
 		if (upgIter != iter->value.MemberEnd() && upgIter->value.IsArray()) {
-//			auto upg = sTilesUpgrade(upgIter->value);
-			//todo move loop here!
 			for (auto upgradeIt = upgIter->value.Begin(); upgradeIt != upgIter->value.End(); ++upgradeIt) {
 				auto upg = sTilesUpgrade(upgradeIt->GetObject());
+				if (upg.isValid()) {
+					item.tileUpgrade.insert({upg.id, upg});
+				}
 			}
 		}
+		tileList.insert({item.name, item});
 
-	}
-}
-
-sTilesUpgrade::sTilesUpgrade(rapidjson::Document obj) {
-	for (auto iter = obj.Begin(); iter != obj.End(); ++iter) {
-		///id
-		auto idIter = iter->FindMember("id");
-		if (idIter != iter->MemberEnd() && idIter->value.IsInt()) {
-			id = idIter->value.GetInt();
-		} else {
-			//todo log warning
-		}
-		///bg
-		auto bgIter = iter->FindMember("bg");
-		if (bgIter != iter->MemberEnd() && bgIter->value.IsString()) {
-			bg = bgIter->value.GetString();
-		} else {
-			//todo log warning
-		}
-		///icon
-		auto iconIter = iter->FindMember("icon");
-		if (iconIter != iter->MemberEnd() && iconIter->value.IsString()) {
-			icon = iconIter->value.GetString();
-		} else {
-			//todo log warning
-		}
 	}
 }
 
 sTilesUpgrade::sTilesUpgrade(const rapidjson::GenericValue<rapidjson::UTF8<char>>::ConstObject& object) {
-	//todo need leek test
+	///id
+	auto idIter = object.FindMember("id");
+	if (idIter != object.MemberEnd() && idIter->value.IsInt()) {
+		id = idIter->value.GetInt();
+	} else {
+		//todo log warning
+	}
+	///bg
+	auto bgIter = object.FindMember("bg");
+	if (bgIter != object.MemberEnd() && bgIter->value.IsString()) {
+		bg = bgIter->value.GetString();
+	} else {
+		//todo log warning
+	}
+	///icon
+	auto iconIter = object.FindMember("icon");
+	if (iconIter != object.MemberEnd() && iconIter->value.IsString()) {
+		icon = iconIter->value.GetString();
+	} else {
+		//todo log warning
+	}
 }

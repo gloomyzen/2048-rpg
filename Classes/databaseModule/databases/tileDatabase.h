@@ -20,11 +20,14 @@ namespace sr {
 
 		struct sTilesUpgrade {
 			explicit sTilesUpgrade(const rapidjson::GenericValue<rapidjson::UTF8<char>>::ConstObject& object);
-			explicit sTilesUpgrade(rapidjson::Document);//todo remove
 
 			int id = 0;
 			std::string bg;
 			std::string icon;
+
+			bool isValid() const {
+				return id > 0 && !bg.empty();
+			}
 		};
 
 		struct sTilesTypes {
@@ -43,6 +46,9 @@ namespace sr {
 			explicit tileDatabase(const std::string&);
 			~tileDatabase();
 			void load(const rapidjson::Document&) override;
+
+		private:
+			std::map<std::string, sTilesTypes> tileList;
 		};
 	}
 }
