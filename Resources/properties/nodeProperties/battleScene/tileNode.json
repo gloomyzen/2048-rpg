@@ -1,11 +1,11 @@
 {
   "tileNode": {
     "TransformComponent": {
-      "size": [ 148, 148 ],
+      "size": [ 128, 128 ],
       "anchor": [ 0.0, 0.0 ]
     },
     "SpriteComponent": {
-      "image": "images/tiles/bg/rec_green.png"
+      "image": "images/tiles/bg/tile_dark.png"
     }
   }
 }

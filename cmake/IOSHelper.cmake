@@ -16,7 +16,7 @@ function(_set_attr_to_all_target attr_name attr_value type)
         set_xcode_property(ext_xxtea ${attr_name} ${attr_value})
         set_xcode_property(external ${attr_name} ${attr_value})
         set_xcode_property(project_dependency ${attr_name} ${attr_value})
-        set_xcode_property(project_warning ${attr_name} ${attr_value})
+#        set_xcode_property(project_warning ${attr_name} ${attr_value})
     endif ()
 endfunction()
 

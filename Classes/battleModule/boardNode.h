@@ -6,12 +6,10 @@
 #include "battleModule/tiles/tileNode.h"
 #include <vector>
 
-#define BOARD_START_POS_X 15
-#define BOARD_START_POS_Y 12
+#define BOARD_START_POS_X 0
+#define BOARD_START_POS_Y 0
 #define BOARD_COUNT_X 5
-#define BOARD_COUNT_Y 5
-#define BOARD_TILE_W 148
-#define BOARD_TILE_H 148
+#define BOARD_COUNT_Y 7
 #define BOARD_TOUCH_FORCE 75
 
 namespace sr {

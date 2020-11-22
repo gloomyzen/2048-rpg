@@ -19,6 +19,7 @@ namespace sr {
 		class tileNode : public coreModule::nodeProperties, public Sprite {
 		public:
 			tileNode();
+			tileNode(float, float);
 			~tileNode() = default;
 			CREATE_FUNC(tileNode);
 

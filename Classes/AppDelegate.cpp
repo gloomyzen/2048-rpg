@@ -74,7 +74,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 	register_all_packages();
 	GET_SCENES_FACTORY().registerState(common::coreModule::eGameStates::BATTLE_SCENE, [](Layer* node)->Layer*{
-		auto _background = cocos2d::Sprite::create("images/ui/windows/testWindow/background.png");
+		auto _background = cocos2d::Sprite::create("images/background.png");
 		_background->setName("background");
 		_background->setAnchorPoint(Vec2(0.f, 0.f));
 		node->addChild(_background);
@@ -85,7 +85,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	});
 
 	GET_SCENES_FACTORY().registerState(common::coreModule::eGameStates::MAIN_MENU, [](Layer* node)->Layer*{
-		auto _background = cocos2d::Sprite::create("images/ui/windows/testWindow/background.png");
+		auto _background = cocos2d::Sprite::create("images/background.png");
 		_background->setName("background");
 		_background->setAnchorPoint(Vec2(0.f, 0.f));
 		node->addChild(_background);

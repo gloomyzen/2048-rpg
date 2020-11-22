@@ -1,10 +1,10 @@
 {
   "boardNode": {
     "TransformComponent": {
-      "anchor": [ 0.003, -0.6 ]
+      "anchor": [ 0.003, -0.25 ]
     },
     "SpriteComponent": {
-      "image": "images/board/board_1.png"
+      "image": "images/board/bg.png"
     }
   }
 }

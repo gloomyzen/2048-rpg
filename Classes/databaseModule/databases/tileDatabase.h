@@ -48,6 +48,7 @@ namespace sr {
 			void load(const rapidjson::Document&) override;
 			sTilesTypes getTileByName(const std::string &name);
 			bool tileExist(const std::string &name);
+			std::map<std::string, sTilesTypes> getAllTiles() { return tileList; }
 
 		private:
 			std::map<std::string, sTilesTypes> tileList;

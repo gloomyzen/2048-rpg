@@ -2,6 +2,7 @@
 #include "cocos2d.h"
 #include "json/document.h"
 #include "json/ostreamwrapper.h"
+#include "common/debugModule/logManager.h"
 #include <map>
 
 using namespace sr::databaseModule;
@@ -22,13 +23,13 @@ tileDatabase::tileDatabase(const std::string& path) {
 	}
 }
 
-tileDatabase::~tileDatabase() {}
+tileDatabase::~tileDatabase() = default;
 
 void tileDatabase::load(const rapidjson::Document& data) {
 	//types to method
 	const auto typesIter = data.FindMember("types");
 	if (typesIter == data.MemberEnd() || !typesIter->value.IsObject()) {
-		//todo log warning
+		LOG_ERROR("tileDatabase::load: Object 'type' is not valid!");
 		return;
 	}
 	for (auto iter = typesIter->value.MemberBegin(); iter != typesIter->value.MemberEnd(); ++iter) {
@@ -101,20 +102,20 @@ sTilesUpgrade::sTilesUpgrade(const rapidjson::GenericValue<rapidjson::UTF8<char>
 	if (idIter != object.MemberEnd() && idIter->value.IsInt()) {
 		id = idIter->value.GetInt();
 	} else {
-		//todo log warning
+		LOG_ERROR("sTilesUpgrade::sTilesUpgrade: Object 'id' is not valid!");
 	}
 	///bg
 	auto bgIter = object.FindMember("bg");
 	if (bgIter != object.MemberEnd() && bgIter->value.IsString()) {
 		bg = bgIter->value.GetString();
 	} else {
-		//todo log warning
+		LOG_ERROR("sTilesUpgrade::sTilesUpgrade: Object 'bg' is not valid!");
 	}
 	///icon
 	auto iconIter = object.FindMember("icon");
 	if (iconIter != object.MemberEnd() && iconIter->value.IsString()) {
 		icon = iconIter->value.GetString();
 	} else {
-		//todo log warning
+		LOG_ERROR("sTilesUpgrade::sTilesUpgrade: Object 'icon' is not valid!");
 	}
 }

@@ -29,6 +29,12 @@ void boardNode::clearTiles() {
 }
 
 void boardNode::setDefaultPosition() {
+	cocos2d::Size boardSize;
+	boardSize.width = Director::getInstance()->getVisibleSize().width;
+	float boardTileWH = boardSize.width / BOARD_COUNT_X;
+	boardSize.height = boardTileWH * BOARD_COUNT_Y;
+	this->setContentSize(boardSize);
+
 	cocos2d::Vec2 position;
 	position.x = BOARD_START_POS_X;
 	position.y = BOARD_START_POS_Y;
@@ -40,14 +46,14 @@ void boardNode::setDefaultPosition() {
 			}
 			sTileData data;
 			data.pos = position;
-			data.tile = new tileNode();
+			data.tile = new tileNode(boardTileWH, boardTileWH);
 			data.tile->setPosition(data.pos);
 			addChild(data.tile);
-			position.y += BOARD_TILE_H;
+			position.y += boardTileWH;
 			row.push_back(data);
 		}
 		tileList.push_back(row);
-		position.x += BOARD_TILE_W;
+		position.x += boardTileWH;
 	}
 }
 

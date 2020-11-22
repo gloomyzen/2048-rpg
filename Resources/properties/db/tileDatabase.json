@@ -10,12 +10,12 @@
       "upgrade": [
         {
           "id": 1,
-          "bg": "images/tiles/bg/rec_green.png",
+          "bg": "images/tiles/bg/tile_dark.png",
           "icon": ""
         }
       ]
     },
-    "sebastian_hero": {
+    "bread_pitt_hero": {
       "type": "hero",
       "attack": 1,
       "armor": 1,
@@ -25,17 +25,12 @@
       "upgrade": [
         {
           "id": 1,
-          "bg": "images/tiles/bg/rec_green.png",
-          "icon": "images/tiles/units/swipe_rpg_05.png"
-        },
-        {
-          "id": 5,
-          "bg": "images/tiles/bg/rec_red.png",
-          "icon": "images/tiles/units/swipe_rpg_09.png"
+          "bg": "images/tiles/bg/tile_purple.png",
+          "icon": "images/tiles/units/bread_pitt.png"
         }
       ]
     },
-    "slime_enemy": {
+    "fly_enemy": {
       "type": "enemy",
       "attack": 1,
       "armor": 1,
@@ -45,13 +40,53 @@
       "upgrade": [
         {
           "id": 1,
-          "bg": "images/tiles/bg/rec_red.png",
-          "icon": "images/tiles/units/swipe_rpg_07.png"
+          "bg": "images/tiles/bg/tile_red.png",
+          "icon": "images/tiles/units/fly.png"
         },
         {
           "id": 5,
-          "bg": "images/tiles/bg/rec_green.png",
-          "icon": "images/tiles/units/swipe_rpg_07.png"
+          "bg": "images/tiles/bg/tile_red.png",
+          "icon": "images/tiles/units/fly.png"
+        }
+      ]
+    },
+    "plant_enemy": {
+      "type": "enemy",
+      "attack": 1,
+      "armor": 1,
+      "isCollect": false,
+      "isHero": false,
+      "isEnemy": true,
+      "upgrade": [
+        {
+          "id": 1,
+          "bg": "images/tiles/bg/tile_red.png",
+          "icon": "images/tiles/units/plant.png"
+        },
+        {
+          "id": 5,
+          "bg": "images/tiles/bg/tile_red.png",
+          "icon": "images/tiles/units/plant.png"
+        }
+      ]
+    },
+    "thorns_enemy": {
+      "type": "enemy",
+      "attack": 1,
+      "armor": 1,
+      "isCollect": false,
+      "isHero": false,
+      "isEnemy": true,
+      "upgrade": [
+        {
+          "id": 1,
+          "bg": "images/tiles/bg/tile_red.png",
+          "icon": "images/tiles/units/thorns.png"
+        },
+        {
+          "id": 5,
+          "bg": "images/tiles/bg/tile_red.png",
+          "icon": "images/tiles/units/thorns.png"
         }
       ]
     }
