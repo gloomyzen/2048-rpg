@@ -3,44 +3,20 @@
   "name": "tileNode",
   "child": [
     {
-      "type": "node",
-      "name": "armorHolder",
-      "child": [
-        {
-          "type": "label",
-          "name": "armorCountLbl"
-        }
-      ]
+      "type": "label",
+      "name": "armorCountLbl"
     },
     {
-      "type": "node",
-      "name": "countHolder",
-      "child": [
-        {
-          "type": "label",
-          "name": "allCountLbl"
-        }
-      ]
+      "type": "label",
+      "name": "allCountLbl"
     },
     {
-      "type": "node",
-      "name": "hpHolder",
-      "child": [
-        {
-          "type": "label",
-          "name": "hpCountLbl"
-        }
-      ]
+      "type": "label",
+      "name": "hpCountLbl"
     },
     {
-      "type": "node",
-      "name": "attackHolder",
-      "child": [
-        {
-          "type": "label",
-          "name": "attackCountLbl"
-        }
-      ]
+      "type": "label",
+      "name": "attackCountLbl"
     }
   ]
 }

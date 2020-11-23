@@ -8,74 +8,58 @@
       "image": "images/tiles/bg/tile_dark.png"
     }
   },
-  "armorHolder": {
-    "TransformComponent": {
-      "anchor": [ 0.0, 0.0 ]
-    }
-  },
   "armorCountLbl": {
     "TransformComponent": {
-      "anchor": [ 0.5, 0.5 ],
+      "pivot": [ 0.15, 0.8 ],
+      "anchor": [ 0.0, 0.0 ],
       "scale": 1
     },
     "LabelComponent": {
       "text": "1",
       "fontType": "ttf",
-      "fontSize": 12.0,
+      "fontSize": 14.0,
       "fontFile": "fonts/Marker Felt.ttf",
       "alight": "left"
-    }
-  },
-  "countHolder": {
-    "TransformComponent": {
-      "anchor": [ 0.0, 0.0 ]
     }
   },
   "allCountLbl": {
     "TransformComponent": {
-      "anchor": [ 0.5, 0.5 ],
+      "pivot": [ 0.84, 0.8 ],
+      "anchor": [ 0.0, 0.0 ],
       "scale": 1
     },
     "LabelComponent": {
       "text": "1",
       "fontType": "ttf",
-      "fontSize": 12.0,
+      "fontSize": 14.0,
       "fontFile": "fonts/Marker Felt.ttf",
       "alight": "left"
-    }
-  },
-  "hpHolder": {
-    "TransformComponent": {
-      "anchor": [ 0.0, 0.0 ]
     }
   },
   "hpCountLbl": {
     "TransformComponent": {
-      "anchor": [ 0.5, 0.5 ],
+      "pivot": [ 0.14, 0.08 ],
+      "anchor": [ 0.0, 0.0 ],
       "scale": 1
     },
     "LabelComponent": {
       "text": "1",
       "fontType": "ttf",
-      "fontSize": 12.0,
+      "fontSize": 14.0,
       "fontFile": "fonts/Marker Felt.ttf",
       "alight": "left"
     }
   },
-  "attackHolder": {
-    "TransformComponent": {
-      "anchor": [ 0.0, 0.0 ]
-    }
-  },
   "attackCountLbl": {
     "TransformComponent": {
-      "anchor": [ 0.5, 0.5 ],
+      "pivot": [ 0.84, 0.08 ],
+      "anchor": [ 0.0, 0.0 ],
       "scale": 1
     },
     "LabelComponent": {
       "text": "1",
       "fontType": "ttf",
-      "fontSize": 12.0,
+      "fontSize": 14.0,
       "fontFile": "fonts/Marker Felt.ttf",
       "alight": "left"
     }
