@@ -30,6 +30,9 @@
       "fontSize": 15.0,
       "fontFile": "fonts/Marker Felt.ttf",
       "alight": "left"
+    },
+    "ColorComponent": {
+      "color": [0, 255, 0, 255]
     }
   },
   "attackCountLbl": {
@@ -44,6 +47,9 @@
       "fontSize": 15.0,
       "fontFile": "fonts/Marker Felt.ttf",
       "alight": "right"
+    },
+    "ColorComponent": {
+      "color": [255, 0, 0, 255]
     }
   }
 }
