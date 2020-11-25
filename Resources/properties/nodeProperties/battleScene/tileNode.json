@@ -8,44 +8,26 @@
       "image": "images/tiles/bg/tile_dark.png"
     }
   },
-  "armorCountLbl": {
+  "hpIcon": {
     "TransformComponent": {
-      "pivot": [ 0.15, 0.8 ],
       "anchor": [ 0.0, 0.0 ],
-      "scale": 1
+      "pivot": [ 0.08, 0.08 ],
+      "scale": 0.7
     },
-    "LabelComponent": {
-      "text": "1",
-      "fontType": "ttf",
-      "fontSize": 14.0,
-      "fontFile": "fonts/Marker Felt.ttf",
-      "alight": "left"
-    }
-  },
-  "allCountLbl": {
-    "TransformComponent": {
-      "pivot": [ 0.84, 0.8 ],
-      "anchor": [ 0.0, 0.0 ],
-      "scale": 1
-    },
-    "LabelComponent": {
-      "text": "1",
-      "fontType": "ttf",
-      "fontSize": 14.0,
-      "fontFile": "fonts/Marker Felt.ttf",
-      "alight": "left"
+    "SpriteComponent": {
+      "image": "images/tiles/ui/heart_icon.png"
     }
   },
   "hpCountLbl": {
     "TransformComponent": {
-      "pivot": [ 0.14, 0.08 ],
+      "pivot": [ 0.21, 0.075 ],
       "anchor": [ 0.0, 0.0 ],
       "scale": 1
     },
     "LabelComponent": {
-      "text": "1",
+      "text": "99+",
       "fontType": "ttf",
-      "fontSize": 14.0,
+      "fontSize": 15.0,
       "fontFile": "fonts/Marker Felt.ttf",
       "alight": "left"
     }
@@ -53,15 +35,15 @@
   "attackCountLbl": {
     "TransformComponent": {
       "pivot": [ 0.84, 0.08 ],
-      "anchor": [ 0.0, 0.0 ],
+      "anchor": [ 0.5, 0.0 ],
       "scale": 1
     },
     "LabelComponent": {
-      "text": "1",
+      "text": "99+",
       "fontType": "ttf",
-      "fontSize": 14.0,
+      "fontSize": 15.0,
       "fontFile": "fonts/Marker Felt.ttf",
-      "alight": "left"
+      "alight": "right"
     }
   }
 }

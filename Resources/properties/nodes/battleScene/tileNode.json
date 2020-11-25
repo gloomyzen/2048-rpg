@@ -3,12 +3,8 @@
   "name": "tileNode",
   "child": [
     {
-      "type": "label",
-      "name": "armorCountLbl"
-    },
-    {
-      "type": "label",
-      "name": "allCountLbl"
+      "type": "sprite",
+      "name": "hpIcon"
     },
     {
       "type": "label",
