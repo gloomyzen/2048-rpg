@@ -1,5 +1,5 @@
 #include "databaseManager.h"
-#include "databases/tileDatabase.h"
+#include "databases/tilesDB.h"
 
 using namespace sr;
 using namespace sr::databaseModule;
@@ -7,7 +7,7 @@ using namespace sr::databaseModule;
 databaseManager *currentDBInstance = nullptr;
 
 databaseManager::databaseManager() {
-	tileDatabaseInstance = new tileDatabase("properties/db/tilesDB.json");
+	tileDatabaseInstance = new tilesDB("properties/db/tilesDB.json");
 }
 
 databaseManager::~databaseManager() = default;

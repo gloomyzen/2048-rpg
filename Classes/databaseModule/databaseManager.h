@@ -7,7 +7,7 @@
 
 namespace sr {
 	namespace databaseModule {
-		class tileDatabase;
+		class tilesDB;
 
 		class databaseManager {
 		public:
@@ -15,10 +15,10 @@ namespace sr {
 			~databaseManager();
 			static databaseManager &getInstance();
 
-			tileDatabase* getTileDatabase() { return tileDatabaseInstance; }
+			tilesDB* getTileDatabase() { return tileDatabaseInstance; }
 
 		private:
-			tileDatabase* tileDatabaseInstance = nullptr;
+			tilesDB* tileDatabaseInstance = nullptr;
 		};
 	}
 }

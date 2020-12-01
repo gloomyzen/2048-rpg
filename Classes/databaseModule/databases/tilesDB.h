@@ -1,5 +1,5 @@
-#ifndef SWIPE_RPG_TILEDATABASE_H
-#define SWIPE_RPG_TILEDATABASE_H
+#ifndef SWIPE_RPG_TILESDB_H
+#define SWIPE_RPG_TILESDB_H
 
 #include "databaseInterface.h"
 #include "json/document.h"
@@ -30,7 +30,7 @@ namespace sr {
 			}
 		};
 
-		struct sTilesTypes {
+		struct sTileData {
 			std::string name;
 			eTileTypes type = eTileTypes::UNDEFINED;
 			int attack = 0;
@@ -38,20 +38,20 @@ namespace sr {
 			std::map<int, sTilesUpgrade> tileUpgrade;
 		};
 
-		class tileDatabase : public databaseInterface {
+		class tilesDB : public databaseInterface {
 		public:
-			explicit tileDatabase(const std::string&);
-			~tileDatabase();
+			explicit tilesDB(const std::string&);
+			~tilesDB();
 			void load(const rapidjson::Document&) override;
-			sTilesTypes getTileByName(const std::string &name);
+			sTileData getTileByName(const std::string &name);
 			bool tileExist(const std::string &name);
-			std::map<std::string, sTilesTypes> getAllTiles() { return tileList; }
+			std::map<std::string, sTileData> getAllTiles() { return tileList; }
 
 		private:
-			std::map<std::string, sTilesTypes> tileList;
+			std::map<std::string, sTileData> tileList;
 		};
 	}
 }
 
 
-#endif //SWIPE_RPG_TILEDATABASE_H
+#endif //SWIPE_RPG_TILESDB_H

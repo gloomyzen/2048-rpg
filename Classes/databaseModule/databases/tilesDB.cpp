@@ -1,4 +1,4 @@
-#include "tileDatabase.h"
+#include "tilesDB.h"
 #include "cocos2d.h"
 #include "common/debugModule/logManager.h"
 #include <map>
@@ -12,7 +12,7 @@ static std::map<std::string, eTileTypes> tileTypesMap = {
 		{"enemy", eTileTypes::ENEMY}
 };
 
-tileDatabase::tileDatabase(const std::string& path) {
+tilesDB::tilesDB(const std::string& path) {
 	const std::string &regionStr = cocos2d::FileUtils::getInstance()->getStringFromFile(path);
 	rapidjson::Document data;
 	data.Parse<0>(regionStr.c_str());
@@ -21,9 +21,9 @@ tileDatabase::tileDatabase(const std::string& path) {
 	}
 }
 
-tileDatabase::~tileDatabase() = default;
+tilesDB::~tilesDB() = default;
 
-void tileDatabase::load(const rapidjson::Document& data) {
+void tilesDB::load(const rapidjson::Document& data) {
 	//types to method
 	const auto typesIter = data.FindMember("types");
 	if (typesIter == data.MemberEnd() || !typesIter->value.IsObject()) {
@@ -31,7 +31,7 @@ void tileDatabase::load(const rapidjson::Document& data) {
 		return;
 	}
 	for (auto iter = typesIter->value.MemberBegin(); iter != typesIter->value.MemberEnd(); ++iter) {
-		sTilesTypes item;
+		sTileData item;
 		item.name = iter->name.GetString();
 		///Type
 		auto typeIter = iter->value.FindMember("type");
@@ -67,15 +67,15 @@ void tileDatabase::load(const rapidjson::Document& data) {
 	}
 }
 
-sTilesTypes tileDatabase::getTileByName(const std::string &name) {
+sTileData tilesDB::getTileByName(const std::string &name) {
 	auto it = tileList.find(name);
 	if (it != tileList.end()) {
 		return it->second;
 	}
-	return sTilesTypes();
+	return sTileData();
 }
 
-bool tileDatabase::tileExist(const std::string &name) {
+bool tilesDB::tileExist(const std::string &name) {
 	auto it = tileList.find(name);
 	return it != tileList.end();
 }

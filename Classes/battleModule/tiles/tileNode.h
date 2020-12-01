@@ -4,7 +4,7 @@
 #include "cocos2d.h"
 #include "common/coreModule/nodes/nodeProperties.h"
 #include "databaseModule/databaseManager.h"
-#include "databaseModule/databases/tileDatabase.h"
+#include "databaseModule/databases/tilesDB.h"
 
 namespace sr {
 	namespace battleModule {

@@ -1,5 +1,4 @@
-//
-// Created by Artur Barilo on 01.12.2020.
-//
-
 #include "gameModesDB.h"
+
+using namespace sr;
+using namespace sr::databaseModule;
