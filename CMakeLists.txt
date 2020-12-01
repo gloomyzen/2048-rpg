@@ -53,6 +53,7 @@ elseif(LINUX)
             )
 elseif(WINDOWS)
     list(APPEND GAME_HEADER
+            proj.win32/defines.h
             proj.win32/main.h
             proj.win32/resource.h
             )
