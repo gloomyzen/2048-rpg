@@ -57,7 +57,7 @@ void tileDatabase::load(const rapidjson::Document& data) {
 		auto upgIter = iter->value.FindMember("upgrade");
 		if (upgIter != iter->value.MemberEnd() && upgIter->value.IsArray()) {
 			for (auto upgradeIt = upgIter->value.Begin(); upgradeIt != upgIter->value.End(); ++upgradeIt) {
-				auto upg = sTilesUpgrade(upgradeIt->GetObject());
+				auto upg = sTilesUpgrade(upgradeIt->GetObjectJ());
 				if (upg.isValid()) {
 					item.tileUpgrade.insert({upg.id, upg});
 				}

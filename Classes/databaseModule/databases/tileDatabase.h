@@ -7,10 +7,6 @@
 #include <string>
 #include <map>
 
-#if defined(_MSC_VER) && defined(GetObject)
-#undef GetObject
-#endif
-
 namespace sr {
 	namespace databaseModule {
 

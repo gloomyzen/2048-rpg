@@ -7,7 +7,7 @@ using namespace sr::databaseModule;
 databaseManager *currentDBInstance = nullptr;
 
 databaseManager::databaseManager() {
-	tileDatabaseInstance = new tileDatabase("properties/db/tileDatabase.json");
+	tileDatabaseInstance = new tileDatabase("properties/db/tilesDB.json");
 }
 
 databaseManager::~databaseManager() = default;

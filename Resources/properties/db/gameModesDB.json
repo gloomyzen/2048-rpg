@@ -1,0 +1,31 @@
+[
+  {
+    "name": "Endless game",
+    "type": "endless",
+    "heroTile": "bread_pitt_hero",
+    "spawnPerSwipe": [
+      {
+        "count": 1,
+        "chance": 80
+      },
+      {
+        "count": 2,
+        "chance": 20
+      }
+    ],
+    "tiles": [
+      {
+        "tile": "fly_enemy",
+        "chance": 50
+      },
+      {
+        "tile": "plant_enemy",
+        "chance": 25
+      },
+      {
+        "tile": "thorns_enemy",
+        "chance": 25
+      }
+    ]
+  }
+]
