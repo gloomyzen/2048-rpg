@@ -6,7 +6,7 @@
 using namespace sr::databaseModule;
 
 static std::map<std::string, eTileTypes> tileTypesMap = {
-		{"none", eTileTypes::NONE},
+		{"env", eTileTypes::ENVIRONMENT},
 		{"hero", eTileTypes::HERO},
 		{"item", eTileTypes::ITEM},
 		{"enemy", eTileTypes::ENEMY}
@@ -47,26 +47,12 @@ void tileDatabase::load(const rapidjson::Document& data) {
 		if (attackIter != iter->value.MemberEnd() && attackIter->value.IsInt()) {
 			item.attack = attackIter->value.GetInt();
 		}
-		///Armor
-		auto armorIter = iter->value.FindMember("armor");
-		if (armorIter != iter->value.MemberEnd() && armorIter->value.IsInt()) {
-			item.armor = armorIter->value.GetInt();
+		///Hp
+		auto hpIter = iter->value.FindMember("hp");
+		if (hpIter != iter->value.MemberEnd() && hpIter->value.IsInt()) {
+			item.hp = hpIter->value.GetInt();
 		}
-		///isCollect
-		auto collectIter = iter->value.FindMember("isCollect");
-		if (collectIter != iter->value.MemberEnd() && collectIter->value.IsBool()) {
-			item.isCollect = collectIter->value.GetBool();
-		}
-		///isHero
-		auto heroIter = iter->value.FindMember("isHero");
-		if (heroIter != iter->value.MemberEnd() && heroIter->value.IsBool()) {
-			item.isHero = heroIter->value.GetBool();
-		}
-		///isEnemy
-		auto enemyIter = iter->value.FindMember("isEnemy");
-		if (enemyIter != iter->value.MemberEnd() && enemyIter->value.IsBool()) {
-			item.isEnemy = enemyIter->value.GetBool();
-		}
+
 		///Upgrade
 		auto upgIter = iter->value.FindMember("upgrade");
 		if (upgIter != iter->value.MemberEnd() && upgIter->value.IsArray()) {

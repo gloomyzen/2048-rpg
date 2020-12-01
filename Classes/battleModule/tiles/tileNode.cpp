@@ -14,6 +14,6 @@ tileNode::tileNode(float w, float h) : tileNode() {
 	this->setContentSize(tileSize);
 }
 
-void tileNode::createTile(eTileType _type) {
+void tileNode::createTile(eTileTypes _type) {
 	type = _type;
 }

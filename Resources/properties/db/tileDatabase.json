@@ -1,12 +1,9 @@
 {
   "types": {
     "empty_1": {
-      "type": "none",
+      "type": "env",
       "attack": 0,
-      "armor": 0,
-      "isCollect": false,
-      "isHero": false,
-      "isEnemy": false,
+      "hp": 0,
       "upgrade": [
         {
           "id": 1,
@@ -18,10 +15,7 @@
     "bread_pitt_hero": {
       "type": "hero",
       "attack": 1,
-      "armor": 1,
-      "isCollect": false,
-      "isHero": true,
-      "isEnemy": false,
+      "hp": 1,
       "upgrade": [
         {
           "id": 1,
@@ -33,10 +27,7 @@
     "fly_enemy": {
       "type": "enemy",
       "attack": 1,
-      "armor": 1,
-      "isCollect": false,
-      "isHero": false,
-      "isEnemy": true,
+      "hp": 1,
       "upgrade": [
         {
           "id": 1,
@@ -53,10 +44,7 @@
     "plant_enemy": {
       "type": "enemy",
       "attack": 1,
-      "armor": 1,
-      "isCollect": false,
-      "isHero": false,
-      "isEnemy": true,
+      "hp": 1,
       "upgrade": [
         {
           "id": 1,
@@ -73,10 +61,7 @@
     "thorns_enemy": {
       "type": "enemy",
       "attack": 1,
-      "armor": 1,
-      "isCollect": false,
-      "isHero": false,
-      "isEnemy": true,
+      "hp": 1,
       "upgrade": [
         {
           "id": 1,

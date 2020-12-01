@@ -3,18 +3,14 @@
 
 #include "cocos2d.h"
 #include "common/coreModule/nodes/nodeProperties.h"
+#include "databaseModule/databaseManager.h"
+#include "databaseModule/databases/tileDatabase.h"
 
 namespace sr {
 	namespace battleModule {
 		using namespace cocos2d;
 		using namespace common;
-
-		enum class eTileType {
-			NONE = 0,
-			HERO,
-			ENVIRONMENT,
-			ENEMY
-		};
+		using namespace databaseModule;
 
 		class tileNode : public coreModule::nodeProperties, public Sprite {
 		public:
@@ -23,10 +19,10 @@ namespace sr {
 			~tileNode() = default;
 			CREATE_FUNC(tileNode);
 
-			void createTile(eTileType _type);
+			void createTile(eTileTypes _type);
 
 		private:
-			eTileType type = eTileType::NONE;
+			eTileTypes type = eTileTypes::UNDEFINED;
 		};
 	}
 }
