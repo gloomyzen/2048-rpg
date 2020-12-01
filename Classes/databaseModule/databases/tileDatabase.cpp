@@ -1,7 +1,5 @@
 #include "tileDatabase.h"
 #include "cocos2d.h"
-#include "json/document.h"
-#include "json/ostreamwrapper.h"
 #include "common/debugModule/logManager.h"
 #include <map>
 

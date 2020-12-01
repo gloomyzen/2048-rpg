@@ -37,9 +37,9 @@ cmake ../.. -GXcode -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_SYSROOT=iphoneos
 sudo xcode-select --reset
 ```
 
-For Visual Studio
+For Visual Studio Community 2019
 ```bash
 mkdir build && cd build
-cmake .. -G "Visual Studio 16 2019" -AWin32 -DDEBUG=1
+cmake .. -G"Visual Studio 16 2019" -Tv142 -A Win32 -DDEBUG=1
 and open .sln file from `proj.win32` folder
 ```
