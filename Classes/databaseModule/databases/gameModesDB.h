@@ -5,6 +5,7 @@
 #include "json/document.h"
 #include "json/ostreamwrapper.h"
 #include <map>
+#include <string>
 #include "tilesDB.h"
 
 namespace sr {
