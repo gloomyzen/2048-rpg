@@ -16,14 +16,24 @@ namespace sr {
 			ENDLESS = 0,
 		};
 
+		struct sSpawnChance {
+			int count;
+			int percent;
+			sSpawnChance(int _count, int _percent) : count(_count), percent(_percent) {}
+		};
+
+		struct sSpawnTile {
+			sTileData tile;
+			int chance;
+			sSpawnTile(sTileData _tile, int _chance) : tile(std::move(_tile)), chance(_chance) {}
+		};
+
 		struct sGameModeData {
 			std::string name;
 			eGameMode type;
 			sTileData heroTile;
-			//todo
-//			spawnPerSwipe <- array of structs
-			//todo
-//			tiles <- array of structs
+			std::vector<sSpawnChance> spawnPerSwipe;
+			std::vector<sSpawnTile> tiles;
 
 		};
 

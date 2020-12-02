@@ -17,6 +17,7 @@ void boardNode::initBoard() {
 	initHandling();
 	//todo only for test, remove after testing
 	auto test = GET_DATABASE_MANAGER().getTileDatabase();
+	auto test2 = GET_DATABASE_MANAGER().getGameModesDB();
 }
 
 void boardNode::clearTiles() {

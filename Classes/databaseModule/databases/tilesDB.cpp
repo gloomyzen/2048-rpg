@@ -28,7 +28,6 @@ void tilesDB::load(const rapidjson::Document& data) {
 	const auto typesIter = data.FindMember("types");
 	if (typesIter == data.MemberEnd() || !typesIter->value.IsObject()) {
 		LOG_ERROR("tileDatabase::load: Object 'type' is not valid!");
-		return;
 	}
 	for (auto iter = typesIter->value.MemberBegin(); iter != typesIter->value.MemberEnd(); ++iter) {
 		sTileData item;
