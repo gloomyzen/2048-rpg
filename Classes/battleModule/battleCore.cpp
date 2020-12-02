@@ -25,8 +25,8 @@ battleCore::battleCore() {
 					 clippingNode->setStencil(stencil);
 					 addChild(clippingNode);
 					 //for debug
-					 addChild(board);
-//					 clippingNode->addChild(board);
+//					 addChild(board);
+					 clippingNode->addChild(board);
 				 }
 	);
 }
