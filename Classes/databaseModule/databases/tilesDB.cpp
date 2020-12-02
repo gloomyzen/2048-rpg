@@ -5,7 +5,7 @@
 
 using namespace sr::databaseModule;
 
-static std::map<std::string, eTileTypes> tileTypesMap = {
+std::map<std::string, eTileTypes> tileTypesMap = {
 		{"env", eTileTypes::ENVIRONMENT},
 		{"hero", eTileTypes::HERO},
 		{"item", eTileTypes::ITEM},
@@ -13,12 +13,7 @@ static std::map<std::string, eTileTypes> tileTypesMap = {
 };
 
 tilesDB::tilesDB(const std::string& path) {
-	const std::string &regionStr = cocos2d::FileUtils::getInstance()->getStringFromFile(path);
-	rapidjson::Document data;
-	data.Parse<0>(regionStr.c_str());
-	if (isValidJson(data)) {
-		load(data);
-	}
+	setPath(path);
 }
 
 tilesDB::~tilesDB() = default;

@@ -16,8 +16,8 @@ namespace sr {
 			~databaseManager();
 			static databaseManager &getInstance();
 
-			tilesDB* getTileDatabase() { return tileDatabaseInstance; }
-			gameModesDB* getGameModesDB() { return gameModesDatabaseInstance; }
+			tilesDB& getTileDatabase() { return *tileDatabaseInstance; }
+			gameModesDB& getGameModesDB() { return *gameModesDatabaseInstance; }
 
 		private:
 			tilesDB* tileDatabaseInstance = nullptr;

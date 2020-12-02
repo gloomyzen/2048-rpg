@@ -18,8 +18,7 @@ battleCore::battleCore() {
 					 destination.y = rect.origin.y + rect.size.height;
 					 clippingNode = ClippingNode::create();
 					 clippingNode->setName("boardClippingNode");
-					 //todo need new method loadComponent()
-					 loadProperty("battleScene/" + clippingNode->getName(), clippingNode);
+					 loadComponent("battleScene/" + clippingNode->getName(), clippingNode);
 					 DrawNode * stencil = DrawNode::create();
 					 stencil->setName("clipperStencil");
 					 stencil->drawSolidRect(origin, destination, Color4F::MAGENTA);
