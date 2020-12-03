@@ -43,12 +43,12 @@ namespace sr {
 			explicit tilesDB(const std::string&);
 			~tilesDB();
 			void load(const rapidjson::Document&) override;
-			sTileData getTileByName(const std::string &name);
+			sTileData* getTileByName(const std::string &name);
 			bool tileExist(const std::string &name);
-			std::map<std::string, sTileData> getAllTiles() { return tileList; }
+			std::map<std::string, sTileData*> getAllTiles() { return tileList; }
 
 		private:
-			std::map<std::string, sTileData> tileList;
+			std::map<std::string, sTileData*> tileList;
 		};
 	}
 }

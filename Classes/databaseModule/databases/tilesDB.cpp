@@ -25,26 +25,26 @@ void tilesDB::load(const rapidjson::Document& data) {
 		LOG_ERROR("tileDatabase::load: Object 'type' is not valid!");
 	}
 	for (auto iter = typesIter->value.MemberBegin(); iter != typesIter->value.MemberEnd(); ++iter) {
-		sTileData item;
-		item.name = iter->name.GetString();
+		auto item = new sTileData();
+		item->name = iter->name.GetString();
 		///Type
 		auto typeIter = iter->value.FindMember("type");
 		if (typeIter != iter->value.MemberEnd() && typeIter->value.IsString()) {
 			auto type = typeIter->value.GetString();
 			auto it = tileTypesMap.find(type);
 			if (it != tileTypesMap.end()) {
-				item.type = it->second;
+				item->type = it->second;
 			}
 		}
 		///Attack
 		auto attackIter = iter->value.FindMember("attack");
 		if (attackIter != iter->value.MemberEnd() && attackIter->value.IsInt()) {
-			item.attack = attackIter->value.GetInt();
+			item->attack = attackIter->value.GetInt();
 		}
 		///Hp
 		auto hpIter = iter->value.FindMember("hp");
 		if (hpIter != iter->value.MemberEnd() && hpIter->value.IsInt()) {
-			item.hp = hpIter->value.GetInt();
+			item->hp = hpIter->value.GetInt();
 		}
 
 		///Upgrade
@@ -53,20 +53,20 @@ void tilesDB::load(const rapidjson::Document& data) {
 			for (auto upgradeIt = upgIter->value.Begin(); upgradeIt != upgIter->value.End(); ++upgradeIt) {
 				auto upg = sTilesUpgrade(upgradeIt->GetObjectJ());
 				if (upg.isValid()) {
-					item.tileUpgrade.insert({upg.id, upg});
+					item->tileUpgrade.insert({upg.id, upg});
 				}
 			}
 		}
-		tileList.insert({item.name, item});
+		tileList.insert({item->name, item});
 	}
 }
 
-sTileData tilesDB::getTileByName(const std::string &name) {
+sTileData* tilesDB::getTileByName(const std::string &name) {
 	auto it = tileList.find(name);
 	if (it != tileList.end()) {
 		return it->second;
 	}
-	return sTileData();
+	return nullptr;
 }
 
 bool tilesDB::tileExist(const std::string &name) {

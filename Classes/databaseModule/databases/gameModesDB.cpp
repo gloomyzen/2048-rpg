@@ -58,7 +58,52 @@ void gameModesDB::load(const rapidjson::Document &data) {
 			LOG_ERROR("gameModesDB::load: Attribute heroTile is not found!");
 		}
 
+		auto spawnPerSwipe = it->FindMember("spawnPerSwipe");
+		if (spawnPerSwipe != it->MemberEnd() && spawnPerSwipe->value.IsArray()) {
+			item->loadSpawnData(spawnPerSwipe->value.GetArray());
+		}
+
+		auto tilesData = it->FindMember("tiles");
+		if (tilesData != it->MemberEnd() && tilesData->value.IsArray()) {
+			item->loadTileData(tilesData->value.GetArray());
+		}
 
 	}
 
+}
+
+sGameModeData *gameModesDB::getModeByType(eGameMode mode) {
+	auto res = modesList.find(mode);
+	if (res != modesList.end()) {
+		return res->second;
+	}
+	return nullptr;
+}
+
+void sGameModeData::loadSpawnData(const rapidjson::GenericValue<rapidjson::UTF8<char>>::ConstArray &array) {
+	for (auto it = array.Begin(); it != array.End(); ++it) {
+		auto count = it->FindMember("count");
+		auto chance = it->FindMember("chance");
+		if (count != it->MemberEnd() && chance != it->MemberEnd()) {
+			auto item = new sSpawnChance(count->value.GetInt(), chance->value.GetInt());
+			spawnPerSwipe.push_back(item);
+		}
+	}
+}
+
+void sGameModeData::loadTileData(const rapidjson::GenericValue<rapidjson::UTF8<char>>::ConstArray &array) {
+	auto tileDb = GET_DATABASE_MANAGER().getTileDatabase();
+	tileDb.executeLoadData();
+	for (auto it = array.Begin(); it != array.End(); ++it) {
+		auto tileIt = it->FindMember("tile");
+		auto chance = it->FindMember("chance");
+		if (tileIt != it->MemberEnd() && chance != it->MemberEnd()) {
+			if (!tileDb.tileExist(tileIt->value.GetString()))
+				continue;
+
+			auto tile = tileDb.getTileByName(tileIt->value.GetString());
+			auto item = new sSpawnTile(tile, chance->value.GetInt());
+			tiles.push_back(item);
+		}
+	}
 }

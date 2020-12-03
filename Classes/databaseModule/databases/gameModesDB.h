@@ -23,18 +23,20 @@ namespace sr {
 		};
 
 		struct sSpawnTile {
-			sTileData tile;
+			sTileData* tile;
 			int chance;
-			sSpawnTile(sTileData _tile, int _chance) : tile(std::move(_tile)), chance(_chance) {}
+			sSpawnTile(sTileData* _tile, int _chance) : tile(_tile), chance(_chance) {}
 		};
 
 		struct sGameModeData {
 			std::string name;
 			eGameMode type;
-			sTileData heroTile;
-			std::vector<sSpawnChance> spawnPerSwipe;
-			std::vector<sSpawnTile> tiles;
+			sTileData* heroTile;
+			std::vector<sSpawnChance*> spawnPerSwipe;
+			std::vector<sSpawnTile*> tiles;
 
+			void loadSpawnData(const rapidjson::GenericValue<rapidjson::UTF8<char>>::ConstArray &array);
+			void loadTileData(const rapidjson::GenericValue<rapidjson::UTF8<char>>::ConstArray &array);
 		};
 
 		class gameModesDB : public databaseInterface {
@@ -42,10 +44,12 @@ namespace sr {
 			explicit gameModesDB(const std::string&);
 			~gameModesDB();
 			void load(const rapidjson::Document&) override;
+			std::map<eGameMode, sGameModeData*> getModes() { return modesList; }
+			sGameModeData* getModeByType(eGameMode);
 
 
 		private:
-			std::map<eGameMode, sGameModeData> modesList;
+			std::map<eGameMode, sGameModeData*> modesList;
 		};
 
 	}
