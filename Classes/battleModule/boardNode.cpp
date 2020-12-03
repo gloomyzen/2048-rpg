@@ -23,7 +23,7 @@ void boardNode::initBoard() {
 }
 
 void boardNode::clearTiles() {
-	///Destroy <- todo добавить красивый дестрой тайлов
+	///Destroy <- todo добавить анимацию дестроя тайлов
 	for (auto list : tileList) {
 		list.clear();
 		list.reserve(BOARD_COUNT_Y);
@@ -42,16 +42,16 @@ void boardNode::setDefaultPosition() {
 	position.x = BOARD_START_POS_X;
 	position.y = BOARD_START_POS_Y;
 	for (int x = 0; x < BOARD_COUNT_X; ++x) {
-		std::vector<sTileData> row{};
+		std::vector<sTileNode*> row{};
 		for (int y = 0; y < BOARD_COUNT_Y; ++y) {
 			if (y == 0) {
 				position.y = BOARD_START_POS_Y;
 			}
-			sTileData data;
-			data.pos = position;
-			data.tile = new tileNode(boardTileWH, boardTileWH);
-			data.tile->setPosition(data.pos);
-			addChild(data.tile);
+			auto data = new sTileNode();
+			data->pos = position;
+			data->tile = new tileNode(boardTileWH, boardTileWH);
+			data->tile->setPosition(data->pos);
+			addChild(data->tile);
 			position.y += boardTileWH;
 			row.push_back(data);
 		}
@@ -86,7 +86,7 @@ void boardNode::initHandling() {
 }
 
 void boardNode::touchUpdate(Touch* touch, Event* event) {
-	//todo check distance and event
+	//todo need calculate correct distance of swipe
 	if (touch->getStartLocation().x > touch->getLocation().x && touch->getStartLocation().x - BOARD_TOUCH_FORCE > touch->getLocation().x) {
 		CCLOG("LEFT SWIPE");
 	} else if (touch->getStartLocation().x < touch->getLocation().x && touch->getStartLocation().x + BOARD_TOUCH_FORCE < touch->getLocation().x) {

@@ -17,7 +17,7 @@ namespace sr {
 		using namespace cocos2d;
 		using namespace common;
 
-		struct sTileData {
+		struct sTileNode {
 			cocos2d::Vec2 pos;
 			tileNode* tile;
 		};
@@ -35,7 +35,7 @@ namespace sr {
 			void initHandling();
 			void touchUpdate(Touch*, Event*);
 
-			std::vector<std::vector<sTileData>> tileList;;
+			std::vector<std::vector<sTileNode*>> tileList;;
 			Touch* lastTouchInfo = nullptr;
 			bool isTouch = false;
 		};
