@@ -10,23 +10,30 @@ battleCore::battleCore() {
 	atp->enqueue(AsyncTaskPool::TaskType::TASK_OTHER, [](void*){}, nullptr,
 				 [this]() {
 					 board = new boardNode();
-					 auto rect = board->getBoundingBox();
-					 Vec2 origin = rect.origin;
-					 Vec2 destination;
-					 auto boardSize = board->getContentSize();
-					 destination.x = rect.origin.x + rect.size.width;
-					 destination.y = rect.origin.y + rect.size.height;
 					 clippingNode = ClippingNode::create();
 					 clippingNode->setName("boardClippingNode");
 					 loadComponent("battleScene/" + clippingNode->getName(), clippingNode);
-					 DrawNode * stencil = DrawNode::create();
-					 stencil->setName("clipperStencil");
-					 stencil->drawSolidRect(origin, destination, Color4F::MAGENTA);
-					 clippingNode->setStencil(stencil);
+					 DrawNode *stencil = DrawNode::create();
 					 addChild(clippingNode);
 					 //for debug
 //					 addChild(board);
 					 clippingNode->addChild(board);
+
+					 auto rect = board->getBoundingBox();
+					 auto parentSize = clippingNode->getContentSize();
+					 Vec2 origin = rect.origin;
+					 Vec2 destination;
+					 auto boardSize = board->getContentSize();
+					 origin.x = origin.x * board->getAnchorPoint().x;
+					 origin.y = origin.y * board->getAnchorPoint().y;
+					 destination.x = rect.origin.x + rect.size.width;
+					 destination.y = rect.origin.y + rect.size.height;
+
+					 stencil->setName("clipperStencil");
+					 stencil->drawSolidRect(origin, destination, Color4F::MAGENTA);
+					 //for debug
+//					 addChild(stencil);
+					 clippingNode->setStencil(stencil);
 				 }
 	);
 }

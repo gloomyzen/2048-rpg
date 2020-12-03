@@ -9,7 +9,7 @@
 #define BOARD_START_POS_X 0
 #define BOARD_START_POS_Y 0
 #define BOARD_COUNT_X 5
-#define BOARD_COUNT_Y 7
+#define BOARD_COUNT_Y 5
 #define BOARD_TOUCH_FORCE 75
 
 namespace sr {
