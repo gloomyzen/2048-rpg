@@ -2,6 +2,7 @@
 #include "cocos2d.h"
 #include "databaseModule/databaseManager.h"
 #include "databaseModule/databases/tilesDB.h"
+#include "common/debugModule/logManager.h"
 
 using namespace sr;
 using namespace sr::databaseModule;
@@ -68,6 +69,7 @@ void gameModesDB::load(const rapidjson::Document &data) {
 			item->loadTileData(tilesData->value.GetArray());
 		}
 
+		modesList.insert({item->type, item});
 	}
 
 }

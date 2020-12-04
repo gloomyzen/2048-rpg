@@ -2,6 +2,7 @@
 #define SWIPE_RPG_GAMEMODESTOOL_H
 
 #include "databaseModule/databases/gameModesDB.h"
+#include "databaseModule/databaseManager.h"
 
 namespace sr {
 	namespace databaseModule {
@@ -10,7 +11,8 @@ namespace sr {
 			gameModesTool();
 			~gameModesTool();
 
-			sTileData* getNextTile(eGameMode);
+			static sTileData* getNextTile(eGameMode);
+
 		};
 	}
 }
