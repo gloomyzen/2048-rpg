@@ -22,11 +22,12 @@ namespace sr {
 			tileNode* tile;
 		};
 
-		class boardNode : public coreModule::nodeProperties, public Sprite {
+		class boardNode : public coreModule::nodeProperties, public Sprite, public taskHolder {
 		public:
 			boardNode();
 			~boardNode();
 			CREATE_FUNC(boardNode);
+			std::deque<nodeTasks> getTasks() override;
 
 		private:
 			void initBoard();

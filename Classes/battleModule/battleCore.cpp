@@ -5,13 +5,14 @@ using namespace sr::battleModule;
 battleCore::battleCore() {
 	this->setName("battleNode");
 	loadProperty("battleScene/" + this->getName(), this);
+	board = new boardNode();
+	board->executeTasks();
 }
 
 std::deque<nodeTasks> battleCore::getTasks() {
 	std::deque<nodeTasks> result;
 
 	result.emplace_back([this]() {
-		board = new boardNode();
 		clippingNode = ClippingNode::create();
 		clippingNode->setName("boardClippingNode");
 		loadComponent("battleScene/" + clippingNode->getName(), clippingNode);

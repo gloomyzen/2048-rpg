@@ -7,11 +7,25 @@ using namespace sr::battleModule;
 
 boardNode::boardNode() {
 	this->setName("boardNode");
-	loadProperty("battleScene/" + this->getName(), dynamic_cast<Sprite*>(this));
-	initBoard();
 }
 
 boardNode::~boardNode() {}
+
+std::deque<nodeTasks> boardNode::getTasks() {
+	std::deque<nodeTasks> result;
+
+	result.emplace_back([this]() {
+		loadProperty("battleScene/" + this->getName(), dynamic_cast<Sprite*>(this));
+		return eTasksStatus::STATUS_OK;
+	});
+
+	result.emplace_back([this]() {
+		initBoard();
+		return eTasksStatus::STATUS_OK;
+	});
+
+	return result;
+}
 
 void boardNode::initBoard() {
 	clearTiles();
