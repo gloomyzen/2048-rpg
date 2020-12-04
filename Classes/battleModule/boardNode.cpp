@@ -21,7 +21,7 @@ void boardNode::initBoard() {
 //	auto test = GET_DATABASE_MANAGER().getTileDatabase();
 	auto test2 = GET_DATABASE_MANAGER().getGameModesDB();
 	test2.executeLoadData();
-	auto tool = gameModesTool::getNextTile(eGameMode::ENDLESS);
+	auto testTool = gameModesTool::getNextTile(eGameMode::ENDLESS);
 }
 
 void boardNode::clearTiles() {

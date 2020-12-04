@@ -18,8 +18,8 @@ namespace sr {
 
 		struct sSpawnChance {
 			int count;
-			int percent;
-			sSpawnChance(int _count, int _percent) : count(_count), percent(_percent) {}
+			int chance;
+			sSpawnChance(int _count, int _chance) : count(_count), chance(_chance) {}
 		};
 
 		struct sSpawnTile {

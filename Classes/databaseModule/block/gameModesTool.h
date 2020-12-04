@@ -3,6 +3,7 @@
 
 #include "databaseModule/databases/gameModesDB.h"
 #include "databaseModule/databaseManager.h"
+#include <vector>
 
 namespace sr {
 	namespace databaseModule {
@@ -11,7 +12,7 @@ namespace sr {
 			gameModesTool();
 			~gameModesTool();
 
-			static sTileData* getNextTile(eGameMode);
+			static std::vector<sTileData*> getNextTile(eGameMode);
 
 		};
 	}
