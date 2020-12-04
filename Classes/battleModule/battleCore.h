@@ -10,11 +10,13 @@ namespace sr {
 	using namespace cocos2d;
 	using namespace common;
 
-		class battleCore : public coreModule::nodeProperties, public Node {
+		class battleCore : public coreModule::nodeProperties, public Node, public taskHolder {
 		public:
 			battleCore();
 			~battleCore() = default;
 			CREATE_FUNC(battleCore);
+
+			std::deque<nodeTasks> getTasks() override;
 
 		private:
 			boardNode* board = nullptr;
