@@ -1,7 +1,5 @@
 #include "boardNode.h"
 #include "databaseModule/databaseManager.h"
-#include "databaseModule/databases/gameModesDB.h"
-#include "databaseModule/block/gameModesTool.h"
 
 using namespace sr::battleModule;
 
@@ -33,9 +31,10 @@ void boardNode::initBoard() {
 	initHandling();
 	//todo only for test, remove after testing
 //	auto test = GET_DATABASE_MANAGER().getTileDatabase();
-	auto test2 = GET_DATABASE_MANAGER().getGameModesDB();
-	test2.executeLoadData();
-	auto testTool = gameModesTool::getNextTile(eGameMode::ENDLESS);
+//	auto test2 = GET_DATABASE_MANAGER().getGameModesDB();
+//	test2.executeLoadData();
+//	auto testTool = gameModesTool::getNextTile(eGameMode::ENDLESS);
+//	auto nextTile = gameModesTool::getNextTile(eGameMode::ENDLESS);
 }
 
 void boardNode::clearTiles() {
