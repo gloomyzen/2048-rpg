@@ -10,6 +10,8 @@
 #define BOARD_START_POS_Y 0
 #define BOARD_COUNT_X 5
 #define BOARD_COUNT_Y 5
+#define BOARD_HERO_POS_X 2
+#define BOARD_HERO_POS_Y 2
 #define BOARD_TOUCH_FORCE 75
 
 namespace sr {
@@ -36,7 +38,8 @@ namespace sr {
 			void initHandling();
 			void touchUpdate(Touch*, Event*);
 
-			std::vector<std::vector<sTileNode*>> tileList;;
+			std::vector<std::vector<sTileNode*>> tileList;
+			tileNode* hero = nullptr;
 			Touch* lastTouchInfo = nullptr;
 			bool isTouch = false;
 		};

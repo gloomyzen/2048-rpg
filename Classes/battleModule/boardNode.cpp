@@ -75,6 +75,8 @@ void boardNode::setDefaultPosition() {
 		tileList.push_back(row);
 		position.x += boardTileWH;
 	}
+
+	hero = tileList[BOARD_HERO_POS_X][BOARD_HERO_POS_Y]->tile;
 }
 
 void boardNode::initHandling() {
