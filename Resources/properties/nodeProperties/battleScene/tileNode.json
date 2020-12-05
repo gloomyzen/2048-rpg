@@ -3,6 +3,12 @@
     "TransformComponent": {
       "size": [ 128, 128 ],
       "anchor": [ 0.0, 0.0 ]
+    }
+  },
+  "bg": {
+    "TransformComponent": {
+      "size": [ 128, 128 ],
+      "anchor": [ 0.0, 0.0 ]
     },
     "SpriteComponent": {
       "image": "images/tiles/bg/tile_dark.png"

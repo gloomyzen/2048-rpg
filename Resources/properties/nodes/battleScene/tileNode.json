@@ -1,7 +1,11 @@
 {
-  "type": "sprite",
+  "type": "node",
   "name": "tileNode",
   "child": [
+    {
+      "type": "sprite",
+      "name": "bg"
+    },
     {
       "type": "sprite",
       "name": "hpIcon"

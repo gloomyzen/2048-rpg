@@ -36,6 +36,15 @@ namespace sr {
 			int attack = 0;
 			int hp = 0;
 			std::map<int, sTilesUpgrade> tileUpgrade;
+
+			sTileData()= default;
+			sTileData(const sTileData& data) {
+				name = data.name;
+				type = data.type;
+				attack = data.attack;
+				hp = data.hp;
+				tileUpgrade = data.tileUpgrade;
+			};
 		};
 
 		class tilesDB : public databaseInterface {

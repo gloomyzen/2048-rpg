@@ -65,7 +65,8 @@ void boardNode::setDefaultPosition() {
 			}
 			auto data = new sTileNode();
 			data->pos = position;
-			data->tile = new tileNode(boardTileWH, boardTileWH);
+			data->tile = new tileNode();
+			data->tile->setTileSize(boardTileWH, boardTileWH);
 			data->tile->setPosition(data->pos);
 			addChild(data->tile);
 			position.y += boardTileWH;
