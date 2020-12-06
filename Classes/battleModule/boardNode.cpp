@@ -17,11 +17,6 @@ std::deque<nodeTasks> boardNode::getTasks() {
 		return eTasksStatus::STATUS_OK;
 	});
 
-	result.emplace_back([this]() {
-		initBoard();
-		return eTasksStatus::STATUS_OK;
-	});
-
 	return result;
 }
 
@@ -62,6 +57,9 @@ void boardNode::setDefaultPosition() {
 			if (y == 0) {
 				position.y = BOARD_START_POS_Y;
 			}
+			if (x == BOARD_HERO_POS_X && y == BOARD_HERO_POS_Y) {
+				//todo init hero tile
+			}
 			auto data = new sTileNode();
 			data->pos = position;
 			data->tile = new tileNode();
@@ -74,8 +72,6 @@ void boardNode::setDefaultPosition() {
 		tileList.push_back(row);
 		position.x += boardTileWH;
 	}
-
-	hero = tileList[BOARD_HERO_POS_X][BOARD_HERO_POS_Y]->tile;
 }
 
 void boardNode::initHandling() {
@@ -105,13 +101,27 @@ void boardNode::initHandling() {
 
 void boardNode::touchUpdate(Touch* touch, Event* event) {
 	//todo need calculate correct distance of swipe
+	auto dir = eSwipeDirection::UNDEFINED;
 	if (touch->getStartLocation().x > touch->getLocation().x && touch->getStartLocation().x - BOARD_TOUCH_FORCE > touch->getLocation().x) {
-		CCLOG("LEFT SWIPE");
+		CCLOG("boardNode::touchUpdate: Left swipe");
+		dir = eSwipeDirection::LEFT;
 	} else if (touch->getStartLocation().x < touch->getLocation().x && touch->getStartLocation().x + BOARD_TOUCH_FORCE < touch->getLocation().x) {
-		CCLOG("RIGHT SWIPE");
+		CCLOG("boardNode::touchUpdate: Right swipe");
+		dir = eSwipeDirection::RIGHT;
 	} else if (touch->getStartLocation().y > touch->getLocation().y && touch->getStartLocation().y - BOARD_TOUCH_FORCE > touch->getLocation().y) {
-		CCLOG("DOWN SWIPE");
+		CCLOG("boardNode::touchUpdate: Down swipe");
+		dir = eSwipeDirection::DOWN;
 	} else if (touch->getStartLocation().y < touch->getLocation().y && touch->getStartLocation().y + BOARD_TOUCH_FORCE < touch->getLocation().y) {
-		CCLOG("UP SWIPE");
+		CCLOG("boardNode::touchUpdate: Up swipe");
+		dir = eSwipeDirection::UP;
 	}
+	if (swipeClb && swipeClb(dir)) {
+		CCLOG("boardNode::touchUpdate: Valid swipe");
+	} else {
+		CCLOG("boardNode::touchUpdate: Swipe is not valid");
+	}
+}
+
+void boardNode::setHeroTileData(sTileData *heroTile) {
+	hero = heroTile;
 }

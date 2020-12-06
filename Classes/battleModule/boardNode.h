@@ -4,7 +4,9 @@
 #include "cocos2d.h"
 #include "common/coreModule/nodes/nodeProperties.h"
 #include "battleModule/tiles/tileNode.h"
+#include <utility>
 #include <vector>
+#include <functional>
 
 #define BOARD_START_POS_X 0
 #define BOARD_START_POS_Y 0
@@ -24,6 +26,14 @@ namespace sr {
 			tileNode* tile;
 		};
 
+		enum class eSwipeDirection {
+			UNDEFINED = 0,
+			UP = 1,
+			DOWN,
+			LEFT,
+			RIGHT
+		};
+
 		class boardNode : public coreModule::nodeProperties, public Sprite, public taskHolder {
 		public:
 			boardNode();
@@ -31,17 +41,21 @@ namespace sr {
 			CREATE_FUNC(boardNode);
 			std::deque<nodeTasks> getTasks() override;
 
-		private:
+			void setHeroTileData(sTileData* heroTile);
 			void initBoard();
+			void setSwipeCallback(std::function<bool(eSwipeDirection)> clb) { swipeClb = std::move(clb); }
+
+		private:
 			void clearTiles();
 			void setDefaultPosition();
 			void initHandling();
 			void touchUpdate(Touch*, Event*);
 
 			std::vector<std::vector<sTileNode*>> tileList;
-			tileNode* hero = nullptr;
+			sTileData* hero = nullptr;
 			Touch* lastTouchInfo = nullptr;
 			bool isTouch = false;
+			std::function<bool(eSwipeDirection)> swipeClb = nullptr;
 		};
 	}
 }
