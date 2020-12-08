@@ -35,7 +35,7 @@ namespace sr {
 			eTileTypes type = eTileTypes::UNDEFINED;
 			int attack = 0;
 			int hp = 0;
-			std::map<int, sTilesUpgrade> tileUpgrade;
+			std::map<int, sTilesUpgrade*> tileUpgrade;
 
 			sTileData()= default;
 			sTileData(const sTileData& data) {

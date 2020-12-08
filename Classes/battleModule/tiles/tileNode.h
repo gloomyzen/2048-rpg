@@ -21,11 +21,15 @@ namespace sr {
 			void createTile(const sTileData& data);
 			void setTileSize(float, float);
 
+
 		private:
 			sTileData* currentType = nullptr;
 			Sprite* hpIcon = nullptr;
 			Label* hpCountLbl = nullptr;
 			Label* attackCountLbl = nullptr;
+			Node* imgSlot = nullptr;
+			int currentLevel = 1;
+			float width = 0.f, height = 0.f;
 
 		};
 	}

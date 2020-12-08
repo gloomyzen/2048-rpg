@@ -8,7 +8,8 @@
   "bg": {
     "TransformComponent": {
       "size": [ 128, 128 ],
-      "anchor": [ 0.0, 0.0 ]
+      "anchor": [ 0.5, 0.5 ],
+      "pivot": [ 0.5, 0.5 ]
     },
     "SpriteComponent": {
       "image": "images/tiles/bg/tile_dark.png"
@@ -56,6 +57,12 @@
     },
     "ColorComponent": {
       "color": [255, 0, 0, 255]
+    }
+  },
+  "imageSlot": {
+    "TransformComponent": {
+      "pivot": [ 0.5, 0.5 ],
+      "anchor": [ 0.5, 0.5 ]
     }
   }
 }

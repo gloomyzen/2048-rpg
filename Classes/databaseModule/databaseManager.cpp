@@ -8,8 +8,8 @@ using namespace sr::databaseModule;
 databaseManager *currentDBInstance = nullptr;
 
 databaseManager::databaseManager() {
-	tileDatabaseInstance = new tilesDB("properties/db/tilesDB.json");
-	gameModesDatabaseInstance = new gameModesDB("properties/db/gameModesDB.json");
+	tileDatabaseInstance = new tilesDB("properties/database/tiles/db.json");
+	gameModesDatabaseInstance = new gameModesDB("properties/database/gameModes/db.json");
 }
 
 databaseManager::~databaseManager() = default;

@@ -24,12 +24,6 @@ void boardNode::initBoard() {
 	clearTiles();
 	setDefaultPosition();
 	initHandling();
-	//todo only for test, remove after testing
-//	auto test = GET_DATABASE_MANAGER().getTileDatabase();
-//	auto test2 = GET_DATABASE_MANAGER().getGameModesDB();
-//	test2.executeLoadData();
-//	auto testTool = gameModesTool::getNextTile(eGameMode::ENDLESS);
-//	auto nextTile = gameModesTool::getNextTile(eGameMode::ENDLESS);
 }
 
 void boardNode::clearTiles() {
@@ -57,9 +51,6 @@ void boardNode::setDefaultPosition() {
 			if (y == 0) {
 				position.y = BOARD_START_POS_Y;
 			}
-			if (x == BOARD_HERO_POS_X && y == BOARD_HERO_POS_Y) {
-				//todo init hero tile
-			}
 			auto data = new sTileNode();
 			data->pos = position;
 			data->tile = new tileNode();
@@ -68,6 +59,10 @@ void boardNode::setDefaultPosition() {
 			addChild(data->tile);
 			position.y += boardTileWH;
 			row.push_back(data);
+
+			if (x == BOARD_HERO_POS_X && y == BOARD_HERO_POS_Y && hero) {
+				data->tile->createTile(*hero);
+			}
 		}
 		tileList.push_back(row);
 		position.x += boardTileWH;
