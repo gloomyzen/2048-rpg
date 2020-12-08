@@ -21,11 +21,6 @@ namespace sr {
 		using namespace cocos2d;
 		using namespace common;
 
-		struct sTileNode {
-			cocos2d::Vec2 pos;
-			tileNode* tile;
-		};
-
 		enum class eSwipeDirection {
 			UNDEFINED = 0,
 			UP = 1,
@@ -44,6 +39,8 @@ namespace sr {
 			void setHeroTileData(sTileData* heroTile);
 			void initBoard();
 			void setSwipeCallback(std::function<bool(eSwipeDirection)> clb) { swipeClb = std::move(clb); }
+			void scrollBoard(eSwipeDirection);
+			void update(float delta) override;
 
 		private:
 			void clearTiles();
@@ -51,7 +48,8 @@ namespace sr {
 			void initHandling();
 			void touchUpdate(Touch*, Event*);
 
-			std::vector<std::vector<sTileNode*>> tileList;
+			std::vector<std::vector<cocos2d::Vec2>> positionsList;
+			std::vector<std::vector<tileNode*>> tileList;
 			sTileData* hero = nullptr;
 			Touch* lastTouchInfo = nullptr;
 			bool isTouch = false;

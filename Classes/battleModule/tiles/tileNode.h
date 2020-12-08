@@ -20,10 +20,12 @@ namespace sr {
 
 			void createTile(const sTileData& data);
 			void setTileSize(float, float);
+			eTileTypes getTileType() { return tileType; }
 
 
 		private:
-			sTileData* currentType = nullptr;
+			eTileTypes tileType = eTileTypes::UNDEFINED;
+			sTileData* tileData = nullptr;
 			Sprite* hpIcon = nullptr;
 			Label* hpCountLbl = nullptr;
 			Label* attackCountLbl = nullptr;

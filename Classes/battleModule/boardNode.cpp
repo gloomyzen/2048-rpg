@@ -24,6 +24,7 @@ void boardNode::initBoard() {
 	clearTiles();
 	setDefaultPosition();
 	initHandling();
+	this->scheduleUpdate();
 }
 
 void boardNode::clearTiles() {
@@ -46,25 +47,27 @@ void boardNode::setDefaultPosition() {
 	position.x = BOARD_START_POS_X;
 	position.y = BOARD_START_POS_Y;
 	for (int x = 0; x < BOARD_COUNT_X; ++x) {
-		std::vector<sTileNode*> row{};
+		std::vector<tileNode*> row{};
+		std::vector<cocos2d::Vec2> rowPos{};
 		for (int y = 0; y < BOARD_COUNT_Y; ++y) {
 			if (y == 0) {
 				position.y = BOARD_START_POS_Y;
 			}
-			auto data = new sTileNode();
-			data->pos = position;
-			data->tile = new tileNode();
-			data->tile->setTileSize(boardTileWH, boardTileWH);
-			data->tile->setPosition(data->pos);
-			addChild(data->tile);
+			auto pos = position;
+			auto tile = new tileNode();
+			tile->setTileSize(boardTileWH, boardTileWH);
+			tile->setPosition(pos);
+			addChild(tile);
 			position.y += boardTileWH;
-			row.push_back(data);
+			row.push_back(tile);
+			rowPos.push_back(pos);
 
 			if (x == BOARD_HERO_POS_X && y == BOARD_HERO_POS_Y && hero) {
-				data->tile->createTile(*hero);
+				tile->createTile(*hero);
 			}
 		}
 		tileList.push_back(row);
+		positionsList.push_back(rowPos);
 		position.x += boardTileWH;
 	}
 }
@@ -119,4 +122,72 @@ void boardNode::touchUpdate(Touch* touch, Event* event) {
 
 void boardNode::setHeroTileData(sTileData *heroTile) {
 	hero = heroTile;
+}
+
+void boardNode::scrollBoard(eSwipeDirection direction) {
+//	tileList[0][0];
+
+	for (std::size_t x = 0; x < tileList.size(); ++x) {
+		for (std::size_t y = 0; y < tileList[x].size(); ++y) {
+			auto item = tileList[x][y];
+			cocos2d::Vec2 nextPos = item->getPosition();
+			bool markToDestroy = false;
+			switch (direction) {
+				case eSwipeDirection::UP: {
+					if (y + 1 < tileList[x].size())
+						nextPos = positionsList[x][y + 1];
+					else
+						markToDestroy = true;
+				}
+					break;
+				case eSwipeDirection::DOWN: {
+					if (y - 1 < tileList[x].size())
+						nextPos = positionsList[x][y - 1];
+					else
+						markToDestroy = true;
+				}
+					break;
+				case eSwipeDirection::LEFT: {
+					if (x - 1 < tileList.size())
+						nextPos = positionsList[x - 1][y];
+					else
+						markToDestroy = true;
+				}
+					break;
+				case eSwipeDirection::RIGHT: {
+					if (x + 1 < tileList.size())
+						nextPos = positionsList[x + 1][y];
+					else
+						markToDestroy = true;
+				}
+					break;
+				default:
+					break;
+			}
+			if (!markToDestroy) {
+				auto moveBy = MoveTo::create(0.5f, nextPos);
+				item->runAction(moveBy);
+			} else {
+				tileList[x][y]->removeFromParentAndCleanup(true);
+				delete tileList[x][y];
+				tileList[x][y] = nullptr;
+			}
+		}
+	}
+
+}
+
+void boardNode::update(float delta) {
+	Node::update(delta);
+
+	for (std::size_t x = 0; x < tileList.size(); ++x) {
+		for (std::size_t y = 0; y < tileList[x].size(); ++y) {
+			if (tileList[x][y] == nullptr) {
+				//todo На завтра
+				// нужно создать экшен который сгенерит новый тайл вместо пустого
+				// нужно делать корректное смещение тайлов через очистку контейнера в начале или в конце
+				auto test = "";
+			}
+		}
+	}
 }

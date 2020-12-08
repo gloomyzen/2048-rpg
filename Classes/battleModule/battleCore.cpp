@@ -20,7 +20,8 @@ std::deque<nodeTasks> battleCore::getTasks() {
 		auto currentGameMode = gameModeDb.getModeByType(eGameMode::ENDLESS);
 		board->setHeroTileData(currentGameMode->heroTile);
 		board->initBoard();
-		board->setSwipeCallback([](eSwipeDirection direction){
+		board->setSwipeCallback([=](eSwipeDirection direction){
+			board->scrollBoard(direction);
 			return true;
 		});
 		//todo На завтра,

@@ -16,14 +16,15 @@ tileNode::tileNode() {
 }
 
 void tileNode::createTile(const sTileData &data) {
-	currentType = new sTileData(data);
-	if (currentType->tileUpgrade.empty()) {
+	tileData = new sTileData(data);
+	tileType = tileData->type;
+	if (tileData->tileUpgrade.empty()) {
 		LOG_WARNING("tileNode::createTile: tile upgrade is empty!");
 		return;
 	}
 	// find closest by level
 	sTilesUpgrade* currentUpgrade = nullptr;
-	for (auto item : currentType->tileUpgrade) {
+	for (auto item : tileData->tileUpgrade) {
 		if (currentLevel <= item.first) {
 			currentUpgrade = item.second;
 		}
