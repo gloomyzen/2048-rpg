@@ -24,8 +24,9 @@ std::deque<nodeTasks> battleCore::getTasks() {
 			board->scrollBoard(direction);
 			return true;
 		});
-		//todo На завтра,
-		// Нужен метод для спавна при свайпе, зарегистрировать тоже из кора
+		board->setSpawnCallback([=](){
+			return gameModesTool::getNextTile(eGameMode::ENDLESS);
+		});
 
 		return eTasksStatus::STATUS_OK;
 	});

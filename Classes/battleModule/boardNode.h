@@ -21,6 +21,14 @@ namespace sr {
 		using namespace cocos2d;
 		using namespace common;
 
+		struct sSlot {
+			cocos2d::Vec2 pos;
+			tileNode* tile = nullptr;
+			bool isHero = false;
+			sSlot() {};
+			sSlot(cocos2d::Vec2 pos, tileNode* tile, bool isHero = false) : pos(pos), tile(tile), isHero(isHero) {}
+		};
+
 		enum class eSwipeDirection {
 			UNDEFINED = 0,
 			UP = 1,
@@ -28,6 +36,9 @@ namespace sr {
 			LEFT,
 			RIGHT
 		};
+
+		typedef std::function<bool(eSwipeDirection)> swipeCallback;
+		typedef std::function<std::vector<sTileData *>()> spawnCallback;
 
 		class boardNode : public coreModule::nodeProperties, public Sprite, public taskHolder {
 		public:
@@ -38,7 +49,8 @@ namespace sr {
 
 			void setHeroTileData(sTileData* heroTile);
 			void initBoard();
-			void setSwipeCallback(std::function<bool(eSwipeDirection)> clb) { swipeClb = std::move(clb); }
+			void setSwipeCallback(swipeCallback clb) { swipeClb = std::move(clb); }
+			void setSpawnCallback(spawnCallback clb) { spawnClb = std::move(clb); }
 			void scrollBoard(eSwipeDirection);
 			void update(float delta) override;
 
@@ -48,12 +60,12 @@ namespace sr {
 			void initHandling();
 			void touchUpdate(Touch*, Event*);
 
-			std::vector<std::vector<cocos2d::Vec2>> positionsList;
-			std::vector<std::vector<tileNode*>> tileList;
+			std::vector<std::vector<sSlot*>> tileList;
 			sTileData* hero = nullptr;
 			Touch* lastTouchInfo = nullptr;
 			bool isTouch = false;
-			std::function<bool(eSwipeDirection)> swipeClb = nullptr;
+			swipeCallback swipeClb = nullptr;
+			spawnCallback spawnClb = nullptr;
 		};
 	}
 }
