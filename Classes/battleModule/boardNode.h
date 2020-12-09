@@ -6,6 +6,7 @@
 #include "battleModule/tiles/tileNode.h"
 #include <utility>
 #include <vector>
+#include <map>
 #include <functional>
 
 #define BOARD_START_POS_X 0
@@ -53,6 +54,7 @@ namespace sr {
 			void setSpawnCallback(spawnCallback clb) { spawnClb = std::move(clb); }
 			void scrollBoard(eSwipeDirection);
 			void update(float delta) override;
+			eTileTypes getNeighborTail(eSwipeDirection, int, int);
 
 		private:
 			void clearTiles();
@@ -60,7 +62,7 @@ namespace sr {
 			void initHandling();
 			void touchUpdate(Touch*, Event*);
 
-			std::vector<std::vector<sSlot*>> tileList;
+			std::map<int, std::map<int, sSlot*>> tileMap;
 			sTileData* hero = nullptr;
 			Touch* lastTouchInfo = nullptr;
 			bool isTouch = false;

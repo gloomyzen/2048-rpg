@@ -1,5 +1,6 @@
 #include "boardNode.h"
 #include "databaseModule/databaseManager.h"
+#include "common/debugModule/logManager.h"
 
 using namespace sr::battleModule;
 
@@ -29,11 +30,12 @@ void boardNode::initBoard() {
 
 void boardNode::clearTiles() {
 	///Destroy <- todo добавить анимацию дестроя тайлов
-	for (auto list : tileList) {
-		list.clear();
-		list.reserve(BOARD_COUNT_Y);
+	for (const auto& row : tileMap) {
+		for (auto tile : row.second) {
+			delete tile.second;
+			tile.second = nullptr;
+		}
 	}
-	tileList.reserve(BOARD_COUNT_X);
 }
 
 void boardNode::setDefaultPosition() {
@@ -47,7 +49,7 @@ void boardNode::setDefaultPosition() {
 	position.x = BOARD_START_POS_X;
 	position.y = BOARD_START_POS_Y;
 	for (int x = 0; x < BOARD_COUNT_X; ++x) {
-		std::vector<sSlot*> row{};
+		std::map<int, sSlot*> row{};
 		for (int y = 0; y < BOARD_COUNT_Y; ++y) {
 			if (y == 0) {
 				position.y = BOARD_START_POS_Y;
@@ -65,9 +67,9 @@ void boardNode::setDefaultPosition() {
 				slot = new sSlot(position, nullptr);
 			}
 			position.y += boardTileWH;
-			row.push_back(slot);
+			row.insert({y, slot});
 		}
-		tileList.push_back(row);
+		tileMap.insert({x, row});
 		position.x += boardTileWH;
 	}
 }
@@ -125,52 +127,46 @@ void boardNode::setHeroTileData(sTileData *heroTile) {
 }
 
 void boardNode::scrollBoard(eSwipeDirection direction) {
-//	tileList[0][0];
+//	tileMap[0][0];
 
-	for (std::size_t x = 0; x < tileList.size(); ++x) {
-		for (std::size_t y = 0; y < tileList[x].size(); ++y) {
-			auto item = tileList[x][y];
-//			cocos2d::Vec2 nextPos = item->getPosition();
-			bool markToDestroy = false;
+	if (!spawnClb) {
+		LOG_ERROR("boardNode::scrollBoard: Can't get next tile from spawn callback!");
+		return;
+	}
+	auto nextTiles = spawnClb();
+
+	//get list of free tiles
+	std::map<int, int> freeSlots;
+	for (std::size_t x = 0; x < tileMap.size(); ++x) {
+		for (std::size_t y = 0; y < tileMap[x].size(); ++y) {
+			if (tileMap[x][y] == nullptr) {
+				freeSlots.insert({x, y});
+			}
+		}
+	}
+
+	for (std::size_t x = 0; x < tileMap.size(); ++x) {
+		for (std::size_t y = 0; y < tileMap[x].size(); ++y) {
+			auto item = tileMap[x][y];
+			if (item->tile != nullptr && item->tile->getTileType() == eTileTypes::HERO) continue;
 			switch (direction) {
 				case eSwipeDirection::UP: {
-//					if (y + 1 < tileList[x].size())
-//						nextPos = positionsList[x][y + 1];
-//					else
-//						markToDestroy = true;
 				}
 					break;
 				case eSwipeDirection::DOWN: {
-//					if (y - 1 < tileList[x].size())
-//						nextPos = positionsList[x][y - 1];
-//					else
-//						markToDestroy = true;
 				}
 					break;
 				case eSwipeDirection::LEFT: {
-//					if (x - 1 < tileList.size())
-//						nextPos = positionsList[x - 1][y];
-//					else
-//						markToDestroy = true;
 				}
 					break;
 				case eSwipeDirection::RIGHT: {
-//					if (x + 1 < tileList.size())
-//						nextPos = positionsList[x + 1][y];
-//					else
-//						markToDestroy = true;
 				}
 					break;
-				default:
+				default: {
+					LOG_ERROR("boardNode::scrollBoard: Can't swipe, wrong direction!");
+					return;
+				}
 					break;
-			}
-			if (!markToDestroy) {
-//				auto moveBy = MoveTo::create(0.5f, nextPos);
-//				item->runAction(moveBy);
-			} else {
-//				tileList[x][y]->removeFromParentAndCleanup(true);
-//				delete tileList[x][y];
-//				tileList[x][y] = nullptr;
 			}
 		}
 	}
@@ -180,9 +176,9 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 void boardNode::update(float delta) {
 	Node::update(delta);
 
-	for (std::size_t x = 0; x < tileList.size(); ++x) {
-		for (std::size_t y = 0; y < tileList[x].size(); ++y) {
-			if (tileList[x][y] == nullptr) {
+	for (std::size_t x = 0; x < tileMap.size(); ++x) {
+		for (std::size_t y = 0; y < tileMap[x].size(); ++y) {
+			if (tileMap[x][y] == nullptr) {
 				//todo На завтра
 				// нужно создать экшен который сгенерит новый тайл вместо пустого
 				// нужно делать корректное смещение тайлов через очистку контейнера в начале или в конце
@@ -190,4 +186,43 @@ void boardNode::update(float delta) {
 			}
 		}
 	}
+}
+
+eTileTypes boardNode::getNeighborTail(eSwipeDirection direction, int x, int y) {
+	auto result = eTileTypes::UNDEFINED;
+
+	switch (direction) {
+
+		case eSwipeDirection::UNDEFINED: {
+			LOG_ERROR("boardNode::getNeighborTail: Can't swipe, wrong direction!");
+			return result;
+		}
+			break;
+		case eSwipeDirection::UP: {
+			y += 1;
+		}
+			break;
+		case eSwipeDirection::DOWN: {
+			y -= 1;
+		}
+			break;
+		case eSwipeDirection::LEFT: {
+			x -= 1;
+		}
+			break;
+		case eSwipeDirection::RIGHT: {
+			x += 1;
+		}
+			break;
+	}
+
+	if (x >= 0 && x < BOARD_COUNT_X
+		&& y >= 0 && y < BOARD_COUNT_Y) {
+		auto item = tileMap[x][y];
+		if (item->tile != nullptr) {
+			return item->tile->getTileType();
+		}
+	}
+
+	return result;
 }

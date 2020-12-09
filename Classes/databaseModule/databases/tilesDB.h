@@ -11,11 +11,12 @@ namespace sr {
 	namespace databaseModule {
 
 		enum class eTileTypes {
-			UNDEFINED = -1,
-			ENVIRONMENT = 0,
-			HERO = 1,
-			ITEM = 2,
-			ENEMY = 3
+			UNDEFINED = -1, // за пределами поля
+			EMPTY = 0, //пустой тайл
+			ENVIRONMENT = 1, //окружение, трава и прочее
+			HERO = 2,
+			ITEM = 3,
+			ENEMY = 4
 		};
 
 		struct sTilesUpgrade {
@@ -32,7 +33,7 @@ namespace sr {
 
 		struct sTileData {
 			std::string name;
-			eTileTypes type = eTileTypes::UNDEFINED;
+			eTileTypes type = eTileTypes::EMPTY;
 			int attack = 0;
 			int hp = 0;
 			std::map<int, sTilesUpgrade*> tileUpgrade;
