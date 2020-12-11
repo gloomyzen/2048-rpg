@@ -127,13 +127,32 @@ void boardNode::setHeroTileData(sTileData *heroTile) {
 }
 
 void boardNode::scrollBoard(eSwipeDirection direction) {
-//	tileMap[0][0];
-
 	if (!spawnClb) {
 		LOG_ERROR("boardNode::scrollBoard: Can't get next tile from spawn callback!");
 		return;
 	}
+	if (direction == eSwipeDirection::UNDEFINED) {
+		LOG_ERROR("boardNode::scrollBoard: Swipe direction is wrong!");
+		return;
+	}
+
 	auto nextTiles = spawnClb();
+
+	//get list of free tiles
+//	std::map<int, int> freeSlots;
+//	switch (direction) {
+//		case eSwipeDirection::UP: {
+//			for (std::size_t y = 0; y < tileMap[0].size(); ++y) {}
+//		}
+//			break;
+//		case eSwipeDirection::DOWN:
+//			for (std::size_t y = 0; y < tileMap[tileMap.size() - 1].size(); ++y) {}
+//			break;
+//		case eSwipeDirection::LEFT:
+//			break;
+//		case eSwipeDirection::RIGHT:
+//			break;
+//	}
 
 	//get list of free tiles
 	std::map<int, int> freeSlots;
@@ -149,6 +168,7 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 		for (std::size_t y = 0; y < tileMap[x].size(); ++y) {
 			auto item = tileMap[x][y];
 			if (item->tile != nullptr && item->tile->getTileType() == eTileTypes::HERO) continue;
+			auto test = getNeighborTail(direction, x, y);
 			switch (direction) {
 				case eSwipeDirection::UP: {
 				}
@@ -198,21 +218,13 @@ eTileTypes boardNode::getNeighborTail(eSwipeDirection direction, int x, int y) {
 			return result;
 		}
 			break;
-		case eSwipeDirection::UP: {
-			y += 1;
-		}
+		case eSwipeDirection::UP: y += 1;
 			break;
-		case eSwipeDirection::DOWN: {
-			y -= 1;
-		}
+		case eSwipeDirection::DOWN: y -= 1;
 			break;
-		case eSwipeDirection::LEFT: {
-			x -= 1;
-		}
+		case eSwipeDirection::LEFT: x -= 1;
 			break;
-		case eSwipeDirection::RIGHT: {
-			x += 1;
-		}
+		case eSwipeDirection::RIGHT: x += 1;
 			break;
 	}
 
@@ -225,4 +237,25 @@ eTileTypes boardNode::getNeighborTail(eSwipeDirection direction, int x, int y) {
 	}
 
 	return result;
+}
+
+std::pair<int, int> boardNode::getOffsetByDirection(eSwipeDirection direction, int x, int y) {
+	std::pair<int, int> position = {x, y};
+	switch (direction) {
+		case eSwipeDirection::UP: position.second += 1;
+			break;
+		case eSwipeDirection::DOWN: position.second -= 1;
+			break;
+		case eSwipeDirection::LEFT: position.first -= 1;
+			break;
+		case eSwipeDirection::RIGHT: position.first += 1;
+			break;
+		case eSwipeDirection::UNDEFINED: {
+			LOG_ERROR("boardNode::getNeighborTail: Can't swipe, wrong direction!");
+			return position;
+		}
+			break;
+	}
+
+	return position;
 }

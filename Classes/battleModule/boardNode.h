@@ -7,6 +7,7 @@
 #include <utility>
 #include <vector>
 #include <map>
+#include <tuple>
 #include <functional>
 
 #define BOARD_START_POS_X 0
@@ -61,6 +62,7 @@ namespace sr {
 			void setDefaultPosition();
 			void initHandling();
 			void touchUpdate(Touch*, Event*);
+			std::pair<int, int> getOffsetByDirection(eSwipeDirection, int, int);
 
 			std::map<int, std::map<int, sSlot*>> tileMap;
 			sTileData* hero = nullptr;
