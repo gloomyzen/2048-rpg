@@ -56,11 +56,11 @@ void boardNode::setDefaultPosition() {
 			}
 			sSlot* slot;
 
-			if (x == BOARD_HERO_POS_X && y == BOARD_HERO_POS_Y && hero) {
+			if (x == BOARD_HERO_POS_X && y == BOARD_HERO_POS_Y && heroData) {
 				auto tile = new tileNode();
 				tile->setTileSize(boardTileWH, boardTileWH);
 				tile->setPosition(position);
-				tile->createTile(*hero);
+				tile->createTile(*heroData);
 				addChild(tile);
 				slot = new sSlot(position, tile, true);
 			} else {
@@ -123,7 +123,7 @@ void boardNode::touchUpdate(Touch* touch, Event* event) {
 }
 
 void boardNode::setHeroTileData(sTileData *heroTile) {
-	hero = heroTile;
+	heroData = heroTile;
 }
 
 void boardNode::scrollBoard(eSwipeDirection direction) {
@@ -138,31 +138,89 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 
 	auto nextTiles = spawnClb();
 
+	//проверяем соседние тайлы от героя, доступен ли свайп впринципе зависит от соседних клеток в первую очередь
+	auto heroNeighborType = getNeighborTail(direction, BOARD_HERO_POS_X, BOARD_HERO_POS_Y);
+	if (heroNeighborType == eTileTypes::ENEMY) {
+		//todo battle logic
+		return;
+	}
+
 	//get list of free tiles
-//	std::map<int, int> freeSlots;
-//	switch (direction) {
-//		case eSwipeDirection::UP: {
-//			for (std::size_t y = 0; y < tileMap[0].size(); ++y) {}
+	//todo проверка местоположения игрока и хождение ДО него
+	std::vector<std::pair<int, int>> freeSlots;
+	switch (direction) {
+		case eSwipeDirection::UP: {
+			for (std::size_t x = 0; x < tileMap.size(); ++x) {
+				bool slotExist = false;
+				for (std::size_t y = tileMap[x].size() - 1; y >= 0; --y) {
+					if (tileMap[x][y]->tile == nullptr) {
+						slotExist = true;
+					}
+				}
+				if (slotExist) {
+					freeSlots.emplace_back(x, tileMap[x].size() - 1);
+				}
+			}
+		}
+			break;
+		case eSwipeDirection::DOWN: {
+			for (std::size_t x = 0; x < tileMap.size(); ++x) {
+				bool slotExist = false;
+				for (std::size_t y = 0; y < tileMap[x].size(); ++y) {
+					if (tileMap[x][y]->tile == nullptr) {
+						slotExist = true;
+					}
+				}
+				if (slotExist) {
+					freeSlots.emplace_back(x, 0);
+				}
+			}
+		}
+			break;
+		case eSwipeDirection::LEFT: {
+			for (std::size_t y = 0; y < tileMap[0].size(); ++y) {
+				bool slotExist = false;
+				for (std::size_t x = 0; x < tileMap.size(); ++x) {
+					if (tileMap[x][y]->tile == nullptr) {
+						slotExist = true;
+					}
+				}
+				if (slotExist) {
+					freeSlots.emplace_back(0, y);
+				}
+			}
+		}
+			break;
+		case eSwipeDirection::RIGHT: {
+			for (std::size_t y = 0; y < tileMap[0].size(); ++y) {
+				bool slotExist = false;
+				for (std::size_t x = tileMap.size() - 1; x >= 0; --x) {
+					if (tileMap[x][y]->tile == nullptr) {
+						slotExist = true;
+					}
+				}
+				if (slotExist) {
+					freeSlots.emplace_back(tileMap.size() - 1, y);
+				}
+			}
+		}
+			break;
+	}
+//	for (std::size_t x = 0; x < tileMap.size(); ++x) {
+//		for (std::size_t y = 0; y < tileMap[x].size(); ++y) {
+//
 //		}
-//			break;
-//		case eSwipeDirection::DOWN:
-//			for (std::size_t y = 0; y < tileMap[tileMap.size() - 1].size(); ++y) {}
-//			break;
-//		case eSwipeDirection::LEFT:
-//			break;
-//		case eSwipeDirection::RIGHT:
-//			break;
 //	}
 
 	//get list of free tiles
-	std::map<int, int> freeSlots;
-	for (std::size_t x = 0; x < tileMap.size(); ++x) {
-		for (std::size_t y = 0; y < tileMap[x].size(); ++y) {
-			if (tileMap[x][y] == nullptr) {
-				freeSlots.insert({x, y});
-			}
-		}
-	}
+//	std::map<int, int> freeSlots;
+//	for (std::size_t x = 0; x < tileMap.size(); ++x) {
+//		for (std::size_t y = 0; y < tileMap[x].size(); ++y) {
+//			if (tileMap[x][y] == nullptr) {
+//				freeSlots.insert({x, y});
+//			}
+//		}
+//	}
 
 	for (std::size_t x = 0; x < tileMap.size(); ++x) {
 		for (std::size_t y = 0; y < tileMap[x].size(); ++y) {
