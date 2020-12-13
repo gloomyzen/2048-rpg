@@ -56,12 +56,16 @@ void boardNode::setDefaultPosition() {
 			}
 			sSlot* slot;
 
+			//todo надо закончить с добавлнием блоков чтобы потом просто двигать тайлы внутри сетки
 			if (x == BOARD_HERO_POS_X && y == BOARD_HERO_POS_Y && heroData) {
+//				auto block = new Node();
+//				block->setName(StringUtils::format("block_%d_%d", x, y));
 				auto tile = new tileNode();
 				tile->setTileSize(boardTileWH, boardTileWH);
 				tile->setPosition(position);
 				tile->createTile(*heroData);
-				addChild(tile);
+//				block->addChild(tile);
+//				addChild(block);
 				slot = new sSlot(position, tile, true);
 			} else {
 				slot = new sSlot(position, nullptr);
@@ -224,11 +228,18 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 
 	auto nextTiles = spawnClb();
 
+	if (freeSlots.size() > 1) {
+		std::random_device rd;
+		std::mt19937 g(rd());
+		std::shuffle(freeSlots.begin(), freeSlots.end(), g);
+	}
+
 	for (auto item : freeSlots) {
 		if (nextTiles.empty()) continue;
 		if (item.first >= 0 && item.first < BOARD_COUNT_X
 			&& item.second >= 0 && item.second < BOARD_COUNT_Y) {
 			//todo insert tiles to tileMap
+//			tileMap[item.first][item.second]->tile =
 //			nextTiles
 		} else {
 			LOG_ERROR("boardNode::scrollBoard: Slot has parameters beyond the radius of the array!");

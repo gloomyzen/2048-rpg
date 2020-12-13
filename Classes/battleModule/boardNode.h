@@ -25,6 +25,7 @@ namespace sr {
 
 		struct sSlot {
 			cocos2d::Vec2 pos;
+			Node* block = nullptr;
 			tileNode* tile = nullptr;
 			bool isHero = false;
 			sSlot() {};
