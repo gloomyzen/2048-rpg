@@ -226,6 +226,7 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 	}
 
 	//swap logic for all tiles
+	bool isFirstTile;
 	switch (direction) {
 		case eSwipeDirection::UP: {
 //			for (int x = 0; x < static_cast<int>(tileMap.size()); ++x) {
@@ -234,8 +235,13 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 //				}
 //			}
 			for (int x = 0; x < static_cast<int>(tileMap.size()); ++x) {
+				isFirstTile = true;
 				for (int y = 0; y < static_cast<int>(tileMap[x].size()); ++y) {
 					auto tempY = y - 1;
+					//todo нужно доработать корректное определие конца поля и объединять фишки выходящие за диапазон этих значений
+					if (isFirstTile) {
+						isFirstTile = false;
+					} else
 					if (tempY >= 0 && tempY < BOARD_COUNT_Y) {
 						if (tileMap[x][y]->isHero || tileMap[x][tempY]->isHero) {
 							//todo hero swap
@@ -256,11 +262,11 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 		}
 			break;
 		case eSwipeDirection::DOWN: {
-			for (int x = 0; x < static_cast<int>(tileMap.size()); ++x) {
-				for (int y = 0; y < static_cast<int>(tileMap[x].size()); ++y) {
-					//
-				}
-			}
+//			for (int x = 0; x < static_cast<int>(tileMap.size()); ++x) {
+//				for (int y = 0; y < static_cast<int>(tileMap[x].size()); ++y) {
+//					//
+//				}
+//			}
 			for (int x = 0; x < static_cast<int>(tileMap.size()); ++x) {
 				for (int y = static_cast<int>(tileMap[x].size()) - 1; y >= 0; --y) {
 					auto tempY = y + 1;
