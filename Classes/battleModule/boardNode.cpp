@@ -55,21 +55,20 @@ void boardNode::setDefaultPosition() {
 				position.y = BOARD_START_POS_Y;
 			}
 			sSlot* slot;
-
-			//todo надо закончить с добавлнием блоков чтобы потом просто двигать тайлы внутри сетки
+			auto block = new Node();
+			block->setName(StringUtils::format("block_%d_%d", x, y));
+			addChild(block);
+			block->setPosition(position);
 			if (x == BOARD_HERO_POS_X && y == BOARD_HERO_POS_Y && heroData) {
-//				auto block = new Node();
-//				block->setName(StringUtils::format("block_%d_%d", x, y));
 				auto tile = new tileNode();
 				tile->setTileSize(boardTileWH, boardTileWH);
-				tile->setPosition(position);
 				tile->createTile(*heroData);
-//				block->addChild(tile);
-//				addChild(block);
+				block->addChild(tile);
 				slot = new sSlot(position, tile, true);
 			} else {
 				slot = new sSlot(position, nullptr);
 			}
+			slot->block = block;
 			position.y += boardTileWH;
 			row.insert({y, slot});
 		}
@@ -239,6 +238,7 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 		if (item.first >= 0 && item.first < BOARD_COUNT_X
 			&& item.second >= 0 && item.second < BOARD_COUNT_Y) {
 			//todo insert tiles to tileMap
+
 //			tileMap[item.first][item.second]->tile =
 //			nextTiles
 		} else {
