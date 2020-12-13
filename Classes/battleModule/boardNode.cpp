@@ -143,7 +143,7 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 	auto heroNeighborType = getNeighborTail(direction, BOARD_HERO_POS_X, BOARD_HERO_POS_Y);
 	if (heroNeighborType == eTileTypes::ENEMY) {
 		//todo battle logic
-		return;
+		//return;
 	}
 
 	//get list of free tiles
@@ -219,6 +219,81 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 				}
 				if (slotExist) {
 					freeSlots.emplace_back(static_cast<int>(tileMap.size()) - 1, y);
+				}
+			}
+		}
+			break;
+	}
+
+	switch (direction) {
+		case eSwipeDirection::UP: {
+			for (int x = 0; x < static_cast<int>(tileMap.size()); ++x) {
+				for (int y = static_cast<int>(tileMap[x].size()) - 1; y >= 0; --y) {
+					//
+				}
+			}
+			for (int x = 0; x < static_cast<int>(tileMap.size()); ++x) {
+				for (int y = 0; y < static_cast<int>(tileMap[x].size()); ++y) {
+					auto tempY = y - 1;
+					if (tempY >= 0 && tempY < BOARD_COUNT_Y) {
+						if (tileMap[x][y]->isHero || tileMap[x][tempY]->isHero) {
+							//todo hero swap
+							continue;
+						} else {
+							tileMap[x][y]->block->removeChild(tileMap[x][y]->tile, false);
+							tileMap[x][tempY]->block->removeChild(tileMap[x][tempY]->tile, false);
+							if (tileMap[x][y]->tile != nullptr) {
+								tileMap[x][tempY]->block->addChild(tileMap[x][y]->tile);
+							}
+							std::swap(tileMap[x][y]->tile, tileMap[x][tempY]->tile);
+						}
+					} else {
+						//todo top row
+					}
+				}
+			}
+		}
+			break;
+		case eSwipeDirection::DOWN: {
+			for (int x = 0; x < static_cast<int>(tileMap.size()); ++x) {
+				for (int y = 0; y < static_cast<int>(tileMap[x].size()); ++y) {
+					//
+				}
+			}
+			for (int x = 0; x < static_cast<int>(tileMap.size()); ++x) {
+				for (int y = static_cast<int>(tileMap[x].size()) - 1; y >= 0; --y) {
+					auto tempY = y + 1;
+					if (tempY >= 0 && tempY < BOARD_COUNT_Y) {
+						if (tileMap[x][y]->isHero || tileMap[x][tempY]->isHero) {
+							//todo hero swap
+							continue;
+						} else {
+							tileMap[x][y]->block->removeChild(tileMap[x][y]->tile, false);
+							tileMap[x][tempY]->block->removeChild(tileMap[x][tempY]->tile, false);
+							if (tileMap[x][y]->tile != nullptr) {
+								tileMap[x][tempY]->block->addChild(tileMap[x][y]->tile);
+							}
+							std::swap(tileMap[x][y]->tile, tileMap[x][tempY]->tile);
+						}
+					} else {
+						//todo top row
+					}
+				}
+			}
+		}
+			break;
+		case eSwipeDirection::LEFT: {
+			for (int y = 0; y < static_cast<int>(tileMap[0].size()); ++y) {
+				for (int x = 0; x < static_cast<int>(tileMap.size()); ++x) {
+					//
+				}
+			}
+		}
+			break;
+		case eSwipeDirection::RIGHT: {
+			for (int y = 0; y < static_cast<int>(tileMap[0].size()); ++y) {
+				for (int x = static_cast<int>(tileMap.size()) - 1; x >= 0; --x) {
+					//
 				}
 			}
 		}
