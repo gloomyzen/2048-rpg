@@ -225,13 +225,14 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 			break;
 	}
 
+	//swap logic for all tiles
 	switch (direction) {
 		case eSwipeDirection::UP: {
-			for (int x = 0; x < static_cast<int>(tileMap.size()); ++x) {
-				for (int y = static_cast<int>(tileMap[x].size()) - 1; y >= 0; --y) {
-					//
-				}
-			}
+//			for (int x = 0; x < static_cast<int>(tileMap.size()); ++x) {
+//				for (int y = static_cast<int>(tileMap[x].size()) - 1; y >= 0; --y) {
+//					//
+//				}
+//			}
 			for (int x = 0; x < static_cast<int>(tileMap.size()); ++x) {
 				for (int y = 0; y < static_cast<int>(tileMap[x].size()); ++y) {
 					auto tempY = y - 1;
