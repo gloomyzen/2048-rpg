@@ -14,7 +14,7 @@
 #define BOARD_START_POS_Y 0
 #define BOARD_COUNT_X 5
 #define BOARD_COUNT_Y 5
-#define BOARD_HERO_POS_X 1
+#define BOARD_HERO_POS_X 2
 #define BOARD_HERO_POS_Y 2
 #define BOARD_TOUCH_FORCE 75
 
@@ -69,6 +69,7 @@ namespace sr {
 			sTileData* heroData = nullptr;
 			Touch* lastTouchInfo = nullptr;
 			bool isTouch = false;
+			float boardTileWH;
 			swipeCallback swipeClb = nullptr;
 			spawnCallback spawnClb = nullptr;
 		};

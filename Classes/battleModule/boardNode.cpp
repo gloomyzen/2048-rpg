@@ -41,7 +41,7 @@ void boardNode::clearTiles() {
 void boardNode::setDefaultPosition() {
 	cocos2d::Size boardSize;
 	boardSize.width = Director::getInstance()->getVisibleSize().width;
-	float boardTileWH = boardSize.width / BOARD_COUNT_X;
+	boardTileWH = boardSize.width / BOARD_COUNT_X;
 	boardSize.height = boardTileWH * BOARD_COUNT_Y;
 	this->setContentSize(boardSize);
 
@@ -234,13 +234,17 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 	}
 
 	for (auto item : freeSlots) {
-		if (nextTiles.empty()) continue;
+		auto it = nextTiles.begin();
+		if (it == nextTiles.end()) continue;
 		if (item.first >= 0 && item.first < BOARD_COUNT_X
 			&& item.second >= 0 && item.second < BOARD_COUNT_Y) {
 			//todo insert tiles to tileMap
-
-//			tileMap[item.first][item.second]->tile =
-//			nextTiles
+			auto tile = new tileNode();
+			tile->setTileSize(boardTileWH, boardTileWH);
+			tile->createTile(*(*it));
+			tileMap[item.first][item.second]->block->addChild(tile);
+			tileMap[item.first][item.second]->tile = tile;
+			nextTiles.erase(it);
 		} else {
 			LOG_ERROR("boardNode::scrollBoard: Slot has parameters beyond the radius of the array!");
 		}
