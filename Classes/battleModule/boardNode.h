@@ -52,7 +52,7 @@ namespace sr {
 			void setHeroTileData(sTileData* heroTile);
 			void initBoard();
 			void setSwipeCallback(swipeCallback clb) { swipeClb = std::move(clb); }
-			void setSpawnCallback(spawnCallback clb) { spawnClb = std::move(clb); }
+			void setSpawnCallback(spawnCallback clb) { spawnClb = clb; }
 			void scrollBoard(eSwipeDirection);
 			void update(float delta) override;
 			eTileTypes getNeighborTail(eSwipeDirection, int, int);

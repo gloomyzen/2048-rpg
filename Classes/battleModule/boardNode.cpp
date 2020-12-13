@@ -136,8 +136,6 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 		return;
 	}
 
-	auto nextTiles = spawnClb();
-
 	//проверяем соседние тайлы от героя, доступен ли свайп впринципе зависит от соседних клеток в первую очередь
 	auto heroNeighborType = getNeighborTail(direction, BOARD_HERO_POS_X, BOARD_HERO_POS_Y);
 	if (heroNeighborType == eTileTypes::ENEMY) {
@@ -146,28 +144,37 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 	}
 
 	//get list of free tiles
-	//todo проверка местоположения игрока и хождение ДО него
 	std::vector<std::pair<int, int>> freeSlots;
+	bool slotExist;
+	bool heroFounded;
 	switch (direction) {
 		case eSwipeDirection::UP: {
-			for (std::size_t x = 0; x < tileMap.size(); ++x) {
-				bool slotExist = false;
-				for (std::size_t y = tileMap[x].size() - 1; y >= 0; --y) {
-					if (tileMap[x][y]->tile == nullptr) {
+			for (int x = 0; x < static_cast<int>(tileMap.size()); ++x) {
+				heroFounded = false;
+				slotExist = false;
+				for (int y = static_cast<int>(tileMap[x].size()) - 1; y >= 0; --y) {
+					if (heroFounded) continue;
+					if (tileMap[x][y]->isHero) {
+						heroFounded = true;
+					} else if (tileMap[x][y]->tile == nullptr) {
 						slotExist = true;
 					}
 				}
 				if (slotExist) {
-					freeSlots.emplace_back(x, tileMap[x].size() - 1);
+					freeSlots.emplace_back(x, static_cast<int>(tileMap[x].size()) - 1);
 				}
 			}
 		}
 			break;
 		case eSwipeDirection::DOWN: {
-			for (std::size_t x = 0; x < tileMap.size(); ++x) {
-				bool slotExist = false;
-				for (std::size_t y = 0; y < tileMap[x].size(); ++y) {
-					if (tileMap[x][y]->tile == nullptr) {
+			for (int x = 0; x < static_cast<int>(tileMap.size()); ++x) {
+				heroFounded = false;
+				slotExist = false;
+				for (int y = 0; y < static_cast<int>(tileMap[x].size()); ++y) {
+					if (heroFounded) continue;
+					if (tileMap[x][y]->isHero) {
+						heroFounded = true;
+					} else if (tileMap[x][y]->tile == nullptr) {
 						slotExist = true;
 					}
 				}
@@ -178,10 +185,14 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 		}
 			break;
 		case eSwipeDirection::LEFT: {
-			for (std::size_t y = 0; y < tileMap[0].size(); ++y) {
-				bool slotExist = false;
-				for (std::size_t x = 0; x < tileMap.size(); ++x) {
-					if (tileMap[x][y]->tile == nullptr) {
+			for (int y = 0; y < static_cast<int>(tileMap[0].size()); ++y) {
+				heroFounded = false;
+				slotExist = false;
+				for (int x = 0; x < static_cast<int>(tileMap.size()); ++x) {
+					if (heroFounded) continue;
+					if (tileMap[x][y]->isHero) {
+						heroFounded = true;
+					} else if (tileMap[x][y]->tile == nullptr) {
 						slotExist = true;
 					}
 				}
@@ -192,20 +203,39 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 		}
 			break;
 		case eSwipeDirection::RIGHT: {
-			for (std::size_t y = 0; y < tileMap[0].size(); ++y) {
-				bool slotExist = false;
-				for (std::size_t x = tileMap.size() - 1; x >= 0; --x) {
-					if (tileMap[x][y]->tile == nullptr) {
+			for (int y = 0; y < static_cast<int>(tileMap[0].size()); ++y) {
+				heroFounded = false;
+				slotExist = false;
+				for (int x = static_cast<int>(tileMap.size()) - 1; x >= 0; --x) {
+					if (heroFounded) continue;
+					if (tileMap[x][y]->isHero) {
+						heroFounded = true;
+					} else if (tileMap[x][y]->tile == nullptr) {
 						slotExist = true;
 					}
 				}
 				if (slotExist) {
-					freeSlots.emplace_back(tileMap.size() - 1, y);
+					freeSlots.emplace_back(static_cast<int>(tileMap.size()) - 1, y);
 				}
 			}
 		}
 			break;
 	}
+
+	auto nextTiles = spawnClb();
+
+	for (auto item : freeSlots) {
+		if (nextTiles.empty()) continue;
+		if (item.first >= 0 && item.first < BOARD_COUNT_X
+			&& item.second >= 0 && item.second < BOARD_COUNT_Y) {
+			//todo insert tiles to tileMap
+//			nextTiles
+		} else {
+			LOG_ERROR("boardNode::scrollBoard: Slot has parameters beyond the radius of the array!");
+		}
+	}
+
+
 //	for (std::size_t x = 0; x < tileMap.size(); ++x) {
 //		for (std::size_t y = 0; y < tileMap[x].size(); ++y) {
 //

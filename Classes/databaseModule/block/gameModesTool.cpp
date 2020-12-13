@@ -51,5 +51,5 @@ std::vector<sTileData*> gameModesTool::getNextTile(eGameMode mode) {
 			result.push_back(nextTile->tile);
 		}
 	}
-	return std::vector<sTileData *>();
+	return result;
 }
