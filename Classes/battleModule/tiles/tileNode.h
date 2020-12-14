@@ -25,7 +25,8 @@ namespace sr {
 			void setCount(int count);
 			int getCount() const { return currentCnt; }
 			std::string getTileDataName();
-
+			void calculateCount(tileNode*);
+			bool canMatchTile(tileNode*);
 
 		private:
 			void drawCount();

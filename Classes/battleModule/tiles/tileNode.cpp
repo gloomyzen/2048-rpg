@@ -104,3 +104,14 @@ void tileNode::drawCount() {
 		LOG_WARNING("tileNode::drawCount: 'countLbl' node not found!");
 	}
 }
+
+void tileNode::calculateCount(tileNode* externalTile) {
+	if (!canMatchTile(externalTile))
+		return;
+	auto count = externalTile->getCount();
+	setCount(currentCnt + count);
+}
+
+bool tileNode::canMatchTile(tileNode* externalTile) {
+	return externalTile != nullptr && externalTile->getTileDataName() == getTileDataName();
+}

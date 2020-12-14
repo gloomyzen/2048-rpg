@@ -64,6 +64,7 @@ namespace sr {
 			void initHandling();
 			void touchUpdate(Touch*, Event*);
 			std::pair<int, int> getOffsetByDirection(eSwipeDirection, int, int);
+			void swipeElements(std::vector<sSlot*> elements);
 
 			std::map<int, std::map<int, sSlot*>> tileMap;
 			sTileData* heroData = nullptr;
