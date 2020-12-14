@@ -30,6 +30,7 @@ namespace sr {
 
 		private:
 			void drawCount();
+			void updateTileFromData();
 
 			eTileTypes tileType = eTileTypes::UNDEFINED;
 			sTileData* tileData = nullptr;
@@ -38,7 +39,6 @@ namespace sr {
 			Label* attackCountLbl = nullptr;
 			Label* countLbl = nullptr;
 			Node* imgSlot = nullptr;
-			int currentLevel = 1;
 			int currentCnt = 1;
 			float width = 0.f, height = 0.f;
 

@@ -234,46 +234,12 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 //					//
 //				}
 //			}
-			/*for (int x = 0; x < static_cast<int>(tileMap.size()); ++x) {
-				for (int y = 0; y < static_cast<int>(tileMap[x].size()); ++y) {
-					//todo локальные данные
-					auto tempAxis = y - 1;
-					//todo нужно доработать корректное определие конца поля и объединять фишки выходящие за диапазон этих значений
-					//todo перенести в коллбек
-					//todo нужен экшен для перемещения якоря
-
-					if (tempAxis >= 0 && tempAxis < BOARD_COUNT_Y) {
-						if (tileMap[x][y]->isHero) {
-							continue;
-						} else
-						if (tileMap[x][y]->isHero || tileMap[x][tempAxis]->isHero) {
-							//todo hero swap
-							LOG_INFO(StringUtils::format("boardNode::scrollBoard: Direction Up, hero pushes a piece"));
-							continue;
-						} else {
-							if (tileMap[x][tempAxis]->tile != nullptr) {
-								tileMap[x][tempAxis]->block->removeChild(tileMap[x][tempAxis]->tile, false);
-							}
-
-							if (tileMap[x][y]->tile != nullptr) {
-								//todo add animation
-								tileMap[x][y]->block->removeChild(tileMap[x][y]->tile, false);
-								tileMap[x][tempAxis]->block->addChild(tileMap[x][y]->tile);
-							}
-							std::swap(tileMap[x][y]->tile, tileMap[x][tempAxis]->tile);
-						}
-					} else {
-						//todo top row
-						auto test = "";
-					}
-				}
-			}*/
 			for (int x = 0; x < static_cast<int>(tileMap.size()); ++x) {
-				std::vector<sSlot*> elemets;
+				std::vector<sSlot*> elements;
 				for (int y = 0; y < static_cast<int>(tileMap[x].size()); ++y) {
-					elemets.push_back(tileMap[x][y]);
+					elements.push_back(tileMap[x][y]);
 				}
-				swipeElements(elemets);
+				swipeElements(elements);
 			}
 		}
 			break;
@@ -284,27 +250,31 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 //				}
 //			}
 			for (int x = 0; x < static_cast<int>(tileMap.size()); ++x) {
-				std::vector<sSlot*> elemets;
+				std::vector<sSlot*> elements;
 				for (int y = static_cast<int>(tileMap[x].size()) - 1; y >= 0; --y) {
-					elemets.push_back(tileMap[x][y]);
+					elements.push_back(tileMap[x][y]);
 				}
-				swipeElements(elemets);
+				swipeElements(elements);
 			}
 		}
 			break;
 		case eSwipeDirection::LEFT: {
 			for (int y = 0; y < static_cast<int>(tileMap[0].size()); ++y) {
-				for (int x = 0; x < static_cast<int>(tileMap.size()); ++x) {
-					//
+				std::vector<sSlot*> elements;
+				for (int x = static_cast<int>(tileMap.size()) - 1; x >= 0; --x) {
+					elements.push_back(tileMap[x][y]);
 				}
+				swipeElements(elements);
 			}
 		}
 			break;
 		case eSwipeDirection::RIGHT: {
 			for (int y = 0; y < static_cast<int>(tileMap[0].size()); ++y) {
-				for (int x = static_cast<int>(tileMap.size()) - 1; x >= 0; --x) {
-					//
+				std::vector<sSlot*> elements;
+				for (int x = 0; x < static_cast<int>(tileMap.size()); ++x) {
+					elements.push_back(tileMap[x][y]);
 				}
+				swipeElements(elements);
 			}
 		}
 			break;
@@ -383,17 +353,6 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 
 void boardNode::update(float delta) {
 	Node::update(delta);
-
-	for (std::size_t x = 0; x < tileMap.size(); ++x) {
-		for (std::size_t y = 0; y < tileMap[x].size(); ++y) {
-			if (tileMap[x][y] == nullptr) {
-				//todo На завтра
-				// нужно создать экшен который сгенерит новый тайл вместо пустого
-				// нужно делать корректное смещение тайлов через очистку контейнера в начале или в конце
-				auto test = "";
-			}
-		}
-	}
 }
 
 eTileTypes boardNode::getNeighborTail(eSwipeDirection direction, int x, int y) {
@@ -452,7 +411,6 @@ void boardNode::swipeElements(std::vector<sSlot *> elements) {
 	for (int i = 0; i < elements.size(); ++i) {
 		auto currentItem = elements[i];
 		auto hasNextItem = elements.size() > 1 && i < elements.size() - 1;
-		auto isFirstRow = i == 0;
 
 		if (currentItem->tile != nullptr && hasNextItem && elements[i + 1]->tile != nullptr) {
 			//swap logic
@@ -460,19 +418,11 @@ void boardNode::swipeElements(std::vector<sSlot *> elements) {
 			if (currentItem->isHero || nextItem->isHero) {
 				continue;
 			}
-			if (!isFirstRow) {
-				nextItem->block->removeChild(nextItem->tile, false);
-				currentItem->block->removeChild(currentItem->tile, false);
-				std::swap(currentItem->tile, nextItem->tile);
-				currentItem->block->addChild(currentItem->tile);
-				nextItem->block->addChild(nextItem->tile);
-			} else {
-				if (currentItem->tile->canMatchTile(nextItem->tile)) {
-					currentItem->tile->calculateCount(nextItem->tile);
-					nextItem->block->removeChild(nextItem->tile, true);
-					delete nextItem->tile;
-					nextItem->tile = nullptr;
-				}
+			if (currentItem->tile->canMatchTile(nextItem->tile)) {
+				currentItem->tile->calculateCount(nextItem->tile);
+				nextItem->block->removeChild(nextItem->tile, true);
+				delete nextItem->tile;
+				nextItem->tile = nullptr;
 			}
 		} else if (currentItem->tile == nullptr && hasNextItem && elements[i + 1]->tile != nullptr) {
 			//simple swipe
@@ -486,10 +436,5 @@ void boardNode::swipeElements(std::vector<sSlot *> elements) {
 		} else if (currentItem->tile != nullptr && !hasNextItem) {
 			//nothing...
 		}
-//		if (i == 0) {
-			//can't swap
-//		} else {
-			//can swap
-//		}
 	}
 }
