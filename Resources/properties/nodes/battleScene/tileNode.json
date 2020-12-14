@@ -19,6 +19,10 @@
       "name": "attackCountLbl"
     },
     {
+      "type": "label",
+      "name": "countLbl"
+    },
+    {
       "type": "node",
       "name": "imageSlot"
     }

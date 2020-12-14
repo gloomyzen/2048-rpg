@@ -10,9 +10,11 @@ tileNode::tileNode() {
 	hpCountLbl = dynamic_cast<Label*>(findNode("hpCountLbl", this));
 	attackCountLbl = dynamic_cast<Label*>(findNode("attackCountLbl", this));
 	imgSlot = dynamic_cast<Node*>(findNode("imageSlot", this));
+	countLbl = dynamic_cast<Label*>(findNode("countLbl", this));
 	if (hpIcon) hpIcon->setVisible(false);
 	if (hpCountLbl) hpCountLbl->setVisible(false);
 	if (attackCountLbl) attackCountLbl->setVisible(false);
+	if (countLbl) countLbl->setVisible(false);
 }
 
 void tileNode::createTile(const sTileData &data) {
@@ -53,6 +55,11 @@ void tileNode::createTile(const sTileData &data) {
 		imgSlot->addChild(icon);
 	}
 
+	//draw count
+	if (tileType != eTileTypes::HERO) {
+		drawCount();
+	}
+
 }
 
 void tileNode::setTileSize(float w, float h) {
@@ -64,5 +71,36 @@ void tileNode::setTileSize(float w, float h) {
 	this->setContentSize(tileSize);
 	if (auto bg = dynamic_cast<Sprite*>(findNode("bg", this))) {
 		bg->setContentSize(tileSize);
+	}
+}
+
+void tileNode::setCount(int count) {
+	currentCnt = count;
+	if (currentCnt < 0)
+		currentCnt = 0;
+	drawCount();
+}
+
+std::string tileNode::getTileDataName() {
+	if (tileData) {
+		return tileData->name;
+	}
+	return std::string();
+}
+
+void tileNode::drawCount() {
+	if (countLbl) {
+		countLbl->setString(std::to_string(currentCnt));
+		if (currentCnt == 0) {
+			countLbl->setVisible(false);
+		} else {
+			if (currentCnt > 99) {
+				countLbl->setString("99+");
+			} else {
+			}
+			countLbl->setVisible(true);
+		}
+	} else {
+		LOG_WARNING("tileNode::drawCount: 'countLbl' node not found!");
 	}
 }

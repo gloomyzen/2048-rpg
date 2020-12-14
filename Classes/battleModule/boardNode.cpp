@@ -235,27 +235,36 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 //				}
 //			}
 			for (int x = 0; x < static_cast<int>(tileMap.size()); ++x) {
-				isFirstTile = true;
 				for (int y = 0; y < static_cast<int>(tileMap[x].size()); ++y) {
+					//todo локальные данные
 					auto tempY = y - 1;
 					//todo нужно доработать корректное определие конца поля и объединять фишки выходящие за диапазон этих значений
-					if (isFirstTile) {
-						isFirstTile = false;
-					} else
+					//todo перенести в коллбек
+					//todo нужен экшен для перемещения якоря
+
 					if (tempY >= 0 && tempY < BOARD_COUNT_Y) {
+						if (tileMap[x][y]->isHero) {
+							continue;
+						} else
 						if (tileMap[x][y]->isHero || tileMap[x][tempY]->isHero) {
 							//todo hero swap
+							LOG_INFO(StringUtils::format("boardNode::scrollBoard: Direction Up, hero pushes a piece"));
 							continue;
 						} else {
-							tileMap[x][y]->block->removeChild(tileMap[x][y]->tile, false);
-							tileMap[x][tempY]->block->removeChild(tileMap[x][tempY]->tile, false);
+							if (tileMap[x][tempY]->tile != nullptr) {
+								tileMap[x][tempY]->block->removeChild(tileMap[x][tempY]->tile, false);
+							}
+
 							if (tileMap[x][y]->tile != nullptr) {
+								//todo add animation
+								tileMap[x][y]->block->removeChild(tileMap[x][y]->tile, false);
 								tileMap[x][tempY]->block->addChild(tileMap[x][y]->tile);
 							}
 							std::swap(tileMap[x][y]->tile, tileMap[x][tempY]->tile);
 						}
 					} else {
 						//todo top row
+						auto test = "";
 					}
 				}
 			}
