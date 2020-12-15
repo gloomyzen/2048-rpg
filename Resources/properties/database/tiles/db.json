@@ -83,6 +83,30 @@
           "icon": "images/tiles/units/octopus.png"
         }
       ]
+    },
+    "rolls": {
+      "type": "item",
+      "attack": 0,
+      "hp": 1,
+      "upgrade": [
+        {
+          "id": 1,
+          "bg": "images/tiles/bg/tile_item.png",
+          "icon": "images/tiles/items/rolls.png"
+        }
+      ]
+    },
+    "egg": {
+      "type": "item",
+      "attack": 1,
+      "hp": 0,
+      "upgrade": [
+        {
+          "id": 1,
+          "bg": "images/tiles/bg/tile_item.png",
+          "icon": "images/tiles/items/egg.png"
+        }
+      ]
     }
   }
 }

@@ -283,7 +283,6 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 		if (it == nextTiles.end()) continue;
 		if (item.first >= 0 && item.first < BOARD_COUNT_X
 			&& item.second >= 0 && item.second < BOARD_COUNT_Y) {
-			//todo insert tiles to tileMap
 			auto tile = new tileNode();
 			tile->setTileSize(boardTileWH, boardTileWH);
 			tile->createTile(*(*it));

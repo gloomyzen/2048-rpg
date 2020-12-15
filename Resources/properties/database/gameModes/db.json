@@ -16,14 +16,18 @@
     "tiles": [
       {
         "tile": "radish_enemy",
-        "chance": 50
+        "chance": 25
       },
       {
         "tile": "cherry_enemy",
         "chance": 25
       },
       {
-        "tile": "mochi",
+        "tile": "egg",
+        "chance": 25
+      },
+      {
+        "tile": "rolls",
         "chance": 25
       }
     ]

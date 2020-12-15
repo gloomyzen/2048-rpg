@@ -45,6 +45,11 @@ std::vector<sTileData*> gameModesTool::getNextTile(eGameMode mode) {
 		for (auto item : currentMode->tiles) {
 			tempContainer.emplace_back(item->chance, item);
 		}
+		if (tempContainer.size() > 1) {
+			std::random_device rd;
+			std::mt19937 g(rd());
+			std::shuffle(tempContainer.begin(), tempContainer.end(), g);
+		}
 		using namespace common::utilityModule;
 		for(int i = 0; i < countSpawn; ++i) {
 			auto nextTile = findUtility::findClosest(randomUtility::generateBetween(1, 100), tempContainer);
