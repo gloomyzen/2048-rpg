@@ -12,7 +12,8 @@
       "pivot": [ 0.5, 0.5 ]
     },
     "SpriteComponent": {
-      "image": "images/tiles/bg/tile_dark.png"
+      "image": "images/tiles/bg/tile_dark.png",
+      "pixel": true
     }
   },
   "hpIcon": {
@@ -22,7 +23,8 @@
       "scale": 0.7
     },
     "SpriteComponent": {
-      "image": "images/tiles/ui/heart_icon.png"
+      "image": "images/tiles/ui/heart_icon.png",
+      "pixel": true
     }
   },
   "hpCountLbl": {
@@ -79,7 +81,8 @@
   "imageSlot": {
     "TransformComponent": {
       "pivot": [ 0.5, 0.5 ],
-      "anchor": [ 0.5, 0.5 ]
+      "anchor": [ 0.5, 0.5 ],
+      "scale": 2
     }
   }
 }

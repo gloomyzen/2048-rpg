@@ -10,6 +10,8 @@
 #include <tuple>
 #include <functional>
 
+#define BOARD_OFFSET_POS_X 10
+#define BOARD_OFFSET_POS_Y 10
 #define BOARD_START_POS_X 0
 #define BOARD_START_POS_Y 0
 #define BOARD_COUNT_X 5

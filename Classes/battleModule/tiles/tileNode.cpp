@@ -1,5 +1,6 @@
 #include "tileNode.h"
 #include "common/debugModule/logManager.h"
+#include "common/coreModule/nodes/spriteParameters.h"
 
 using namespace sr::battleModule;
 
@@ -105,6 +106,7 @@ void tileNode::updateTileFromData() {
 	if (!currentUpgrade->bg.empty()) {
 		if (auto bg = dynamic_cast<Sprite*>(findNode("bg", this))) {
 			bg->initWithFile(currentUpgrade->bg);
+			common::coreModule::spriteParameters::setCorrectPixelartTexture(bg);
 			cocos2d::Size tileSize;
 			tileSize.width = width;
 			tileSize.height = height;
@@ -118,6 +120,7 @@ void tileNode::updateTileFromData() {
 	if (!currentUpgrade->icon.empty()) {
 		auto icon = new Sprite();
 		icon->initWithFile(currentUpgrade->icon);
+		common::coreModule::spriteParameters::setCorrectPixelartTexture(icon);
 		imgSlot->removeAllChildren();
 		imgSlot->addChild(icon);
 	}

@@ -41,18 +41,18 @@ void boardNode::clearTiles() {
 void boardNode::setDefaultPosition() {
 	cocos2d::Size boardSize;
 	boardSize.width = Director::getInstance()->getVisibleSize().width;
-	boardTileWH = boardSize.width / BOARD_COUNT_X;
-	boardSize.height = boardTileWH * BOARD_COUNT_Y;
+	boardTileWH = (boardSize.width - BOARD_OFFSET_POS_X * 2) / BOARD_COUNT_X;
+	boardSize.height = boardTileWH * BOARD_COUNT_Y + BOARD_OFFSET_POS_Y * 2;
 	this->setContentSize(boardSize);
 
 	cocos2d::Vec2 position;
-	position.x = BOARD_START_POS_X;
-	position.y = BOARD_START_POS_Y;
+	position.x = BOARD_START_POS_X + BOARD_OFFSET_POS_X;
+	position.y = BOARD_START_POS_Y + BOARD_OFFSET_POS_Y;
 	for (int x = 0; x < BOARD_COUNT_X; ++x) {
 		std::map<int, sSlot*> row{};
 		for (int y = 0; y < BOARD_COUNT_Y; ++y) {
 			if (y == 0) {
-				position.y = BOARD_START_POS_Y;
+				position.y = BOARD_START_POS_Y + BOARD_OFFSET_POS_Y;
 			}
 			sSlot* slot;
 			auto block = new Node();

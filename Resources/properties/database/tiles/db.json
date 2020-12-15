@@ -12,7 +12,7 @@
         }
       ]
     },
-    "bread_pitt_hero": {
+    "hero_chan": {
       "type": "hero",
       "attack": 1,
       "hp": 1,
@@ -20,11 +20,11 @@
         {
           "id": 1,
           "bg": "images/tiles/bg/tile_purple.png",
-          "icon": "images/tiles/units/bread_pitt.png"
+          "icon": "images/tiles/units/hero_chan.png"
         }
       ]
     },
-    "fly_enemy": {
+    "radish_enemy": {
       "type": "enemy",
       "attack": 1,
       "hp": 1,
@@ -32,16 +32,11 @@
         {
           "id": 1,
           "bg": "images/tiles/bg/tile_red.png",
-          "icon": "images/tiles/units/fly.png"
-        },
-        {
-          "id": 5,
-          "bg": "images/tiles/bg/tile_red.png",
-          "icon": "images/tiles/units/fly.png"
+          "icon": "images/tiles/units/radish_enemy.png"
         }
       ]
     },
-    "plant_enemy": {
+    "cherry_enemy": {
       "type": "enemy",
       "attack": 1,
       "hp": 1,
@@ -49,16 +44,11 @@
         {
           "id": 1,
           "bg": "images/tiles/bg/tile_red.png",
-          "icon": "images/tiles/units/plant.png"
-        },
-        {
-          "id": 5,
-          "bg": "images/tiles/bg/tile_red.png",
-          "icon": "images/tiles/units/plant.png"
+          "icon": "images/tiles/units/cherry_enemy.png"
         }
       ]
     },
-    "thorns_enemy": {
+    "fish": {
       "type": "enemy",
       "attack": 1,
       "hp": 1,
@@ -66,12 +56,31 @@
         {
           "id": 1,
           "bg": "images/tiles/bg/tile_red.png",
-          "icon": "images/tiles/units/thorns.png"
-        },
+          "icon": "images/tiles/units/fish.png"
+        }
+      ]
+    },
+    "mochi": {
+      "type": "enemy",
+      "attack": 1,
+      "hp": 1,
+      "upgrade": [
         {
-          "id": 5,
+          "id": 1,
           "bg": "images/tiles/bg/tile_red.png",
-          "icon": "images/tiles/units/thorns.png"
+          "icon": "images/tiles/units/mochi.png"
+        }
+      ]
+    },
+    "octopus": {
+      "type": "enemy",
+      "attack": 1,
+      "hp": 1,
+      "upgrade": [
+        {
+          "id": 1,
+          "bg": "images/tiles/bg/tile_red.png",
+          "icon": "images/tiles/units/octopus.png"
         }
       ]
     }

@@ -1,4 +1,10 @@
 {
   "type": "node",
-  "name": "battleNode"
+  "name": "battleNode",
+  "child": [
+    {
+      "type": "sprite",
+      "name": "bg"
+    }
+  ]
 }

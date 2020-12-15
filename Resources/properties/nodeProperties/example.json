@@ -13,7 +13,8 @@
       "scale": 1
     },
     "SpriteComponent": {
-      "image": "images/testTiles/tile_3.png"
+      "image": "images/testTiles/tile_3.png",
+      "pixel": true
     }
   },
   "labelNode": {

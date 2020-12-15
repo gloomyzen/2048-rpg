@@ -2,7 +2,7 @@
   {
     "name": "Endless game",
     "type": "endless",
-    "heroTile": "bread_pitt_hero",
+    "heroTile": "hero_chan",
     "spawnPerSwipe": [
       {
         "count": 1,
@@ -15,15 +15,15 @@
     ],
     "tiles": [
       {
-        "tile": "fly_enemy",
+        "tile": "radish_enemy",
         "chance": 50
       },
       {
-        "tile": "plant_enemy",
+        "tile": "cherry_enemy",
         "chance": 25
       },
       {
-        "tile": "thorns_enemy",
+        "tile": "mochi",
         "chance": 25
       }
     ]

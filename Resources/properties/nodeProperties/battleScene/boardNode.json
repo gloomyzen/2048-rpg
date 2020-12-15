@@ -1,11 +1,12 @@
 {
   "boardNode": {
     "TransformComponent": {
-      "pivot": [ 0.0, 0.97 ],
+      "pivot": [ 0.0, 0.67 ],
       "anchor": [ 0.0, 1.0 ]
     },
     "SpriteComponent": {
-      "image": "images/board/bg.png"
+      "image": "images/board/boardBg.png",
+      "pixel": true
     }
   }
 }
