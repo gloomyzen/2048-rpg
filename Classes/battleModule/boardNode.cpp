@@ -57,6 +57,7 @@ void boardNode::setDefaultPosition() {
 			sSlot* slot;
 			auto block = new Node();
 			block->setName(StringUtils::format("block_%d_%d", x, y));
+			block->setContentSize(cocos2d::Size(boardTileWH, boardTileWH));
 			addChild(block);
 			block->setPosition(position);
 			if (x == BOARD_HERO_POS_X && y == BOARD_HERO_POS_Y && heroData) {
@@ -226,14 +227,8 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 	}
 
 	//swap logic for all tiles
-	bool isFirstTile;
 	switch (direction) {
 		case eSwipeDirection::UP: {
-//			for (int x = 0; x < static_cast<int>(tileMap.size()); ++x) {
-//				for (int y = static_cast<int>(tileMap[x].size()) - 1; y >= 0; --y) {
-//					//
-//				}
-//			}
 			for (int x = 0; x < static_cast<int>(tileMap.size()); ++x) {
 				std::vector<sSlot*> elements;
 				for (int y = 0; y < static_cast<int>(tileMap[x].size()); ++y) {
@@ -244,11 +239,6 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 		}
 			break;
 		case eSwipeDirection::DOWN: {
-//			for (int x = 0; x < static_cast<int>(tileMap.size()); ++x) {
-//				for (int y = 0; y < static_cast<int>(tileMap[x].size()); ++y) {
-//					//
-//				}
-//			}
 			for (int x = 0; x < static_cast<int>(tileMap.size()); ++x) {
 				std::vector<sSlot*> elements;
 				for (int y = static_cast<int>(tileMap[x].size()) - 1; y >= 0; --y) {
@@ -299,6 +289,10 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 			tile->createTile(*(*it));
 			tileMap[item.first][item.second]->block->addChild(tile);
 			tileMap[item.first][item.second]->tile = tile;
+			auto originalScale = tile->getScale();
+			tile->setScale(originalScale * .2f);
+			auto scaleAction = ScaleTo::create(BOARD_ANIMATION_DURATION, originalScale);
+			tile->runAction(scaleAction);
 			nextTiles.erase(it);
 		} else {
 			LOG_ERROR("boardNode::scrollBoard: Slot has parameters beyond the radius of the array!");
@@ -423,6 +417,10 @@ void boardNode::swipeElements(std::vector<sSlot *> elements) {
 				nextItem->block->removeChild(nextItem->tile, true);
 				delete nextItem->tile;
 				nextItem->tile = nullptr;
+				auto originalScale = currentItem->tile->getScale();
+				currentItem->tile->setScale(originalScale * 1.2f);
+				auto scaleAction = ScaleTo::create(BOARD_ANIMATION_DURATION, originalScale);
+				currentItem->tile->runAction(scaleAction);
 			}
 		} else if (currentItem->tile == nullptr && hasNextItem && elements[i + 1]->tile != nullptr) {
 			//simple swipe
@@ -430,11 +428,20 @@ void boardNode::swipeElements(std::vector<sSlot *> elements) {
 			if (currentItem->isHero || nextItem->isHero) {
 				continue;
 			}
+			auto prevPos = nextItem->block->convertToWorldSpaceAR(nextItem->tile->getPosition());
 			nextItem->block->removeChild(nextItem->tile, false);
 			std::swap(currentItem->tile, nextItem->tile);
 			currentItem->block->addChild(currentItem->tile);
+			{
+				//move
+				auto nextPos = currentItem->block->convertToNodeSpaceAR(prevPos);
+				currentItem->tile->setPosition(nextPos);
+				auto moveAction = MoveTo::create(BOARD_ANIMATION_DURATION, Vec2::ZERO);
+				currentItem->tile->runAction(moveAction);
+			}
 		} else if (currentItem->tile != nullptr && !hasNextItem) {
 			//nothing...
+			//may be used in future
 		}
 	}
 }

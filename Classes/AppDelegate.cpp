@@ -63,6 +63,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	// set FPS. the default value is 1.0/60 if you don't call this
 	director->setAnimationInterval(1.0f / 60);
 
+	// set
+	director->setProjection(Director::Projection::_2D);
+
 	// Set the design resolution
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
 	director->setContentScaleFactor(1.f);
@@ -74,10 +77,6 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 	register_all_packages();
 	GET_SCENES_FACTORY().registerState(common::coreModule::eGameStates::BATTLE_SCENE, [](Layer* node)->Layer*{
-		auto _background = cocos2d::Sprite::create("images/background.png");
-		_background->setName("background");
-		_background->setAnchorPoint(Vec2(0.f, 0.f));
-		node->addChild(_background);
 		auto battle = new sr::battleModule::battleCore();
 		node->addChild(battle);
 

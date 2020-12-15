@@ -2,7 +2,8 @@
   "tileNode": {
     "TransformComponent": {
       "size": [ 128, 128 ],
-      "anchor": [ 0.0, 0.0 ]
+      "anchor": [ 0.5, 0.5 ],
+      "pivot": [ 0.5, 0.5 ]
     }
   },
   "bg": {

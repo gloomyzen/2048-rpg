@@ -19,15 +19,14 @@
 #define BOARD_HERO_POS_X 2
 #define BOARD_HERO_POS_Y 2
 #define BOARD_TOUCH_FORCE 75
+#define BOARD_ANIMATION_DURATION 0.15f
 
 namespace sr {
 	namespace battleModule {
-		using namespace cocos2d;
-		using namespace common;
 
 		struct sSlot {
 			cocos2d::Vec2 pos;
-			Node* block = nullptr;
+			cocos2d::Node* block = nullptr;
 			tileNode* tile = nullptr;
 			bool isHero = false;
 			sSlot() {};
@@ -45,7 +44,7 @@ namespace sr {
 		typedef std::function<bool(eSwipeDirection)> swipeCallback;
 		typedef std::function<std::vector<sTileData *>()> spawnCallback;
 
-		class boardNode : public coreModule::nodeProperties, public Sprite, public taskHolder {
+		class boardNode : public coreModule::nodeProperties, public cocos2d::Sprite, public taskHolder {
 		public:
 			boardNode();
 			~boardNode();
@@ -55,7 +54,7 @@ namespace sr {
 			void setHeroTileData(sTileData* heroTile);
 			void initBoard();
 			void setSwipeCallback(swipeCallback clb) { swipeClb = std::move(clb); }
-			void setSpawnCallback(spawnCallback clb) { spawnClb = clb; }
+			void setSpawnCallback(spawnCallback clb) { spawnClb = std::move(clb); }
 			void scrollBoard(eSwipeDirection);
 			void update(float delta) override;
 			eTileTypes getNeighborTail(eSwipeDirection, int, int);
@@ -64,13 +63,13 @@ namespace sr {
 			void clearTiles();
 			void setDefaultPosition();
 			void initHandling();
-			void touchUpdate(Touch*, Event*);
+			void touchUpdate(cocos2d::Touch*, cocos2d::Event*);
 			std::pair<int, int> getOffsetByDirection(eSwipeDirection, int, int);
 			void swipeElements(std::vector<sSlot*> elements);
 
 			std::map<int, std::map<int, sSlot*>> tileMap;
 			sTileData* heroData = nullptr;
-			Touch* lastTouchInfo = nullptr;
+			cocos2d::Touch* lastTouchInfo = nullptr;
 			bool isTouch = false;
 			float boardTileWH;
 			swipeCallback swipeClb = nullptr;
