@@ -5,6 +5,14 @@
     {
       "type": "sprite",
       "name": "bg"
+    },
+    {
+      "type": "label",
+      "name": "energyLbl"
+    },
+    {
+      "type": "label",
+      "name": "hpLbl"
     }
   ]
 }

@@ -19,8 +19,13 @@ namespace sr {
 			std::deque<nodeTasks> getTasks() override;
 
 		private:
+			void updateStats();
 			boardNode* board = nullptr;
 			ClippingNode* clippingNode = nullptr;
+			Label* hpLbl = nullptr;
+			Label* energyLbl = nullptr;
+			int currentEnergy;
+			int currentHp;
 		};
 	}
 }

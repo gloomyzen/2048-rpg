@@ -408,7 +408,23 @@ void boardNode::swipeElements(std::vector<sSlot *> elements) {
 		if (currentItem->tile != nullptr && hasNextItem && elements[i + 1]->tile != nullptr) {
 			//swap logic
 			auto nextItem = elements[i + 1];
-			if (currentItem->isHero || nextItem->isHero) {
+			if (nextItem->isHero) {
+				continue;
+			}
+			if (currentItem->isHero) {
+				if (heroMatchClb && heroMatchClb(nextItem->tile)) {
+					//eat
+					nextItem->block->removeChild(nextItem->tile, true);
+					delete nextItem->tile;
+					nextItem->tile = nullptr;
+					auto originalScale = currentItem->tile->getScale();
+					currentItem->tile->setScale(originalScale * 1.2f);
+					auto scaleAction = ScaleTo::create(BOARD_ANIMATION_DURATION, originalScale);
+					currentItem->tile->runAction(scaleAction);
+				} else {
+					//todo
+//					one animation and destroy
+				}
 				continue;
 			}
 			if (currentItem->tile->canMatchTile(nextItem->tile)) {

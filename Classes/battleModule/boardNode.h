@@ -42,7 +42,8 @@ namespace sr {
 		};
 
 		typedef std::function<bool(eSwipeDirection)> swipeCallback;
-		typedef std::function<std::vector<sTileData *>()> spawnCallback;
+		typedef std::function<std::vector<sTileData*>()> spawnCallback;
+		typedef std::function<bool(tileNode*)> heroMatchCallback;
 
 		class boardNode : public coreModule::nodeProperties, public cocos2d::Sprite, public taskHolder {
 		public:
@@ -55,6 +56,7 @@ namespace sr {
 			void initBoard();
 			void setSwipeCallback(swipeCallback clb) { swipeClb = std::move(clb); }
 			void setSpawnCallback(spawnCallback clb) { spawnClb = std::move(clb); }
+			void setHeroMatchCallback(heroMatchCallback clb) { heroMatchClb = std::move(clb); }
 			void scrollBoard(eSwipeDirection);
 			void update(float delta) override;
 			eTileTypes getNeighborTail(eSwipeDirection, int, int);
@@ -74,6 +76,7 @@ namespace sr {
 			float boardTileWH;
 			swipeCallback swipeClb = nullptr;
 			spawnCallback spawnClb = nullptr;
+			heroMatchCallback heroMatchClb = nullptr;
 		};
 	}
 }

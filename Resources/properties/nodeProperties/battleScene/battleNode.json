@@ -14,5 +14,39 @@
       "image": "images/board/sceneBg.png",
       "pixel": true
     }
+  },
+  "energyLbl": {
+    "TransformComponent": {
+      "pivot": [ 0.21, 0.075 ],
+      "anchor": [ 0.0, 0.0 ],
+      "scale": 1
+    },
+    "LabelComponent": {
+      "text": "0",
+      "fontType": "ttf",
+      "fontSize": 22.0,
+      "fontFile": "fonts/Marker Felt.ttf",
+      "alight": "left"
+    },
+    "ColorComponent": {
+      "color": [255, 255, 255, 255]
+    }
+  },
+  "hpLbl": {
+    "TransformComponent": {
+      "pivot": [ 0.05, 0.075 ],
+      "anchor": [ 0.0, 0.0 ],
+      "scale": 1
+    },
+    "LabelComponent": {
+      "text": "0",
+      "fontType": "ttf",
+      "fontSize": 22.0,
+      "fontFile": "fonts/Marker Felt.ttf",
+      "alight": "left"
+    },
+    "ColorComponent": {
+      "color": [255, 0, 0, 255]
+    }
   }
 }

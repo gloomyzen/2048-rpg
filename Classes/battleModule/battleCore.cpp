@@ -28,6 +28,40 @@ std::deque<nodeTasks> battleCore::getTasks() {
 			return gameModesTool::getNextTile(eGameMode::ENDLESS);
 		});
 
+		board->setHeroMatchCallback([this](tileNode* tile){
+			if (tile == nullptr) return false;
+			auto data = tile->getTileData();
+			if (data != nullptr) {
+				switch (data->type) {
+					case eTileTypes::HERO:
+					case eTileTypes::UNDEFINED:
+					case eTileTypes::EMPTY:
+					case eTileTypes::ENVIRONMENT:
+						break;
+					case eTileTypes::ITEM: {
+						currentHp += data->hp * tile->getCount();
+						currentEnergy += data->attack * tile->getCount();
+						updateStats();
+						return true;
+					}
+						break;
+					case eTileTypes::ENEMY:
+						if (currentEnergy >= data->hp * tile->getCount()) {
+							currentHp -= data->hp * tile->getCount();
+							currentEnergy -= data->attack * tile->getCount();
+							updateStats();
+							return true;
+						}
+						tile->setCount(tile->getCount() - currentEnergy);
+						currentHp -= data->attack * tile->getCount();
+						updateStats();
+						return false;
+						break;
+				}
+			}
+			return true;
+		});
+
 		return eTasksStatus::STATUS_OK;
 	});
 
@@ -60,5 +94,24 @@ std::deque<nodeTasks> battleCore::getTasks() {
 		return eTasksStatus::STATUS_OK;
 	});
 
+	result.emplace_back([this]() {
+		hpLbl = dynamic_cast<Label*>(findNode("hpLbl", this));
+		energyLbl = dynamic_cast<Label*>(findNode("energyLbl", this));
+		currentEnergy = 1;
+		currentHp = 1;
+		updateStats();
+
+		return eTasksStatus::STATUS_OK;
+	});
+
 	return result;
+}
+
+void battleCore::updateStats() {
+	if (hpLbl) {
+		hpLbl->setString(std::to_string(currentHp));
+	}
+	if (energyLbl) {
+		energyLbl->setString(std::to_string(currentEnergy));
+	}
 }
