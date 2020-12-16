@@ -6,10 +6,8 @@
 
 namespace sr {
 	namespace interfaceModule {
-		using namespace cocos2d;
-		using namespace common;
 
-		class testWidget : public coreModule::nodeProperties, public Node {
+	class testWidget : public common::coreModule::nodeProperties, public cocos2d::Node {
 		public:
 			testWidget();
 			~testWidget();

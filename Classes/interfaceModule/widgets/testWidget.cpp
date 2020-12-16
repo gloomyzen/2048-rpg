@@ -1,6 +1,7 @@
 #include "testWidget.h"
 
 using namespace sr::interfaceModule;
+using namespace cocos2d;
 
 
 testWidget::testWidget() {
