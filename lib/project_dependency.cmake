@@ -42,18 +42,6 @@ include(${CMAKE_SOURCE_DIR}/cmake/StaticAnalyzers.cmake)
 #            )
 #endif()
 
-# enable cache system
-#include(${CMAKE_SOURCE_DIR}/cmake/Cache.cmake)
-# Very basic PCH example
-option(ENABLE_PCH "Enable Precompiled Headers" ON)
-if (ENABLE_PCH AND NOT IOS)
-    # This sets a global PCH parameter, each project will build its own PCH, which
-    # is a good idea if any #define's change
-    #
-    # consider breaking this out per project as necessary
-    target_precompile_headers(${PROJECT_NAME} PRIVATE <vector> <array> <string> <map> <utility> <memory> <algorithm> <bitset> "${CMAKE_SOURCE_DIR}/lib/empty.h")
-endif ()
-
 #------------------------------------------------------------------------------
 #                        ImGui, included for debugging only
 #------------------------------------------------------------------------------

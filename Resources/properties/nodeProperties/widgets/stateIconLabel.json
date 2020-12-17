@@ -1,0 +1,36 @@
+{
+  "stateIconLabel": {
+    "TransformComponent": {
+      "anchor": [ 0.5, 0.5 ],
+      "pivot": [ 0.5, 0.5 ]
+    }
+  },
+  "icon": {
+    "TransformComponent": {
+      "size": [ 128, 128 ],
+      "anchor": [ 0.5, 0.5 ],
+      "pivot": [ 0.5, 0.5 ]
+    },
+    "SpriteComponent": {
+      "image": "images/tiles/bg/tile_dark.png",
+      "pixel": true
+    }
+  },
+  "lbl": {
+    "TransformComponent": {
+      "pivot": [ 0.21, 0.075 ],
+      "anchor": [ 0.0, 0.0 ],
+      "scale": 1
+    },
+    "LabelComponent": {
+      "text": "test",
+      "fontType": "ttf",
+      "fontSize": 15.0,
+      "fontFile": "fonts/Marker Felt.ttf",
+      "alight": "left"
+    },
+    "ColorComponent": {
+      "color": [0, 255, 0, 255]
+    }
+  }
+}

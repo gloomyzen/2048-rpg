@@ -2,4 +2,7 @@
 
 using namespace sr::interfaceModule;
 
-stateIconLabel::stateIconLabel() {}
+stateIconLabel::stateIconLabel() {
+	this->setName("stateIconLabel");
+	loadProperty("widgets/" + this->getName(), dynamic_cast<Node*>(this));
+}

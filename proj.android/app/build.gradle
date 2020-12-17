@@ -6,7 +6,7 @@ android {
     compileSdkVersion PROP_COMPILE_SDK_VERSION.toInteger()
 
     defaultConfig {
-        applicationId "com.efreyu.swipe-rpg"
+        applicationId "com.efreyu.swiperpg"
         minSdkVersion PROP_MIN_SDK_VERSION
         targetSdkVersion PROP_TARGET_SDK_VERSION
         versionCode 1
@@ -14,7 +14,7 @@ android {
 
         externalNativeBuild {
             cmake {
-                targets 'MyGame'
+                targets 'SwipeRpg'
                 arguments "-DCMAKE_FIND_ROOT_PATH=", "-DANDROID_STL=c++_static", "-DANDROID_TOOLCHAIN=clang", "-DANDROID_ARM_NEON=TRUE"
                 cppFlags "-frtti -fexceptions -fsigned-char"
             }
