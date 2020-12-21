@@ -45,7 +45,7 @@ namespace sr {
 		typedef std::function<std::vector<sTileData*>()> spawnCallback;
 		typedef std::function<bool(tileNode*)> heroMatchCallback;
 
-		class boardNode : public coreModule::nodeProperties, public cocos2d::Sprite, public taskHolder {
+		class boardNode : public coreModule::nodeProperties, public cocos2d::Node, public taskHolder {
 		public:
 			boardNode();
 			~boardNode();
@@ -74,6 +74,7 @@ namespace sr {
 			cocos2d::Touch* lastTouchInfo = nullptr;
 			bool isTouch = false;
 			float boardTileWH;
+			cocos2d::Sprite* bg = nullptr;
 			swipeCallback swipeClb = nullptr;
 			spawnCallback spawnClb = nullptr;
 			heroMatchCallback heroMatchClb = nullptr;

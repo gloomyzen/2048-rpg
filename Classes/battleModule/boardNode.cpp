@@ -14,7 +14,15 @@ std::deque<nodeTasks> boardNode::getTasks() {
 	std::deque<nodeTasks> result;
 
 	result.emplace_back([this]() {
-		loadProperty("battleScene/" + this->getName(), dynamic_cast<Sprite*>(this));
+		loadProperty("battleScene/" + this->getName(), this);
+		return eTasksStatus::STATUS_OK;
+	});
+
+	result.emplace_back([this]() {
+		bg = cocos2d::Sprite::create();
+		bg->setName("bg");
+		loadComponent("battleScene/" + this->getName(), dynamic_cast<cocos2d::Sprite*>(bg));
+		addChild(bg);
 		return eTasksStatus::STATUS_OK;
 	});
 

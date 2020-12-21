@@ -95,8 +95,8 @@ std::deque<nodeTasks> battleCore::getTasks() {
 	});
 
 	result.emplace_back([this]() {
-		hpLbl = dynamic_cast<Label*>(findNode("hpLbl", this));
-		energyLbl = dynamic_cast<Label*>(findNode("energyLbl", this));
+		hpLbl = dynamic_cast<Label*>(findNode("hpLbl"));
+		energyLbl = dynamic_cast<Label*>(findNode("energyLbl"));
 		currentEnergy = 1;
 		currentHp = 1;
 		updateStats();

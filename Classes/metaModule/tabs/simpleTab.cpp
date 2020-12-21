@@ -7,7 +7,7 @@ simpleTab::simpleTab() {
 	this->setName("simpleTab");
 	loadProperty("menuScene/tabs/" + this->getName(), dynamic_cast<Node *>(this));
 	auto visibleSize = Director::getInstance()->getVisibleSize();
-	if (auto label = dynamic_cast<Label *>(findNode("comingSoon", this))) {
+	if (auto label = dynamic_cast<Label *>(findNode("comingSoon"))) {
 		label->setPosition(visibleSize / 2);
 	}
 
