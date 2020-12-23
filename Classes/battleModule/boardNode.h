@@ -20,6 +20,8 @@
 #define BOARD_HERO_POS_Y 2
 #define BOARD_TOUCH_FORCE 75
 #define BOARD_ANIMATION_DURATION 0.15f
+#define BOARD_COUNT_PATTERN_X 9
+#define BOARD_COUNT_PATTERN_Y 9
 
 namespace sr {
 	namespace battleModule {
@@ -64,6 +66,8 @@ namespace sr {
 		private:
 			void clearTiles();
 			void setDefaultPosition();
+			void generateBoardBg(cocos2d::Vec2);
+			void swipeBoardBg(eSwipeDirection);
 			void initHandling();
 			void touchUpdate(cocos2d::Touch*, cocos2d::Event*);
 			std::pair<int, int> getOffsetByDirection(eSwipeDirection, int, int);
@@ -74,7 +78,9 @@ namespace sr {
 			cocos2d::Touch* lastTouchInfo = nullptr;
 			bool isTouch = false;
 			float boardTileWH;
-			cocos2d::Sprite* bg = nullptr;
+			cocos2d::Sprite* boardBg = nullptr;
+			bool boardSolid = false;
+			cocos2d::Vec2 boardBgPos;
 			swipeCallback swipeClb = nullptr;
 			spawnCallback spawnClb = nullptr;
 			heroMatchCallback heroMatchClb = nullptr;

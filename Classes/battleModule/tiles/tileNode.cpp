@@ -3,6 +3,7 @@
 #include "common/coreModule/nodes/spriteParameters.h"
 
 using namespace sr::battleModule;
+using namespace cocos2d;
 
 tileNode::tileNode() {
 	this->setName("tileNode");
@@ -99,7 +100,7 @@ void tileNode::updateTileFromData() {
 		}
 	}
 	if (currentUpgrade == nullptr) {
-		LOG_WARNING("tileNode::createTile: tile upgrade has no data in first key!");
+		LOG_WARNING(StringUtils::format("tileNode::createTile: tile '%s' upgrade has no data in first key with count %d!", tileData->name.c_str(), currentCnt));
 		return;
 	}
 	//set bg

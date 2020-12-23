@@ -3,6 +3,7 @@
 #include "common/debugModule/logManager.h"
 
 using namespace sr::battleModule;
+using namespace cocos2d;
 
 boardNode::boardNode() {
 	this->setName("boardNode");
@@ -15,14 +16,6 @@ std::deque<nodeTasks> boardNode::getTasks() {
 
 	result.emplace_back([this]() {
 		loadProperty("battleScene/" + this->getName(), this);
-		return eTasksStatus::STATUS_OK;
-	});
-
-	result.emplace_back([this]() {
-		bg = cocos2d::Sprite::create();
-		bg->setName("bg");
-		loadComponent("battleScene/" + this->getName(), dynamic_cast<cocos2d::Sprite*>(bg));
-		addChild(bg);
 		return eTasksStatus::STATUS_OK;
 	});
 
@@ -84,6 +77,52 @@ void boardNode::setDefaultPosition() {
 		tileMap.insert({x, row});
 		position.x += boardTileWH;
 	}
+	generateBoardBg(Vec2(BOARD_START_POS_X + BOARD_OFFSET_POS_X, BOARD_START_POS_Y + BOARD_OFFSET_POS_Y));
+}
+
+void boardNode::generateBoardBg(Vec2 pos) {
+	auto sliceX = BOARD_COUNT_PATTERN_X % BOARD_COUNT_X / 2;
+	auto sliceY = BOARD_COUNT_PATTERN_Y % BOARD_COUNT_Y / 2;
+	boardBgPos = Vec2(pos.x - sliceX * boardTileWH, pos.y - sliceY * boardTileWH);
+	boardBg = Sprite::create();
+	boardBg->setName("bg");
+	loadComponent("battleScene/" + this->getName(), dynamic_cast<Sprite*>(boardBg));
+	boardBg->setPosition(boardBgPos);
+	boardBg->setContentSize(cocos2d::Size(BOARD_COUNT_PATTERN_X * boardTileWH, BOARD_COUNT_PATTERN_Y * boardTileWH));
+	addChild(boardBg, -1);
+}
+
+void boardNode::swipeBoardBg(eSwipeDirection direction) {
+	Vec2 startPos = boardBgPos;
+	Vec2 nextPos = boardBgPos;
+	boardSolid = !boardSolid;
+	switch (direction) {
+		case eSwipeDirection::UNDEFINED:
+			break;
+		case eSwipeDirection::UP: {
+			startPos.y = boardBgPos.y + boardTileWH * (boardSolid ? 2 : 1);
+			nextPos.y = boardBgPos.y - boardTileWH * (boardSolid ? 1 : 2);
+		}
+			break;
+		case eSwipeDirection::DOWN: {
+			startPos.y = boardBgPos.y - boardTileWH * (boardSolid ? 2 : 1);
+			nextPos.y = boardBgPos.y + boardTileWH * (boardSolid ? 1 : 2);
+		}
+			break;
+		case eSwipeDirection::RIGHT: {
+			startPos.x = boardBgPos.x + boardTileWH * (boardSolid ? 2 : 1);
+			nextPos.x = boardBgPos.x - boardTileWH * (boardSolid ? 1 : 2);
+		}
+			break;
+		case eSwipeDirection::LEFT: {
+			startPos.x = boardBgPos.x - boardTileWH * (boardSolid ? 2 : 1);
+			nextPos.x = boardBgPos.x + boardTileWH * (boardSolid ? 1 : 2);
+		}
+			break;
+	}
+	boardBg->setPosition(startPos);
+	auto moveAction = MoveTo::create(0.13f, nextPos);
+	boardBg->runAction(moveAction);
 }
 
 void boardNode::initHandling() {
@@ -235,6 +274,7 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 	}
 
 	//swap logic for all tiles
+	swipeBoardBg(direction);
 	switch (direction) {
 		case eSwipeDirection::UP: {
 			for (int x = 0; x < static_cast<int>(tileMap.size()); ++x) {
@@ -303,50 +343,6 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 			nextTiles.erase(it);
 		} else {
 			LOG_ERROR("boardNode::scrollBoard: Slot has parameters beyond the radius of the array!");
-		}
-	}
-
-
-//	for (std::size_t x = 0; x < tileMap.size(); ++x) {
-//		for (std::size_t y = 0; y < tileMap[x].size(); ++y) {
-//
-//		}
-//	}
-
-	//get list of free tiles
-//	std::map<int, int> freeSlots;
-//	for (std::size_t x = 0; x < tileMap.size(); ++x) {
-//		for (std::size_t y = 0; y < tileMap[x].size(); ++y) {
-//			if (tileMap[x][y] == nullptr) {
-//				freeSlots.insert({x, y});
-//			}
-//		}
-//	}
-
-	for (std::size_t x = 0; x < tileMap.size(); ++x) {
-		for (std::size_t y = 0; y < tileMap[x].size(); ++y) {
-			auto item = tileMap[x][y];
-			if (item->tile != nullptr && item->tile->getTileType() == eTileTypes::HERO) continue;
-			auto test = getNeighborTail(direction, x, y);
-			switch (direction) {
-				case eSwipeDirection::UP: {
-				}
-					break;
-				case eSwipeDirection::DOWN: {
-				}
-					break;
-				case eSwipeDirection::LEFT: {
-				}
-					break;
-				case eSwipeDirection::RIGHT: {
-				}
-					break;
-				default: {
-					LOG_ERROR("boardNode::scrollBoard: Can't swipe, wrong direction!");
-					return;
-				}
-					break;
-			}
 		}
 	}
 

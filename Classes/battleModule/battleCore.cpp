@@ -3,6 +3,7 @@
 #include "databaseModule/block/gameModesTool.h"
 
 using namespace sr::battleModule;
+using namespace cocos2d;
 
 battleCore::battleCore() {
 	this->setName("battleNode");

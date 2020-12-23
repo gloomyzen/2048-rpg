@@ -9,11 +9,10 @@
 
 namespace sr {
 	namespace battleModule {
-		using namespace cocos2d;
 		using namespace common;
 		using namespace databaseModule;
 
-		class tileNode : public coreModule::nodeProperties, public Node {
+		class tileNode : public coreModule::nodeProperties, public cocos2d::Node {
 		public:
 			tileNode();
 			~tileNode() = default;
@@ -35,11 +34,11 @@ namespace sr {
 
 			eTileTypes tileType = eTileTypes::UNDEFINED;
 			sTileData* tileData = nullptr;
-			Sprite* hpIcon = nullptr;
-			Label* hpCountLbl = nullptr;
-			Label* attackCountLbl = nullptr;
-			Label* countLbl = nullptr;
-			Node* imgSlot = nullptr;
+			cocos2d::Sprite* hpIcon = nullptr;
+			cocos2d::Label* hpCountLbl = nullptr;
+			cocos2d::Label* attackCountLbl = nullptr;
+			cocos2d::Label* countLbl = nullptr;
+			cocos2d::Node* imgSlot = nullptr;
 			int currentCnt = 1;
 			float width = 0.f, height = 0.f;
 

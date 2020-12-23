@@ -7,10 +7,9 @@
 
 namespace sr {
 	namespace battleModule {
-	using namespace cocos2d;
 	using namespace common;
 
-		class battleCore : public coreModule::nodeProperties, public Node, public taskHolder {
+		class battleCore : public coreModule::nodeProperties, public cocos2d::Node, public taskHolder {
 		public:
 			battleCore();
 			~battleCore() = default;
@@ -21,9 +20,9 @@ namespace sr {
 		private:
 			void updateStats();
 			boardNode* board = nullptr;
-			ClippingNode* clippingNode = nullptr;
-			Label* hpLbl = nullptr;
-			Label* energyLbl = nullptr;
+			cocos2d::ClippingNode* clippingNode = nullptr;
+			cocos2d::Label* hpLbl = nullptr;
+			cocos2d::Label* energyLbl = nullptr;
 			int currentEnergy;
 			int currentHp;
 		};
