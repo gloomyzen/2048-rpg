@@ -1,4 +1,10 @@
 {
   "type": "node",
-  "name": "boardNode"
+  "name": "boardNode",
+  "child": [
+    {
+      "type": "sprite",
+      "name": "border"
+    }
+  ]
 }

@@ -78,6 +78,8 @@ void boardNode::setDefaultPosition() {
 		position.x += boardTileWH;
 	}
 	generateBoardBg(Vec2(BOARD_START_POS_X + BOARD_OFFSET_POS_X, BOARD_START_POS_Y + BOARD_OFFSET_POS_Y));
+	auto border = dynamic_cast<Sprite*>(findNode("border"));
+	border->setContentSize(cocos2d::Size(boardTileWH * BOARD_COUNT_X + BOARD_OFFSET_POS_X * 2, boardTileWH * BOARD_COUNT_Y + BOARD_OFFSET_POS_Y * 2));
 }
 
 void boardNode::generateBoardBg(Vec2 pos) {
@@ -94,34 +96,38 @@ void boardNode::generateBoardBg(Vec2 pos) {
 
 void boardNode::swipeBoardBg(eSwipeDirection direction) {
 	Vec2 startPos = boardBgPos;
+	startPos.x = boardBgPos.x + boardTileWH * (boardSolid ? 1 : 2);
+	startPos.y = boardBgPos.y + boardTileWH * (boardSolid ? 1 : 2);
 	Vec2 nextPos = boardBgPos;
+	nextPos.x = boardBgPos.x + boardTileWH * (boardSolid ? 1 : 2);
+	nextPos.y = boardBgPos.y + boardTileWH * (boardSolid ? 1 : 2);
 	boardSolid = !boardSolid;
 	switch (direction) {
 		case eSwipeDirection::UNDEFINED:
 			break;
 		case eSwipeDirection::UP: {
-			startPos.y = boardBgPos.y + boardTileWH * (boardSolid ? 2 : 1);
-			nextPos.y = boardBgPos.y - boardTileWH * (boardSolid ? 1 : 2);
+			startPos.y = boardBgPos.y;
+			nextPos.y = boardBgPos.y - boardTileWH;
 		}
 			break;
 		case eSwipeDirection::DOWN: {
-			startPos.y = boardBgPos.y - boardTileWH * (boardSolid ? 2 : 1);
-			nextPos.y = boardBgPos.y + boardTileWH * (boardSolid ? 1 : 2);
+			startPos.y = boardBgPos.y;
+			nextPos.y = boardBgPos.y + boardTileWH;
 		}
 			break;
 		case eSwipeDirection::RIGHT: {
-			startPos.x = boardBgPos.x + boardTileWH * (boardSolid ? 2 : 1);
-			nextPos.x = boardBgPos.x - boardTileWH * (boardSolid ? 1 : 2);
+			startPos.x = boardBgPos.x;
+			nextPos.x = boardBgPos.x - boardTileWH;
 		}
 			break;
 		case eSwipeDirection::LEFT: {
-			startPos.x = boardBgPos.x - boardTileWH * (boardSolid ? 2 : 1);
-			nextPos.x = boardBgPos.x + boardTileWH * (boardSolid ? 1 : 2);
+			startPos.x = boardBgPos.x;
+			nextPos.x = boardBgPos.x + boardTileWH;
 		}
 			break;
 	}
 	boardBg->setPosition(startPos);
-	auto moveAction = MoveTo::create(0.13f, nextPos);
+	auto moveAction = MoveTo::create(BOARD_ANIMATION_DURATION, nextPos);
 	boardBg->runAction(moveAction);
 }
 

@@ -14,5 +14,15 @@
       "image": "images/board/bg.png",
       "pixel": true
     }
+  },
+  "border": {
+    "TransformComponent": {
+      "pivot": [ 0.0, 0.0 ],
+      "anchor": [ 0.0, 0.0 ]
+    },
+    "SpriteComponent": {
+      "image": "images/board/border.png",
+      "pixel": true
+    }
   }
 }
