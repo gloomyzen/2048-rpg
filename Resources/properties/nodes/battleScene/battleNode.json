@@ -4,11 +4,13 @@
   "child": [
     {
       "type": "sprite",
-      "name": "bg"
-    },
-    {
-      "type": "sprite",
-      "name": "table"
+      "name": "bg",
+      "child": [
+        {
+          "type": "sprite",
+          "name": "table"
+        }
+      ]
     },
     {
       "type": "stateEnergyLabel",

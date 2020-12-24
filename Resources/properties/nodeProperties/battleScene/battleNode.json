@@ -17,8 +17,8 @@
   },
   "table": {
     "TransformComponent": {
-      "pivot": [ 0.5, 1.0 ],
-      "anchor": [ 0.5, 2.2 ],
+      "pivot": [ 0.5, 0.745 ],
+      "anchor": [ 0.5, 0.5 ],
       "scale": [0.3, 0.3]
     },
     "SpriteComponent": {
