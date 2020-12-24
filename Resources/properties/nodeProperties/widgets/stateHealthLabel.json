@@ -1,31 +1,33 @@
 {
-  "stateIconLabel": {
+  "stateHealthLabel": {
     "TransformComponent": {
-      "anchor": [ 0.5, 0.5 ],
-      "pivot": [ 0.5, 0.5 ]
+      "pivot": [ 0.21, 0.065 ],
+      "anchor": [ 0.0, 0.0 ]
     }
   },
   "icon": {
     "TransformComponent": {
-      "size": [ 128, 128 ],
-      "anchor": [ 0.5, 0.5 ],
-      "pivot": [ 0.5, 0.5 ]
+      "size": [ 40, 40 ],
+      "anchor": [ 0.0, 0.0 ],
+      "pivot": [ 0.0, 0.0 ],
+      "position": [ 0, 6 ]
     },
     "SpriteComponent": {
-      "image": "images/tiles/bg/tile_dark.png",
+      "image": "images/widgets/stateIconLabel/healthIcon.png",
       "pixel": true
     }
   },
   "lbl": {
     "TransformComponent": {
-      "pivot": [ 0.21, 0.075 ],
-      "anchor": [ 0.0, 0.0 ],
+      "pivot": [ 0.0, 0.00 ],
+      "anchor": [ 0, -0.5 ],
+      "position": [ 50, 0 ],
       "scale": 1
     },
     "LabelComponent": {
-      "text": "test",
+      "text": "0",
       "fontType": "ttf",
-      "fontSize": 15.0,
+      "fontSize": 25.0,
       "fontFile": "fonts/Marker Felt.ttf",
       "alight": "left"
     },

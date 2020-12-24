@@ -1,6 +1,6 @@
 {
   "type": "node",
-  "name": "stateIconLabel",
+  "name": "stateHealthLabel",
   "child": [
     {
       "type": "sprite",

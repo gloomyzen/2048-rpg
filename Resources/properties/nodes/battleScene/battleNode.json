@@ -7,11 +7,15 @@
       "name": "bg"
     },
     {
-      "type": "label",
+      "type": "sprite",
+      "name": "table"
+    },
+    {
+      "type": "stateEnergyLabel",
       "name": "energyLbl"
     },
     {
-      "type": "label",
+      "type": "stateHealthLabel",
       "name": "hpLbl"
     }
   ]

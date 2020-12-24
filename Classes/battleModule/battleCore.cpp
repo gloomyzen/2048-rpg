@@ -1,8 +1,10 @@
 #include "battleCore.h"
 #include "databaseModule/databases/gameModesDB.h"
 #include "databaseModule/block/gameModesTool.h"
+#include "interfaceModule/widgets/stateIconLabel.h"
 
 using namespace sr::battleModule;
+using namespace sr::interfaceModule;
 using namespace cocos2d;
 
 battleCore::battleCore() {
@@ -96,8 +98,12 @@ std::deque<nodeTasks> battleCore::getTasks() {
 	});
 
 	result.emplace_back([this]() {
-		hpLbl = dynamic_cast<Label*>(findNode("hpLbl"));
-		energyLbl = dynamic_cast<Label*>(findNode("energyLbl"));
+		if (auto state = dynamic_cast<stateIconLabel*>(findNode("hpLbl"))) {
+			hpLbl = state->getLabel();
+		}
+		if (auto state = dynamic_cast<stateIconLabel*>(findNode("energyLbl"))) {
+			energyLbl = state->getLabel();
+		}
 		currentEnergy = 1;
 		currentHp = 1;
 		updateStats();

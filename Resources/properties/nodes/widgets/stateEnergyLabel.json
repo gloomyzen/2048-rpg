@@ -1,0 +1,14 @@
+{
+  "type": "node",
+  "name": "stateEnergyLabel",
+  "child": [
+    {
+      "type": "sprite",
+      "name": "icon"
+    },
+    {
+      "type": "label",
+      "name": "lbl"
+    }
+  ]
+}

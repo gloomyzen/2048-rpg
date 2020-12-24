@@ -43,3 +43,8 @@ mkdir build && cd build
 cmake .. -G"Visual Studio 16 2019" -Tv142 -A Win32 -DDEBUG=1
 and open .sln file from `proj.win32` folder
 ```
+
+For Android studio:
+android gradle plugin version: 3.6.3
+gradle version: 5.6.4
+NDK 21.0.6011959
