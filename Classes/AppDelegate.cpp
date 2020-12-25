@@ -70,9 +70,19 @@ bool AppDelegate::applicationDidFinishLaunching() {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
 	director->setContentScaleFactor(1.f);
 //	glview->setFrameZoomFactor(1.f);
-	glview->setResolutionPolicy(ResolutionPolicy::FIXED_WIDTH);
+	glview->setResolutionPolicy(ResolutionPolicy::EXACT_FIT);
+
 #else
-	glview->setDesignResolutionSize(frameResolutionSize.size.width, frameResolutionSize.size.height, ResolutionPolicy::FIXED_WIDTH);
+	auto currentSize = glview->getDesignResolutionSize();
+	auto current = currentSize.height / currentSize.width;
+	auto large = largeResolutionSize.size.height / largeResolutionSize.size.width;
+	auto frame = frameResolutionSize.size.height / frameResolutionSize.size.width;
+	auto res = large / frame;
+	if (current > 0 && current < frame + res) {
+		glview->setDesignResolutionSize(frameResolutionSize.size.width, frameResolutionSize.size.height, ResolutionPolicy::EXACT_FIT);
+	} else {
+		glview->setDesignResolutionSize(largeResolutionSize.size.width, largeResolutionSize.size.height, ResolutionPolicy::EXACT_FIT);
+	}
 #endif
 
 	register_all_packages();
