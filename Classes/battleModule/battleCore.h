@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "common/coreModule/nodes/nodeProperties.h"
 #include "boardNode.h"
+#include "databaseModule/block/questTool.h"
 
 namespace sr {
 	namespace battleModule {
@@ -24,6 +25,7 @@ namespace sr {
 			cocos2d::Label* energyLbl = nullptr;
 			int currentEnergy;
 			int currentHp;
+			databaseModule::questTool* questMgr = nullptr;
 		};
 	}
 }

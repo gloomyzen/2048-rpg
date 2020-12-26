@@ -15,6 +15,7 @@ battleCore::battleCore() {
 	loadProperty("battleScene/" + this->getName(), this);
 	board = new boardNode();
 	board->executeTasks();
+	questMgr = new questTool();
 }
 
 std::deque<nodeTasks> battleCore::getTasks() {
@@ -28,6 +29,7 @@ std::deque<nodeTasks> battleCore::getTasks() {
 		board->initBoard();
 		board->setSwipeCallback([=](eSwipeDirection direction){
 			board->scrollBoard(direction);
+			auto updated = questMgr->updateObjectives(direction);
 			return true;
 		});
 		board->setSpawnCallback([=](){
