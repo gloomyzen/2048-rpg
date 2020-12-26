@@ -1,11 +1,14 @@
 #include "battleCore.h"
 #include "databaseModule/databases/gameModesDB.h"
 #include "databaseModule/block/gameModesTool.h"
+#include "databaseModule/databases/gameEnums.h"
 #include "interfaceModule/widgets/stateIconLabel.h"
 
 using namespace sr::battleModule;
 using namespace sr::interfaceModule;
+using namespace sr::databaseModule;
 using namespace cocos2d;
+using namespace common;
 
 battleCore::battleCore() {
 	this->setName("battleNode");

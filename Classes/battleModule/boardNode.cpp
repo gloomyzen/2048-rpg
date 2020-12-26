@@ -1,8 +1,10 @@
 #include "boardNode.h"
 #include "databaseModule/databaseManager.h"
+#include "databaseModule/databases/gameEnums.h"
 #include "common/debugModule/logManager.h"
 
 using namespace sr::battleModule;
+using namespace sr::databaseModule;
 using namespace cocos2d;
 
 boardNode::boardNode() {
@@ -188,10 +190,6 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 		LOG_ERROR("boardNode::scrollBoard: Can't get next tile from spawn callback!");
 		return;
 	}
-	if (direction == eSwipeDirection::UNDEFINED) {
-		LOG_ERROR("boardNode::scrollBoard: Swipe direction is wrong!");
-		return;
-	}
 
 	//проверяем соседние тайлы от героя, доступен ли свайп впринципе зависит от соседних клеток в первую очередь
 	auto heroNeighborType = getNeighborTail(direction, BOARD_HERO_POS_X, BOARD_HERO_POS_Y);
@@ -205,6 +203,11 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 	bool slotExist;
 	bool heroFounded;
 	switch (direction) {
+		case eSwipeDirection::UNDEFINED: {
+			LOG_ERROR("boardNode::scrollBoard: Swipe direction is wrong!");
+			return;
+		}
+			break;
 		case eSwipeDirection::UP: {
 			for (int x = 0; x < static_cast<int>(tileMap.size()); ++x) {
 				heroFounded = false;
@@ -282,6 +285,8 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 	//swap logic for all tiles
 	swipeBoardBg(direction);
 	switch (direction) {
+		case eSwipeDirection::UNDEFINED:
+			break;
 		case eSwipeDirection::UP: {
 			for (int x = 0; x < static_cast<int>(tileMap.size()); ++x) {
 				std::vector<sSlot*> elements;

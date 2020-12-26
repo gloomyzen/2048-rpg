@@ -7,9 +7,8 @@
 
 namespace sr {
 	namespace battleModule {
-	using namespace common;
 
-		class battleCore : public coreModule::nodeProperties, public cocos2d::Node, public taskHolder {
+		class battleCore : public common::coreModule::nodeProperties, public cocos2d::Node, public taskHolder {
 		public:
 			battleCore();
 			~battleCore() = default;

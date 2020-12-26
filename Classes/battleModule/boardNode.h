@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "common/coreModule/nodes/nodeProperties.h"
 #include "battleModule/tiles/tileNode.h"
+#include "databaseModule/databases/gameEnums.h"
 #include <utility>
 #include <vector>
 #include <map>
@@ -35,46 +36,38 @@ namespace sr {
 			sSlot(cocos2d::Vec2 pos, tileNode* tile, bool isHero = false) : pos(pos), tile(tile), isHero(isHero) {}
 		};
 
-		enum class eSwipeDirection {
-			UNDEFINED = 0,
-			UP = 1,
-			DOWN,
-			LEFT,
-			RIGHT
-		};
-
-		typedef std::function<bool(eSwipeDirection)> swipeCallback;
-		typedef std::function<std::vector<sTileData*>()> spawnCallback;
+		typedef std::function<bool(databaseModule::eSwipeDirection)> swipeCallback;
+		typedef std::function<std::vector<databaseModule::sTileData*>()> spawnCallback;
 		typedef std::function<bool(tileNode*)> heroMatchCallback;
 
-		class boardNode : public coreModule::nodeProperties, public cocos2d::Node, public taskHolder {
+		class boardNode : public common::coreModule::nodeProperties, public cocos2d::Node, public taskHolder {
 		public:
 			boardNode();
 			~boardNode();
 			CREATE_FUNC(boardNode);
 			std::deque<nodeTasks> getTasks() override;
 
-			void setHeroTileData(sTileData* heroTile);
+			void setHeroTileData(databaseModule::sTileData* heroTile);
 			void initBoard();
 			void setSwipeCallback(swipeCallback clb) { swipeClb = std::move(clb); }
 			void setSpawnCallback(spawnCallback clb) { spawnClb = std::move(clb); }
 			void setHeroMatchCallback(heroMatchCallback clb) { heroMatchClb = std::move(clb); }
-			void scrollBoard(eSwipeDirection);
+			void scrollBoard(databaseModule::eSwipeDirection);
 			void update(float delta) override;
-			eTileTypes getNeighborTail(eSwipeDirection, int, int);
+			databaseModule::eTileTypes getNeighborTail(databaseModule::eSwipeDirection, int, int);
 
 		private:
 			void clearTiles();
 			void setDefaultPosition();
 			void generateBoardBg(cocos2d::Vec2);
-			void swipeBoardBg(eSwipeDirection);
+			void swipeBoardBg(databaseModule::eSwipeDirection);
 			void initHandling();
 			void touchUpdate(cocos2d::Touch*, cocos2d::Event*);
-			std::pair<int, int> getOffsetByDirection(eSwipeDirection, int, int);
+			std::pair<int, int> getOffsetByDirection(databaseModule::eSwipeDirection, int, int);
 			void swipeElements(std::vector<sSlot*> elements);
 
 			std::map<int, std::map<int, sSlot*>> tileMap;
-			sTileData* heroData = nullptr;
+			databaseModule::sTileData* heroData = nullptr;
 			cocos2d::Touch* lastTouchInfo = nullptr;
 			bool isTouch = false;
 			float boardTileWH;

@@ -2,8 +2,10 @@
 #include "common/debugModule/logManager.h"
 #include "common/coreModule/nodes/spriteParameters.h"
 
-using namespace sr::battleModule;
 using namespace cocos2d;
+using namespace common;
+using namespace sr::battleModule;
+using namespace sr::databaseModule;
 
 tileNode::tileNode() {
 	this->setName("tileNode");
