@@ -7,6 +7,11 @@
 namespace sr {
 	namespace databaseModule {
 
+		enum class ePersonReaction {
+			PERSON_SAD = 0,
+			PERSON_HAPPY
+		};
+
 		struct sQuestObjective {
 			eSwipeDirection direction;
 			int leftSwipes = 3;

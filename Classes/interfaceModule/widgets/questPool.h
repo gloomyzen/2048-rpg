@@ -28,6 +28,9 @@ namespace sr {
 
 			void printQuest(databaseModule::sQuestObjective*);
 
+		private:
+			cocos2d::Node* arrowHolder = nullptr;
+			cocos2d::Node* personHolder = nullptr;
 		};
 	}
 }

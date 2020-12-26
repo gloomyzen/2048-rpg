@@ -19,7 +19,7 @@
   },
   "lbl": {
     "TransformComponent": {
-      "pivot": [ 0.0, 0.00 ],
+      "pivot": [ 0.0, 0.0 ],
       "anchor": [ 0, -0.5 ],
       "position": [ 50, 0 ],
       "scale": 1

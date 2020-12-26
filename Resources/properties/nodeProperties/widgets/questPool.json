@@ -1,27 +1,27 @@
 {
   "stateEnergyLabel": {
-    "TransformComponent": {
-      "pivot": [ 0.03, 0.065 ],
+    "questPool": {
+      "pivot": [ 0.0, 0.0 ],
       "anchor": [ 0.0, 0.0 ]
     }
   },
-  "icon": {
+  "personHolder": {
     "TransformComponent": {
-      "size": [ 50, 50 ],
       "anchor": [ 0.0, 0.0 ],
       "pivot": [ 0.0, 0.0 ]
-    },
-    "SpriteComponent": {
-      "image": "images/widgets/stateIconLabel/energyIcon.png",
-      "pixel": true
     }
   },
-  "lbl": {
+  "arrowHolder": {
+    "TransformComponent": {
+      "anchor": [ 0.0, 0.0 ],
+      "pivot": [ 0.0, 0.0 ]
+    }
+  },
+  "leftStepsLabel": {
     "TransformComponent": {
       "pivot": [ 0.0, 0.0 ],
-      "anchor": [ 0, -0.5 ],
-      "position": [ 50, 0 ],
-      "scale": 1
+      "anchor": [ 0, 0.0 ],
+      "position": [ 0, 0 ]
     },
     "LabelComponent": {
       "text": "0",
