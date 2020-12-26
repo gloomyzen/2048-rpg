@@ -5,6 +5,7 @@
 #include "common/coreModule/nodes/nodeProperties.h"
 #include "boardNode.h"
 #include "databaseModule/block/questTool.h"
+#include "interfaceModule/widgets/questPool.h"
 
 namespace sr {
 	namespace battleModule {
@@ -26,6 +27,7 @@ namespace sr {
 			int currentEnergy;
 			int currentHp;
 			databaseModule::questTool* questMgr = nullptr;
+			interfaceModule::questPool* questList = nullptr;
 		};
 	}
 }

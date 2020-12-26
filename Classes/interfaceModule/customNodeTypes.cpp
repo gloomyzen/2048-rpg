@@ -4,12 +4,14 @@
 #include "battleModule/boardNode.h"
 #include "battleModule/tiles/tileNode.h"
 #include "interfaceModule/widgets/stateIconLabel.h"
+#include "interfaceModule/widgets/questPool.h"
 
 using namespace sr::interfaceModule;
 
 void customNodeTypes::registerAllCustomNodes() {
-	GET_NODE_FACTORY().registerCustomNodeType("boardNode", []()->battleModule::boardNode* { return new battleModule::boardNode(); });
-	GET_NODE_FACTORY().registerCustomNodeType("tileNode", []()->battleModule::tileNode* { return new battleModule::tileNode(); });
-	GET_NODE_FACTORY().registerCustomNodeType("stateEnergyLabel", []()->interfaceModule::stateIconLabel* { return interfaceModule::stateIconLabel::generateEnergyLabel(); });
-	GET_NODE_FACTORY().registerCustomNodeType("stateHealthLabel", []()->interfaceModule::stateIconLabel* { return interfaceModule::stateIconLabel::generateHealthLabel(); });
+	GET_NODE_FACTORY().registerCustomNodeType("boardNode", []() { return new battleModule::boardNode(); });
+	GET_NODE_FACTORY().registerCustomNodeType("tileNode", []() { return new battleModule::tileNode(); });
+	GET_NODE_FACTORY().registerCustomNodeType("stateEnergyLabel", []() { return interfaceModule::stateIconLabel::generateEnergyLabel(); });
+	GET_NODE_FACTORY().registerCustomNodeType("stateHealthLabel", []() { return interfaceModule::stateIconLabel::generateHealthLabel(); });
+	GET_NODE_FACTORY().registerCustomNodeType("questPoolWidget", []() { return new interfaceModule::questPool(); });
 }
