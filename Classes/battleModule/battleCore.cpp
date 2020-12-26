@@ -30,6 +30,9 @@ std::deque<nodeTasks> battleCore::getTasks() {
 		board->setSwipeCallback([=](eSwipeDirection direction){
 			board->scrollBoard(direction);
 			auto updated = questMgr->updateObjectives(direction);
+			if (updated) {
+				//todo call widget questPool* -> printQuest()
+			}
 			return true;
 		});
 		board->setSpawnCallback([=](){
