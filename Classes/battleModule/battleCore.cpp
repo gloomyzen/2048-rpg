@@ -41,21 +41,20 @@ std::deque<nodeTasks> battleCore::getTasks() {
 		board->setHeroTileData(currentGameMode->heroTile);
 		board->initBoard();
 		board->setSwipeCallback([this](eSwipeDirection direction){
-			auto updated = questMgr->updateObjectives(direction);
-			if (updated) {
-				auto quest = questMgr->getObjectives().front();
-				questList->printQuest(quest);
-				if (quest->leftSwipes == 0 && !quest->getSpawned()) {
-					//spawn quest tile
-					quest->setSpawned(true);
-					quest->tile->setSpawnClb([&](){
-						tilesToSpawn.clear();
-					});
-					quest->tile->setDestroyClb([&](){
-						tilesToSpawn.clear();
-					});
-					tilesToSpawn.push_back(quest->tile);
-				}
+			questMgr->updateObjectives(direction);
+			auto quest = questMgr->getObjectives().front();
+			questList->printQuest(quest);
+			if (quest->leftSwipes == 0 && !quest->getSpawned()) {
+				//spawn quest tile
+				quest->setSpawned(true);
+				quest->tile->setSpawnClb([this](){
+					tilesToSpawn.clear();
+				});
+				quest->tile->setDestroyClb([this](){
+					tilesToSpawn.clear();
+					questMgr->clearQuests();
+				});
+				tilesToSpawn.push_back(quest->tile);
 			}
 			board->scrollBoard(direction);
 			return true;

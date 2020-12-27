@@ -30,6 +30,7 @@ namespace sr {
 
 		private:
 			void updateArrow(databaseModule::eSwipeDirection);
+			void updatePersonReaction(databaseModule::ePersonReaction);
 			cocos2d::Node* arrowHolder = nullptr;
 			cocos2d::Node* personHolder = nullptr;
 			cocos2d::Label* countLabel = nullptr;

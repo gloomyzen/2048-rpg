@@ -12,7 +12,6 @@ std::map<eSwipeDirection, std::string> arrowImages = {
 		{eSwipeDirection::RIGHT, "images/widgets/questPool/arrowRight.png"},
 };
 
-//todo now it is not used
 std::map<ePersonReaction, std::string> personImages = {
 		{ePersonReaction::PERSON_SAD, "images/widgets/questPool/personSad.png"},
 		{ePersonReaction::PERSON_HAPPY, "images/widgets/questPool/personHappy.png"},
@@ -50,8 +49,10 @@ void questPool::printQuest(databaseModule::sQuestObjective* quest) {
 		updateArrow(quest->direction);
 		countLabel->setVisible(true);
 		countLabel->setString(std::to_string(quest->leftSwipes));
-	} else {
+		updatePersonReaction(ePersonReaction::PERSON_SAD);
+	} else if (quest->leftSwipes == 0) {
 		//add only person
+		updatePersonReaction(ePersonReaction::PERSON_HAPPY);
 	}
 
 }
@@ -59,9 +60,17 @@ void questPool::printQuest(databaseModule::sQuestObjective* quest) {
 void questPool::updateArrow(databaseModule::eSwipeDirection direction) {
 	auto arrow = arrowImages.find(direction);
 	if (arrow != arrowImages.end()) {
-//		arrowHolder
 		auto node = cocos2d::Sprite::create();
 		node->initWithFile(arrow->second);
 		arrowHolder->addChild(node);
+	}
+}
+
+void questPool::updatePersonReaction(ePersonReaction state) {
+	auto reaction = personImages.find(state);
+	if (reaction != personImages.end()) {
+		auto node = cocos2d::Sprite::create();
+		node->initWithFile(reaction->second);
+		personHolder->addChild(node);
 	}
 }

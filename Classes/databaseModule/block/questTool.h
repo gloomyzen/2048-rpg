@@ -29,7 +29,8 @@ namespace sr {
 			~questTool();
 
 			std::vector<sQuestObjective*> getObjectives();
-			bool updateObjectives(eSwipeDirection);
+			void updateObjectives(eSwipeDirection);
+			bool clearQuests();
 
 		private:
 			void generateNextObjective();
