@@ -135,7 +135,7 @@ void boardNode::swipeBoardBg(eSwipeDirection direction) {
 
 void boardNode::initHandling() {
 	auto listener = EventListenerTouchOneByOne::create();
-	listener->setSwallowTouches(true);
+	listener->setSwallowTouches(false);
 	listener->onTouchBegan = [this](Touch* touch, Event*){
 		if (!isTouch) {
 			isTouch = true;
@@ -156,6 +156,25 @@ void boardNode::initHandling() {
 		return true;
 	};
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
+	auto keyboardListener = EventListenerKeyboard::create();
+	keyboardListener->onKeyPressed = [this](EventKeyboard::KeyCode keyCode, Event *event){
+		auto direction = eSwipeDirection::UNDEFINED;
+		if (keyCode == EventKeyboard::KeyCode::KEY_W || keyCode == EventKeyboard::KeyCode::KEY_UP_ARROW) {
+			direction = eSwipeDirection::UP;
+		}
+		if (keyCode == EventKeyboard::KeyCode::KEY_S || keyCode == EventKeyboard::KeyCode::KEY_DOWN_ARROW) {
+			direction = eSwipeDirection::DOWN;
+		}
+		if (keyCode == EventKeyboard::KeyCode::KEY_A || keyCode == EventKeyboard::KeyCode::KEY_LEFT_ARROW) {
+			direction = eSwipeDirection::LEFT;
+		}
+		if (keyCode == EventKeyboard::KeyCode::KEY_D || keyCode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW) {
+			direction = eSwipeDirection::RIGHT;
+		}
+		if (swipeClb && direction != eSwipeDirection::UNDEFINED)
+			swipeClb(direction);
+	};
+	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(keyboardListener, this);
 }
 
 void boardNode::touchUpdate(Touch* touch, Event* event) {
