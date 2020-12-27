@@ -15,15 +15,15 @@
     ],
     "tiles": [
       {
-        "tile": "radish_enemy",
+        "tile": "mochi_enemy",
         "chance": 25
       },
       {
-        "tile": "cherry_enemy",
+        "tile": "octopus_enemy",
         "chance": 25
       },
       {
-        "tile": "egg",
+        "tile": "ramen",
         "chance": 25
       },
       {

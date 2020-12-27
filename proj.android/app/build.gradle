@@ -9,8 +9,8 @@ android {
         applicationId "com.efreyu.swiperpg"
         minSdkVersion PROP_MIN_SDK_VERSION
         targetSdkVersion PROP_TARGET_SDK_VERSION
-        versionCode 2
-        versionName "1.001"
+        versionCode 3
+        versionName "1.003"
 
         externalNativeBuild {
             cmake {

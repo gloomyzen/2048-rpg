@@ -48,7 +48,7 @@
         }
       ]
     },
-    "fish": {
+    "fish_enemy": {
       "type": "enemy",
       "attack": 1,
       "hp": 1,
@@ -60,7 +60,7 @@
         }
       ]
     },
-    "mochi": {
+    "mochi_enemy": {
       "type": "enemy",
       "attack": 1,
       "hp": 1,
@@ -72,7 +72,7 @@
         }
       ]
     },
-    "octopus": {
+    "octopus_enemy": {
       "type": "enemy",
       "attack": 1,
       "hp": 1,
@@ -96,7 +96,7 @@
         }
       ]
     },
-    "egg": {
+    "ramen": {
       "type": "item",
       "attack": 1,
       "hp": 0,
@@ -104,7 +104,7 @@
         {
           "id": 1,
           "bg": "images/tiles/bg/tile_item.png",
-          "icon": "images/tiles/items/egg.png"
+          "icon": "images/tiles/items/ramen.png"
         }
       ]
     },
@@ -116,7 +116,7 @@
         {
           "id": 1,
           "bg": "images/tiles/bg/tile_yellow.png",
-          "icon": "images/tiles/items/lollipop.png"
+          "icon": "images/tiles/items/coffee.png"
         }
       ]
     }
