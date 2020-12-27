@@ -347,6 +347,8 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 			auto tile = new tileNode();
 			tile->setTileSize(boardTileWH, boardTileWH);
 			tile->createTile(*(*it));
+//			if ((*it)->getSpawnClb() != nullptr)
+//				(*it)->getSpawnClb()();
 			tileMap[item.first][item.second]->block->addChild(tile);
 			tileMap[item.first][item.second]->tile = tile;
 			auto originalScale = tile->getScale();

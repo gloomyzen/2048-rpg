@@ -25,8 +25,18 @@ bool questTool::updateObjectives(eSwipeDirection direction) {
 			}
 		}
 	}
-
+	checkEndObjectives();
 	return wasChanged;
+}
+
+void questTool::checkEndObjectives() {
+	auto item = std::find_if(quests.begin(), quests.end(), [](sQuestObjective* obj) {
+		return !obj->getSpawned() ;
+	});
+	if (item == quests.end()) {
+		quests.clear();
+		generateNextObjective();
+	}
 }
 
 void questTool::generateNextObjective() {

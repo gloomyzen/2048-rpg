@@ -47,6 +47,8 @@ namespace sr {
 				attack = data.attack;
 				hp = data.hp;
 				tileUpgrade = data.tileUpgrade;
+				spawnClb = data.spawnClb;
+				destroyClb = data.destroyClb;
 			};
 			void setSpawnClb(std::function<void()> clb) { spawnClb = std::move(clb); }
 			void setDestroyClb(std::function<void()> clb) { destroyClb = std::move(clb); }

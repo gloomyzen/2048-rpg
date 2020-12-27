@@ -33,6 +33,7 @@ namespace sr {
 
 		private:
 			void generateNextObjective();
+			void checkEndObjectives();
 			std::vector<sQuestObjective*> quests;
 		};
 	}

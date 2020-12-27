@@ -40,13 +40,12 @@ std::deque<nodeTasks> battleCore::getTasks() {
 		auto currentGameMode = gameModeDb.getModeByType(eGameMode::ENDLESS);
 		board->setHeroTileData(currentGameMode->heroTile);
 		board->initBoard();
-		board->setSwipeCallback([=](eSwipeDirection direction){
-			board->scrollBoard(direction);
+		board->setSwipeCallback([this](eSwipeDirection direction){
 			auto updated = questMgr->updateObjectives(direction);
 			if (updated) {
 				auto quest = questMgr->getObjectives().front();
 				questList->printQuest(quest);
-				if (quest->leftSwipes <= 1 && !quest->getSpawned()) {
+				if (quest->leftSwipes == 0 && !quest->getSpawned()) {
 					//spawn quest tile
 					quest->setSpawned(true);
 					quest->tile->setSpawnClb([&](){
@@ -58,6 +57,7 @@ std::deque<nodeTasks> battleCore::getTasks() {
 					tilesToSpawn.push_back(quest->tile);
 				}
 			}
+			board->scrollBoard(direction);
 			return true;
 		});
 		board->setSpawnCallback([=](){
