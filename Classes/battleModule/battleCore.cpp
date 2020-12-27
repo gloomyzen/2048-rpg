@@ -46,14 +46,24 @@ std::deque<nodeTasks> battleCore::getTasks() {
 			if (updated) {
 				auto quest = questMgr->getObjectives().front();
 				questList->printQuest(quest);
-				if (quest->leftSwipes == 0) {
+				if (quest->leftSwipes <= 1 && !quest->getSpawned()) {
 					//spawn quest tile
-
+					quest->setSpawned(true);
+					quest->tile->setSpawnClb([&](){
+						tilesToSpawn.clear();
+					});
+					quest->tile->setDestroyClb([&](){
+						tilesToSpawn.clear();
+					});
+					tilesToSpawn.push_back(quest->tile);
 				}
 			}
 			return true;
 		});
 		board->setSpawnCallback([=](){
+			if (!tilesToSpawn.empty()) {
+				return tilesToSpawn;
+			}
 			return gameModesTool::getNextTile(eGameMode::ENDLESS);
 		});
 
@@ -61,6 +71,10 @@ std::deque<nodeTasks> battleCore::getTasks() {
 			if (tile == nullptr) return false;
 			auto data = tile->getTileData();
 			if (data != nullptr) {
+				auto destroyClb = data->getDestroyClb();
+				if (destroyClb) {
+					destroyClb();
+				}
 				switch (data->type) {
 					case eTileTypes::HERO:
 					case eTileTypes::UNDEFINED:

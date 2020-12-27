@@ -107,6 +107,18 @@
           "icon": "images/tiles/items/egg.png"
         }
       ]
+    },
+    "questItem1": {
+      "type": "item",
+      "attack": 1,
+      "hp": 0,
+      "upgrade": [
+        {
+          "id": 1,
+          "bg": "images/tiles/bg/tile_yellow.png",
+          "icon": "images/tiles/items/lollipop.png"
+        }
+      ]
     }
   }
 }

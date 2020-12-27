@@ -31,6 +31,10 @@ void tileNode::createTile(const sTileData &data) {
 	if (tileType != eTileTypes::HERO) {
 		drawCount();
 	}
+	auto spawnClb = tileData->getSpawnClb();
+	if (spawnClb) {
+		spawnClb();
+	}
 
 }
 

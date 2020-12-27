@@ -5,6 +5,7 @@
 #include "common/coreModule/nodes/nodeProperties.h"
 #include "boardNode.h"
 #include "databaseModule/block/questTool.h"
+#include "databaseModule/databases/tilesDB.h"
 #include "interfaceModule/widgets/questPool.h"
 
 namespace sr {
@@ -20,6 +21,7 @@ namespace sr {
 
 		private:
 			void updateStats();
+			std::vector<databaseModule::sTileData*> tilesToSpawn;
 			boardNode* board = nullptr;
 			cocos2d::ClippingNode* clippingNode = nullptr;
 			cocos2d::Label* hpLbl = nullptr;

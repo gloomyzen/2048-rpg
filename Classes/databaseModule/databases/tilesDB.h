@@ -6,6 +6,7 @@
 #include "json/ostreamwrapper.h"
 #include <string>
 #include <map>
+#include <functional>
 
 namespace sr {
 	namespace databaseModule {
@@ -32,6 +33,7 @@ namespace sr {
 		};
 
 		struct sTileData {
+		public:
 			std::string name;
 			eTileTypes type = eTileTypes::EMPTY;
 			int attack = 0;
@@ -46,6 +48,13 @@ namespace sr {
 				hp = data.hp;
 				tileUpgrade = data.tileUpgrade;
 			};
+			void setSpawnClb(std::function<void()> clb) { spawnClb = std::move(clb); }
+			void setDestroyClb(std::function<void()> clb) { destroyClb = std::move(clb); }
+			std::function<void()>& getSpawnClb() { return spawnClb; }
+			std::function<void()>& getDestroyClb() { return destroyClb; }
+		private:
+			std::function<void()> spawnClb = nullptr;
+			std::function<void()> destroyClb = nullptr;
 		};
 
 		class tilesDB : public databaseInterface {

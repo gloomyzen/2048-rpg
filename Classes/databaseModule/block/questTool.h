@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "databaseModule/databases/gameEnums.h"
+#include "databaseModule/databases/tilesDB.h"
 
 namespace sr {
 	namespace databaseModule {
@@ -15,6 +16,11 @@ namespace sr {
 		struct sQuestObjective {
 			eSwipeDirection direction;
 			int leftSwipes = 3;
+			sTileData* tile = nullptr;
+			bool getSpawned() { return isSpawned; }
+			bool setSpawned(bool value) { isSpawned = value; }
+		private:
+			bool isSpawned = false;
 		};
 
 		class questTool {
