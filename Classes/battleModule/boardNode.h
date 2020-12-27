@@ -64,10 +64,11 @@ namespace sr {
 			void initHandling();
 			void touchUpdate(cocos2d::Touch*, cocos2d::Event*);
 			std::pair<int, int> getOffsetByDirection(databaseModule::eSwipeDirection, int, int);
-			void swipeElements(std::vector<sSlot*> elements);
+			void swipeElements(std::vector<sSlot*> elements, bool& canSwipe);
 
 			std::map<int, std::map<int, sSlot*>> tileMap;
 			databaseModule::sTileData* heroData = nullptr;
+			tileNode* heroTile = nullptr;
 			cocos2d::Touch* lastTouchInfo = nullptr;
 			bool isTouch = false;
 			float boardTileWH;

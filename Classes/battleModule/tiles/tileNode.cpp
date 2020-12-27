@@ -131,3 +131,20 @@ void tileNode::updateTileFromData() {
 		imgSlot->addChild(icon);
 	}
 }
+
+void tileNode::flip(eSwipeDirection direction) {
+	if (direction == lastDirection)
+		return;
+
+	lastDirection = direction;
+	for (auto item : imgSlot->getChildren()) {
+		if (auto sprite = dynamic_cast<Sprite*>(item)) {
+			if (direction == eSwipeDirection::RIGHT) {
+				sprite->setFlippedX(false);
+			}
+			if (direction == eSwipeDirection::LEFT) {
+				sprite->setFlippedX(true);
+			}
+		}
+	}
+}

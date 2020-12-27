@@ -5,6 +5,7 @@
 #include "common/coreModule/nodes/nodeProperties.h"
 #include "databaseModule/databaseManager.h"
 #include "databaseModule/databases/tilesDB.h"
+#include "databaseModule/databases/gameEnums.h"
 #include <string>
 
 namespace sr {
@@ -25,6 +26,7 @@ namespace sr {
 			void calculateCount(tileNode*);
 			bool canMatchTile(tileNode*);
 			databaseModule::sTileData* getTileData() { return tileData; }
+			void flip(databaseModule::eSwipeDirection);
 
 		private:
 			void drawCount();
@@ -39,6 +41,7 @@ namespace sr {
 			cocos2d::Node* imgSlot = nullptr;
 			int currentCnt = 1;
 			float width = 0.f, height = 0.f;
+			databaseModule::eSwipeDirection lastDirection = databaseModule::eSwipeDirection::RIGHT;
 
 		};
 	}

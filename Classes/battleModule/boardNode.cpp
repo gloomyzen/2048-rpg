@@ -67,6 +67,7 @@ void boardNode::setDefaultPosition() {
 				auto tile = new tileNode();
 				tile->setTileSize(boardTileWH, boardTileWH);
 				tile->createTile(*heroData);
+				heroTile = tile;
 				block->addChild(tile);
 				slot = new sSlot(position, tile, true);
 			} else {
@@ -303,7 +304,7 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 	}
 
 	//swap logic for all tiles
-	swipeBoardBg(direction);
+	bool canSwipe = true;
 	switch (direction) {
 		case eSwipeDirection::UNDEFINED:
 			break;
@@ -313,7 +314,7 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 				for (int y = 0; y < static_cast<int>(tileMap[x].size()); ++y) {
 					elements.push_back(tileMap[x][y]);
 				}
-				swipeElements(elements);
+				swipeElements(elements, canSwipe);
 			}
 		}
 			break;
@@ -323,7 +324,7 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 				for (int y = static_cast<int>(tileMap[x].size()) - 1; y >= 0; --y) {
 					elements.push_back(tileMap[x][y]);
 				}
-				swipeElements(elements);
+				swipeElements(elements, canSwipe);
 			}
 		}
 			break;
@@ -333,7 +334,7 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 				for (int x = static_cast<int>(tileMap.size()) - 1; x >= 0; --x) {
 					elements.push_back(tileMap[x][y]);
 				}
-				swipeElements(elements);
+				swipeElements(elements, canSwipe);
 			}
 		}
 			break;
@@ -343,10 +344,14 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 				for (int x = 0; x < static_cast<int>(tileMap.size()); ++x) {
 					elements.push_back(tileMap[x][y]);
 				}
-				swipeElements(elements);
+				swipeElements(elements, canSwipe);
 			}
 		}
 			break;
+	}
+	if (canSwipe) {
+		swipeBoardBg(direction);
+		heroTile->flip(direction);
 	}
 
 	auto nextTiles = spawnClb();
@@ -365,8 +370,6 @@ void boardNode::scrollBoard(eSwipeDirection direction) {
 			auto tile = new tileNode();
 			tile->setTileSize(boardTileWH, boardTileWH);
 			tile->createTile(*(*it));
-//			if ((*it)->getSpawnClb() != nullptr)
-//				(*it)->getSpawnClb()();
 			tileMap[item.first][item.second]->block->addChild(tile);
 			tileMap[item.first][item.second]->tile = tile;
 			auto originalScale = tile->getScale();
@@ -437,7 +440,7 @@ std::pair<int, int> boardNode::getOffsetByDirection(eSwipeDirection direction, i
 	return position;
 }
 
-void boardNode::swipeElements(std::vector<sSlot *> elements) {
+void boardNode::swipeElements(std::vector<sSlot *> elements, bool& canSwipe) {
 	for (int i = 0; i < elements.size(); ++i) {
 		auto currentItem = elements[i];
 		auto hasNextItem = elements.size() > 1 && i < elements.size() - 1;
@@ -460,6 +463,7 @@ void boardNode::swipeElements(std::vector<sSlot *> elements) {
 					currentItem->tile->runAction(scaleAction);
 				} else {
 					//todo
+					canSwipe = false;
 //					one animation and destroy
 				}
 				continue;
