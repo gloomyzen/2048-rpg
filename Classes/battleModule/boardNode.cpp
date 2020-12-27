@@ -174,10 +174,12 @@ void boardNode::touchUpdate(Touch* touch, Event* event) {
 		CCLOG("boardNode::touchUpdate: Up swipe");
 		dir = eSwipeDirection::UP;
 	}
-	if (swipeClb && swipeClb(dir)) {
-		CCLOG("boardNode::touchUpdate: Valid swipe");
-	} else {
-		CCLOG("boardNode::touchUpdate: Swipe is not valid");
+	if (dir != eSwipeDirection::UNDEFINED) {
+		if (swipeClb && swipeClb(dir)) {
+			CCLOG("boardNode::touchUpdate: Valid swipe");
+		} else {
+			CCLOG("boardNode::touchUpdate: Swipe is not valid");
+		}
 	}
 }
 

@@ -29,8 +29,10 @@ namespace sr {
 			void printQuest(databaseModule::sQuestObjective*);
 
 		private:
+			void updateArrow(databaseModule::eSwipeDirection);
 			cocos2d::Node* arrowHolder = nullptr;
 			cocos2d::Node* personHolder = nullptr;
+			cocos2d::Label* countLabel = nullptr;
 		};
 	}
 }

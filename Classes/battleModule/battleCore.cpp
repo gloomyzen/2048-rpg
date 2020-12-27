@@ -22,6 +22,19 @@ std::deque<nodeTasks> battleCore::getTasks() {
 	std::deque<nodeTasks> result;
 
 	result.emplace_back([this]() {
+		questList = dynamic_cast<questPool*>(findNode("questList"));
+		if (!questList) {
+			LOG_ERROR("battleCore::getTasks() Can't find element 'questList'!");
+			return eTasksStatus::STATUS_ERROR_BREAK;
+		}
+		//fixme пока что только один квест в один переод времени, в будущем переделаем
+		auto quests = questMgr->getObjectives();
+		questList->printQuest(quests.front());
+
+		return eTasksStatus::STATUS_OK;
+	});
+
+	result.emplace_back([this]() {
 		auto gameModeDb = GET_DATABASE_MANAGER().getGameModesDB();
 		gameModeDb.executeLoadData();
 		auto currentGameMode = gameModeDb.getModeByType(eGameMode::ENDLESS);
@@ -31,7 +44,12 @@ std::deque<nodeTasks> battleCore::getTasks() {
 			board->scrollBoard(direction);
 			auto updated = questMgr->updateObjectives(direction);
 			if (updated) {
-				//todo call widget questPool* -> printQuest()
+				auto quest = questMgr->getObjectives().front();
+				questList->printQuest(quest);
+				if (quest->leftSwipes == 0) {
+					//spawn quest tile
+
+				}
 			}
 			return true;
 		});
@@ -115,19 +133,6 @@ std::deque<nodeTasks> battleCore::getTasks() {
 		currentEnergy = 1;
 		currentHp = 1;
 		updateStats();
-
-		return eTasksStatus::STATUS_OK;
-	});
-
-	result.emplace_back([this]() {
-		questList = dynamic_cast<questPool*>(findNode("questList"));
-		if (!questList) {
-			LOG_ERROR("battleCore::getTasks() Can't find element 'questList'!");
-			return eTasksStatus::STATUS_ERROR_BREAK;
-		}
-		//fixme пока что только один квест в один переод времени, в будущем переделаем
-		auto quests = questMgr->getObjectives();
-		questList->printQuest(quests.front());
 
 		return eTasksStatus::STATUS_OK;
 	});

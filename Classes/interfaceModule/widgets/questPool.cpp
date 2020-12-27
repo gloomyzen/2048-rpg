@@ -1,4 +1,5 @@
 #include "questPool.h"
+#include "cocos2d.h"
 #include <map>
 
 using namespace sr::interfaceModule;
@@ -28,8 +29,39 @@ questPool::questPool() {
 	if (!personHolder) {
 		LOG_ERROR("questPool::questPool() Can't find element 'personHolder'!");
 	}
+	countLabel = dynamic_cast<cocos2d::Label*>(findNode("leftStepsLabel"));
+	if (!countLabel) {
+		LOG_ERROR("questPool::questPool() Can't find element 'leftStepsLabel'!");
+	}
 }
 
-void questPool::printQuest(databaseModule::sQuestObjective*) {
+void questPool::printQuest(databaseModule::sQuestObjective* quest) {
+	arrowHolder->removeAllChildren();
+	personHolder->removeAllChildren();
+	countLabel->setVisible(false);
 
+	if (quest->direction == eSwipeDirection::UNDEFINED) {
+		LOG_ERROR("questPool::printQuest() 'UNDEFINED' swipe action!");
+		return;
+	}
+
+	if (quest->leftSwipes > 0) {
+		//add image arrow label and person
+		updateArrow(quest->direction);
+		countLabel->setVisible(true);
+		countLabel->setString(std::to_string(quest->leftSwipes));
+	} else {
+		//add only person
+	}
+
+}
+
+void questPool::updateArrow(databaseModule::eSwipeDirection direction) {
+	auto arrow = arrowImages.find(direction);
+	if (arrow != arrowImages.end()) {
+//		arrowHolder
+		auto node = cocos2d::Sprite::create();
+		node->initWithFile(arrow->second);
+		arrowHolder->addChild(node);
+	}
 }
