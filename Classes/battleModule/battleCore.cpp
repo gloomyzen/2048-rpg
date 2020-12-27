@@ -16,6 +16,8 @@ battleCore::battleCore() {
 	board = new boardNode();
 	board->executeTasks();
 	questMgr = new questTool();
+	scheduler = new Scheduler();
+	this->scheduleUpdate();
 }
 
 std::deque<nodeTasks> battleCore::getTasks() {
@@ -41,6 +43,14 @@ std::deque<nodeTasks> battleCore::getTasks() {
 		board->setHeroTileData(currentGameMode->heroTile);
 		board->initBoard();
 		board->setSwipeCallback([this](eSwipeDirection direction){
+			if (!swipeAvailable) return false;
+			auto clb = [this](float){
+				scheduler->unschedule("swipe", this);
+				swipeAvailable = true;
+			};
+			swipeAvailable = false;
+			scheduler->schedule(clb, this, 0.2f, false, "swipe");
+
 			questMgr->updateObjectives(direction);
 			auto quest = questMgr->getObjectives().front();
 			questList->printQuest(quest);
@@ -160,4 +170,8 @@ void battleCore::updateStats() {
 	if (energyLbl) {
 		energyLbl->setString(std::to_string(currentEnergy));
 	}
+}
+
+void battleCore::update(float delta) {
+	scheduler->update(delta);
 }

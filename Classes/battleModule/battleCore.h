@@ -21,6 +21,7 @@ namespace sr {
 
 		private:
 			void updateStats();
+			void update(float delta) override;
 			std::vector<databaseModule::sTileData*> tilesToSpawn;
 			boardNode* board = nullptr;
 			cocos2d::ClippingNode* clippingNode = nullptr;
@@ -30,6 +31,9 @@ namespace sr {
 			int currentHp;
 			databaseModule::questTool* questMgr = nullptr;
 			interfaceModule::questPool* questList = nullptr;
+			time_t swipeTimer;
+			bool swipeAvailable = true;
+			cocos2d::Scheduler* scheduler = nullptr;
 		};
 	}
 }

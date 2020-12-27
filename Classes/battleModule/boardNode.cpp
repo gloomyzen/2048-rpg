@@ -177,8 +177,7 @@ void boardNode::initHandling() {
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(keyboardListener, this);
 }
 
-void boardNode::touchUpdate(Touch* touch, Event* event) {
-	//todo need calculate correct distance of swipe
+void boardNode::touchUpdate(Touch* touch, Event*) {
 	auto dir = eSwipeDirection::UNDEFINED;
 	if (touch->getStartLocation().x > touch->getLocation().x && touch->getStartLocation().x - BOARD_TOUCH_FORCE > touch->getLocation().x) {
 		CCLOG("boardNode::touchUpdate: Left swipe");
