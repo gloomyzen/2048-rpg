@@ -163,16 +163,16 @@ void boardNode::touchUpdate(Touch* touch, Event* event) {
 	auto dir = eSwipeDirection::UNDEFINED;
 	if (touch->getStartLocation().x > touch->getLocation().x && touch->getStartLocation().x - BOARD_TOUCH_FORCE > touch->getLocation().x) {
 		CCLOG("boardNode::touchUpdate: Left swipe");
-		dir = eSwipeDirection::LEFT;
+		dir = eSwipeDirection::RIGHT;
 	} else if (touch->getStartLocation().x < touch->getLocation().x && touch->getStartLocation().x + BOARD_TOUCH_FORCE < touch->getLocation().x) {
 		CCLOG("boardNode::touchUpdate: Right swipe");
-		dir = eSwipeDirection::RIGHT;
+		dir = eSwipeDirection::LEFT;
 	} else if (touch->getStartLocation().y > touch->getLocation().y && touch->getStartLocation().y - BOARD_TOUCH_FORCE > touch->getLocation().y) {
 		CCLOG("boardNode::touchUpdate: Down swipe");
-		dir = eSwipeDirection::DOWN;
+		dir = eSwipeDirection::UP;
 	} else if (touch->getStartLocation().y < touch->getLocation().y && touch->getStartLocation().y + BOARD_TOUCH_FORCE < touch->getLocation().y) {
 		CCLOG("boardNode::touchUpdate: Up swipe");
-		dir = eSwipeDirection::UP;
+		dir = eSwipeDirection::DOWN;
 	}
 	if (dir != eSwipeDirection::UNDEFINED) {
 		if (swipeClb && swipeClb(dir)) {

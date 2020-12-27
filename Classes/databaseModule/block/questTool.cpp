@@ -16,8 +16,8 @@ std::vector<sQuestObjective*> questTool::getObjectives() {
 }
 
 void questTool::updateObjectives(eSwipeDirection direction) {
-//	checkEndObjectives();
-	generateNextObjective();
+	checkEndObjectives();
+
 	for (auto &item : quests) {
 		if (item->direction == direction) {
 			if (item->leftSwipes > 0) {
@@ -28,11 +28,16 @@ void questTool::updateObjectives(eSwipeDirection direction) {
 }
 
 void questTool::checkEndObjectives() {
-	auto item = std::find_if(quests.begin(), quests.end(), [](sQuestObjective* obj) {
-		return !obj->getSpawned();
-	});
-	if (item == quests.end()) {
+	bool mark = false;
+	for (auto item : quests) {
+		if (item->getDestroy()) {
+			mark = true;
+		}
+	}
+	if (mark) {
 		quests.clear();
+	}
+	if (quests.empty()) {
 		generateNextObjective();
 	}
 }

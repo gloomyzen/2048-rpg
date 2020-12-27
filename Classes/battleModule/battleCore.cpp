@@ -50,9 +50,9 @@ std::deque<nodeTasks> battleCore::getTasks() {
 				quest->tile->setSpawnClb([this](){
 					tilesToSpawn.clear();
 				});
-				quest->tile->setDestroyClb([this](){
+				quest->tile->setDestroyClb([this, quest](){
+					quest->setDestroy(true);
 					tilesToSpawn.clear();
-					questMgr->clearQuests();
 				});
 				tilesToSpawn.push_back(quest->tile);
 			}

@@ -35,8 +35,12 @@ questPool::questPool() {
 }
 
 void questPool::printQuest(databaseModule::sQuestObjective* quest) {
-	arrowHolder->removeAllChildren();
-	personHolder->removeAllChildren();
+	if (arrow) {
+		arrow->setVisible(false);
+	}
+	if (person) {
+		person->setVisible(false);
+	}
 	countLabel->setVisible(false);
 
 	if (quest->direction == eSwipeDirection::UNDEFINED) {
@@ -58,19 +62,25 @@ void questPool::printQuest(databaseModule::sQuestObjective* quest) {
 }
 
 void questPool::updateArrow(databaseModule::eSwipeDirection direction) {
-	auto arrow = arrowImages.find(direction);
-	if (arrow != arrowImages.end()) {
-		auto node = cocos2d::Sprite::create();
-		node->initWithFile(arrow->second);
-		arrowHolder->addChild(node);
+	if (!arrow) {
+		arrow = cocos2d::Sprite::create();
+		arrowHolder->addChild(arrow);
 	}
+	auto arrowImg = arrowImages.find(direction);
+	if (arrowImg != arrowImages.end()) {
+		arrow->initWithFile(arrowImg->second);
+	}
+	arrow->setVisible(true);
 }
 
 void questPool::updatePersonReaction(ePersonReaction state) {
-	auto reaction = personImages.find(state);
-	if (reaction != personImages.end()) {
-		auto node = cocos2d::Sprite::create();
-		node->initWithFile(reaction->second);
-		personHolder->addChild(node);
+	if (!person) {
+		person = cocos2d::Sprite::create();
+		personHolder->addChild(person);
 	}
+	auto reactionImg = personImages.find(state);
+	if (reactionImg != personImages.end()) {
+		person->initWithFile(reactionImg->second);
+	}
+	person->setVisible(true);
 }

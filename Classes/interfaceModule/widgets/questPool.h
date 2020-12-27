@@ -34,6 +34,8 @@ namespace sr {
 			cocos2d::Node* arrowHolder = nullptr;
 			cocos2d::Node* personHolder = nullptr;
 			cocos2d::Label* countLabel = nullptr;
+			cocos2d::Sprite* arrow = nullptr;
+			cocos2d::Sprite* person = nullptr;
 		};
 	}
 }

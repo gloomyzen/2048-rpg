@@ -18,9 +18,13 @@ namespace sr {
 			int leftSwipes = 3;
 			sTileData* tile = nullptr;
 			bool getSpawned() { return isSpawned; }
-			bool setSpawned(bool value) { isSpawned = value; }
+			void setSpawned(bool value) { isSpawned = value; }
+			bool getDestroy() { return isDestroy; }
+			void setDestroy(bool value) { isDestroy = value; }
+
 		private:
 			bool isSpawned = false;
+			bool isDestroy = false;
 		};
 
 		class questTool {
