@@ -24,6 +24,18 @@
         }
       ]
     },
+    "witch_cat": {
+      "type": "hero",
+      "attack": 1,
+      "hp": 1,
+      "upgrade": [
+        {
+          "id": 1,
+          "bg": "images/tiles/bg/tile_purple.png",
+          "icon": "images/tiles/units/witch_cat.png"
+        }
+      ]
+    },
     "radish_enemy": {
       "type": "enemy",
       "attack": 1,

@@ -2,7 +2,7 @@
   {
     "name": "Endless game",
     "type": "endless",
-    "heroTile": "hero_chan",
+    "heroTile": "witch_cat",
     "spawnPerSwipe": [
       {
         "count": 1,
