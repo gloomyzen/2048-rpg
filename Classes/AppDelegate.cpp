@@ -73,12 +73,30 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	glview->setResolutionPolicy(ResolutionPolicy::EXACT_FIT);
 
 #else
+	auto findClosest = [](float current, float resolution) {
+		const float step = 0.1f;
+		int cntSteps = 0;
+
+		if (current > resolution) {
+			while (resolution + step <= current) {
+				resolution += step;
+				cntSteps++;
+			}
+		} else {
+			while (resolution >= current + step) {
+				current += step;
+				cntSteps++;
+			}
+		}
+		return cntSteps;
+	};
 	auto currentSize = glview->getDesignResolutionSize();
 	auto current = currentSize.height / currentSize.width;
 	auto large = largeResolutionSize.size.height / largeResolutionSize.size.width;
 	auto frame = frameResolutionSize.size.height / frameResolutionSize.size.width;
-	auto res = large / frame;
-	if (current > 0 && current < frame + res) {
+	auto first = findClosest(current, frame);
+	auto second = findClosest(current, large);
+	if (findClosest(current, frame) < findClosest(current, large)) {
 		glview->setDesignResolutionSize(frameResolutionSize.size.width, frameResolutionSize.size.height, ResolutionPolicy::EXACT_FIT);
 	} else {
 		glview->setDesignResolutionSize(largeResolutionSize.size.width, largeResolutionSize.size.height, ResolutionPolicy::EXACT_FIT);

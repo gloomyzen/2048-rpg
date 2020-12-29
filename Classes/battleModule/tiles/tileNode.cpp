@@ -89,7 +89,7 @@ void tileNode::calculateCount(tileNode* externalTile) {
 }
 
 bool tileNode::canMatchTile(tileNode* externalTile) {
-	return externalTile != nullptr && externalTile->getTileDataName() == getTileDataName();
+	return currentCnt < 4 && externalTile != nullptr && externalTile->getTileDataName() == getTileDataName() && externalTile->currentCnt == currentCnt;
 }
 
 void tileNode::updateTileFromData() {
