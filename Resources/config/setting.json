@@ -1,12 +1,12 @@
 {
   "frameResolution": {
-    "x":640, "y":1136, "desktopScale": 0.75,
+    "width": 640, "height": 1136, "desktopScale": 0.75,
     "parent": "",
     "path": "",
     "showDisplayStats": true
   },
   "largeResolution": {
-    "x":640, "y":1366, "desktopScale": 0.75,
+    "width": 640, "height": 1366, "desktopScale": 0.75,
     "parent": "frameResolution",
     "path": "largeResolution",
     "showDisplayStats": true
