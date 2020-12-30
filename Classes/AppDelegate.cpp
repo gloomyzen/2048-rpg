@@ -1,3 +1,4 @@
+#include "common/coreModule/resources/resourceManager.h"
 #include "battleModule/battleCore.h"
 #include "interfaceModule/customNodeTypes.h"
 #include "AppDelegate.h"
@@ -42,15 +43,18 @@ static int register_all_packages() {
 }
 
 bool AppDelegate::applicationDidFinishLaunching() {
-	auto setting = common::coreModule::settingManager::load();
-	auto largeResolutionSize = setting.largeResolutionSize;
-	auto frameResolutionSize = setting.frameResolutionSize;
+//	auto setting = common::coreModule::settingManager::load();
+	auto setting = GET_RESOLUTION_SETTING();
+	setting->load();
+//	auto largeResolutionSize = setting.largeResolutionSize;
+//	auto frameResolutionSize = setting.frameResolutionSize;
 	// initialize director
 	auto director = Director::getInstance();
 	auto glview = director->getOpenGLView();
 	if (!glview) {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
-		glview = GLViewImpl::createWithRect("Swipe RPG", cocos2d::Rect(0, 0, largeResolutionSize.size.width, largeResolutionSize.size.height), largeResolutionSize.scale);
+//		glview = GLViewImpl::createWithRect("Swipe RPG", cocos2d::Rect(0, 0, largeResolutionSize.size.width, largeResolutionSize.size.height), largeResolutionSize.scale);
+		glview = GLViewImpl::createWithRect("Swipe RPG", cocos2d::Rect(0, 0, 100, 100), 1);
 #else
 		glview = GLViewImpl::create("Swipe RPG");
 #endif
@@ -58,7 +62,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	}
 
 	// turn on display FPS
-	director->setDisplayStats(setting.showDisplayStats);
+//	director->setDisplayStats(setting.showDisplayStats); todo
 
 	// set FPS. the default value is 1.0/60 if you don't call this
 	director->setAnimationInterval(1.0f / 60);
@@ -90,17 +94,18 @@ bool AppDelegate::applicationDidFinishLaunching() {
 		}
 		return cntSteps;
 	};
-	auto currentSize = glview->getDesignResolutionSize();
-	auto current = currentSize.height / currentSize.width;
-	auto large = largeResolutionSize.size.height / largeResolutionSize.size.width;
-	auto frame = frameResolutionSize.size.height / frameResolutionSize.size.width;
-	auto first = findClosest(current, frame);
-	auto second = findClosest(current, large);
-	if (findClosest(current, frame) < findClosest(current, large)) {
-		glview->setDesignResolutionSize(frameResolutionSize.size.width, frameResolutionSize.size.height, ResolutionPolicy::EXACT_FIT);
-	} else {
-		glview->setDesignResolutionSize(largeResolutionSize.size.width, largeResolutionSize.size.height, ResolutionPolicy::EXACT_FIT);
-	}
+	//todo
+//	auto currentSize = glview->getDesignResolutionSize();
+//	auto current = currentSize.height / currentSize.width;
+//	auto large = largeResolutionSize.size.height / largeResolutionSize.size.width;
+//	auto frame = frameResolutionSize.size.height / frameResolutionSize.size.width;
+//	auto first = findClosest(current, frame);
+//	auto second = findClosest(current, large);
+//	if (findClosest(current, frame) < findClosest(current, large)) {
+//		glview->setDesignResolutionSize(frameResolutionSize.size.width, frameResolutionSize.size.height, ResolutionPolicy::EXACT_FIT);
+//	} else {
+//		glview->setDesignResolutionSize(largeResolutionSize.size.width, largeResolutionSize.size.height, ResolutionPolicy::EXACT_FIT);
+//	}
 #endif
 
 	register_all_packages();
