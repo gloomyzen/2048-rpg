@@ -3,6 +3,7 @@
 #include "databaseModule/block/gameModesTool.h"
 #include "databaseModule/databases/gameEnums.h"
 #include "interfaceModule/widgets/stateIconLabel.h"
+#include "audio/include/AudioEngine.h"
 
 using namespace sr::battleModule;
 using namespace sr::interfaceModule;
@@ -24,6 +25,10 @@ std::deque<nodeTasks> battleCore::getTasks() {
 	std::deque<nodeTasks> result;
 
 	result.emplace_back([this]() {
+		cocos2d::AudioEngine::preload("sounds/click.wav");
+		cocos2d::AudioEngine::preload("sounds/game.wav");
+		cocos2d::AudioEngine::play2d("sounds/game.wav", true);
+
 		questList = dynamic_cast<questPool*>(findNode("questList"));
 		if (!questList) {
 			LOG_ERROR("battleCore::getTasks() Can't find element 'questList'!");
@@ -48,6 +53,7 @@ std::deque<nodeTasks> battleCore::getTasks() {
 				scheduler->unschedule("swipe", this);
 				swipeAvailable = true;
 			};
+			cocos2d::AudioEngine::play2d("sounds/click.wav");
 			swipeAvailable = false;
 			scheduler->schedule(clb, this, 0.2f, false, "swipe");
 

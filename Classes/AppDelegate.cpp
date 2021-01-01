@@ -8,11 +8,11 @@
 #include "common/coreModule/resources/settings/settingManager.h"
 #include "metaModule/metaTabs.h"
 
-// #define USE_AUDIO_ENGINE 1
+ #define USE_AUDIO_ENGINE 1
 
 #if USE_AUDIO_ENGINE
 #include "audio/include/AudioEngine.h"
-using namespace cocos2d::experimental;
+//using namespace cocos2d::experimental;
 #endif
 
 USING_NS_CC;
@@ -47,7 +47,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	setting->load();
 	cocos2d::FileUtils::getInstance()->setPopupNotify(false);
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
-	setting->init(false, "largeResolution");
+	setting->init(false, "frameResolution");
 #else
 	setting->init(true);
 #endif
