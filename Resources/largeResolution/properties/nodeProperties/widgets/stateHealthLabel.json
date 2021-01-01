@@ -1,0 +1,38 @@
+{
+  "stateHealthLabel": {
+    "TransformComponent": {
+      "pivot": [ 0.21, 0.065 ],
+      "anchor": [ 0.0, 0.0 ]
+    }
+  },
+  "icon": {
+    "TransformComponent": {
+      "size": [ 40, 40 ],
+      "anchor": [ 0.0, 0.0 ],
+      "pivot": [ 0.0, 0.0 ],
+      "position": [ 0, 6 ]
+    },
+    "SpriteComponent": {
+      "image": "images/widgets/stateIconLabel/healthIcon.png",
+      "pixel": true
+    }
+  },
+  "lbl": {
+    "TransformComponent": {
+      "pivot": [ 0.0, 0.0 ],
+      "anchor": [ 0, -0.5 ],
+      "position": [ 50, 0 ],
+      "scale": 1
+    },
+    "LabelComponent": {
+      "text": "0",
+      "fontType": "ttf",
+      "fontSize": 25.0,
+      "fontFile": "fonts/Marker Felt.ttf",
+      "alight": "left"
+    },
+    "ColorComponent": {
+      "color": [0, 255, 0, 255]
+    }
+  }
+}

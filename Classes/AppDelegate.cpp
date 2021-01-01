@@ -45,6 +45,7 @@ static int register_all_packages() {
 bool AppDelegate::applicationDidFinishLaunching() {
 	auto setting = GET_RESOLUTION_SETTING();
 	setting->load();
+	cocos2d::FileUtils::getInstance()->setPopupNotify(false);
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
 	setting->init(false, "largeResolution");
 #else
