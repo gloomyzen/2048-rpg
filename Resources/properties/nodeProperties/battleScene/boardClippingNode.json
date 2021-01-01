@@ -1,6 +1,6 @@
 {
   "boardClippingNode": {
-    "TransformComponent": {
+    "transformComponent": {
       "stretch": [ 1.0, 1.0 ]
     }
   }

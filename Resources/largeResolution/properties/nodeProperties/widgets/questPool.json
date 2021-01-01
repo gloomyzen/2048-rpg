@@ -1,12 +1,12 @@
 {
   "questPool": {
-    "TransformComponent": {
+    "transformComponent": {
       "pivot": [ 0.19, 0.87 ],
       "anchor": [ 0.0, 0.0 ]
     }
   },
   "personHolder": {
-    "TransformComponent": {
+    "transformComponent": {
       "anchor": [ 0.0, 0.0 ],
       "pivot": [ 0.0, 0.0 ],
       "scale": [0.35, 0.35],
@@ -14,26 +14,26 @@
     }
   },
   "arrowHolder": {
-    "TransformComponent": {
+    "transformComponent": {
       "anchor": [ 0.0, 0.0 ],
       "pivot": [ 0.0, 0.0 ],
       "scale": [0.5, 0.5]
     }
   },
   "leftStepsLabel": {
-    "TransformComponent": {
+    "transformComponent": {
       "pivot": [ 0.0, 0.0 ],
       "anchor": [ 0.0, 0.0 ],
       "position": [ -60, -60 ]
     },
-    "LabelComponent": {
+    "labelComponent": {
       "text": "0",
       "fontType": "ttf",
       "fontSize": 25.0,
       "fontFile": "fonts/Marker Felt.ttf",
       "alight": "left"
     },
-    "ColorComponent": {
+    "colorComponent": {
       "color": [255, 0, 0, 255]
     }
   }

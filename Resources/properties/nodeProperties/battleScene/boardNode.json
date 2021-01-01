@@ -1,26 +1,26 @@
 {
   "boardNode": {
-    "TransformComponent": {
+    "transformComponent": {
       "pivot": [ 0.0, 0.67 ],
       "anchor": [ 0.0, 1.0 ]
     }
   },
   "bg": {
-    "TransformComponent": {
+    "transformComponent": {
       "pivot": [ 0.0, 0.0 ],
       "anchor": [ 0.0, 0.0 ]
     },
-    "SpriteComponent": {
+    "spriteComponent": {
       "image": "images/board/bg.png",
       "pixel": true
     }
   },
   "border": {
-    "TransformComponent": {
+    "transformComponent": {
       "pivot": [ 0.0, 0.0 ],
       "anchor": [ 0.0, 0.0 ]
     },
-    "SpriteComponent": {
+    "spriteComponent": {
       "image": "images/board/border.png",
       "pixel": true
     }

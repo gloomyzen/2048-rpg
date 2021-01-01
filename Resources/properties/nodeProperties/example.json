@@ -1,28 +1,28 @@
 {
   "example": {
-    "TransformComponent": {
+    "transformComponent": {
       "position": [ 200, 200 ],
       "size": [ 128, 128 ],
       "scale": 1
     }
   },
   "spriteNode": {
-    "TransformComponent": {
+    "transformComponent": {
       "position": [ 128, 128 ],
       "size": [ 128, 128 ],
       "scale": 1
     },
-    "SpriteComponent": {
+    "spriteComponent": {
       "image": "images/testTiles/tile_3.png",
       "pixel": true
     }
   },
   "labelNode": {
-    "TransformComponent": {
+    "transformComponent": {
       "anchor": [ 0.5, 0.5 ],
       "scale": 1
     },
-    "LabelComponent": {
+    "labelComponent": {
       "text": "Label Node Text",
       "fontType": "ttf",
       "fontSize": 24.0,

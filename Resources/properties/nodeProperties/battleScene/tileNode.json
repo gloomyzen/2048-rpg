@@ -1,86 +1,86 @@
 {
   "tileNode": {
-    "TransformComponent": {
+    "transformComponent": {
       "size": [ 128, 128 ],
       "anchor": [ 0.5, 0.5 ],
       "pivot": [ 0.5, 0.5 ]
     }
   },
   "bg": {
-    "TransformComponent": {
+    "transformComponent": {
       "size": [ 128, 128 ],
       "anchor": [ 0.5, 0.5 ],
       "pivot": [ 0.5, 0.5 ]
     },
-    "SpriteComponent": {
+    "spriteComponent": {
       "image": "images/tiles/bg/tile_dark.png",
       "pixel": true
     }
   },
   "hpIcon": {
-    "TransformComponent": {
+    "transformComponent": {
       "anchor": [ 0.0, 0.0 ],
       "pivot": [ 0.08, 0.08 ],
       "scale": 0.7
     },
-    "SpriteComponent": {
+    "spriteComponent": {
       "image": "images/tiles/ui/heart_icon.png",
       "pixel": true
     }
   },
   "hpCountLbl": {
-    "TransformComponent": {
+    "transformComponent": {
       "pivot": [ 0.21, 0.075 ],
       "anchor": [ 0.0, 0.0 ],
       "scale": 1
     },
-    "LabelComponent": {
+    "labelComponent": {
       "text": "99+",
       "fontType": "ttf",
       "fontSize": 15.0,
       "fontFile": "fonts/Marker Felt.ttf",
       "alight": "left"
     },
-    "ColorComponent": {
+    "colorComponent": {
       "color": [0, 255, 0, 255]
     }
   },
   "attackCountLbl": {
-    "TransformComponent": {
+    "transformComponent": {
       "pivot": [ 0.84, 0.08 ],
       "anchor": [ 0.5, 0.0 ],
       "scale": 1
     },
-    "LabelComponent": {
+    "labelComponent": {
       "text": "99+",
       "fontType": "ttf",
       "fontSize": 15.0,
       "fontFile": "fonts/Marker Felt.ttf",
       "alight": "right"
     },
-    "ColorComponent": {
+    "colorComponent": {
       "color": [255, 0, 0, 255]
     }
   },
   "countLbl": {
-    "TransformComponent": {
+    "transformComponent": {
       "pivot": [ 0.85, 0.85 ],
       "anchor": [ 0.5, 0.5 ],
       "scale": 1
     },
-    "LabelComponent": {
+    "labelComponent": {
       "text": "1",
       "fontType": "ttf",
       "fontSize": 15.0,
       "fontFile": "fonts/Marker Felt.ttf",
       "alight": "left"
     },
-    "ColorComponent": {
+    "colorComponent": {
       "color": [255, 255, 255, 255]
     }
   },
   "imageSlot": {
-    "TransformComponent": {
+    "transformComponent": {
       "pivot": [ 0.5, 0.5 ],
       "anchor": [ 0.5, 0.5 ],
       "scale": 2

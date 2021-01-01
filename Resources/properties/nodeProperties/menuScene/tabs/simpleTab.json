@@ -1,15 +1,15 @@
 {
   "simpleTab": {
-    "TransformComponent": {
+    "transformComponent": {
       "anchor": [ 0.5, 0.5 ]
     }
   },
   "comingSoon": {
-    "TransformComponent": {
+    "transformComponent": {
       "anchor": [ 0.5, 0.5 ],
       "scale": 1
     },
-    "LabelComponent": {
+    "labelComponent": {
       "text": "Coming Soon",
       "fontType": "ttf",
       "fontSize": 24,
@@ -20,11 +20,11 @@
     }
   },
   "dbtest": {
-    "TransformComponent": {
+    "transformComponent": {
       "anchor": [ 0.5, 0.5 ],
       "scale": 1
     },
-    "DragonbonesComponent": {
+    "dragonbonesComponent": {
       "name": "GoblinAxe",
       "skeFile": "images/characters/anim/axe_goblin/GoblinAxe_ske.json",
       "texFile": "images/characters/anim/axe_goblin/GoblinAxe_tex.json"
