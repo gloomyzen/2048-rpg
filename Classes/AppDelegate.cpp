@@ -43,26 +43,26 @@ static int register_all_packages() {
 }
 
 bool AppDelegate::applicationDidFinishLaunching() {
-//	auto setting = common::coreModule::settingManager::load();
 	auto setting = GET_RESOLUTION_SETTING();
 	setting->load();
-//	auto largeResolutionSize = setting.largeResolutionSize;
-//	auto frameResolutionSize = setting.frameResolutionSize;
-	// initialize director
-	auto director = Director::getInstance();
-	auto glview = director->getOpenGLView();
-	if (!glview) {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
-//		glview = GLViewImpl::createWithRect("Swipe RPG", cocos2d::Rect(0, 0, largeResolutionSize.size.width, largeResolutionSize.size.height), largeResolutionSize.scale);
-		glview = GLViewImpl::createWithRect("Swipe RPG", cocos2d::Rect(0, 0, 100, 100), 1);
+	auto currentResolution = setting->getCurrentSize(false, "frameResolution");
 #else
-		glview = GLViewImpl::create("Swipe RPG");
+	auto currentResolution = setting->getCurrentSize(true);
 #endif
-		director->setOpenGLView(glview);
+	auto director = Director::getInstance();
+	auto glView = director->getOpenGLView();
+	if (!glView) {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
+		glView = GLViewImpl::createWithRect("Swipe RPG", cocos2d::Rect(0, 0, currentResolution->size.width, currentResolution->size.height), currentResolution->scale);
+#else
+		glView = GLViewImpl::create("Swipe RPG");
+#endif
+		director->setOpenGLView(glView);
 	}
 
 	// turn on display FPS
-//	director->setDisplayStats(setting.showDisplayStats); todo
+	director->setDisplayStats(currentResolution->showStats);
 
 	// set FPS. the default value is 1.0/60 if you don't call this
 	director->setAnimationInterval(1.0f / 60);
@@ -73,39 +73,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	// Set the design resolution
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
 	director->setContentScaleFactor(1.f);
-//	glview->setFrameZoomFactor(1.f);
-	glview->setResolutionPolicy(ResolutionPolicy::EXACT_FIT);
-
+//	glView->setFrameZoomFactor(1.f);
+	glView->setResolutionPolicy(ResolutionPolicy::EXACT_FIT);
 #else
-	auto findClosest = [](float current, float resolution) {
-		const float step = 0.1f;
-		int cntSteps = 0;
-
-		if (current > resolution) {
-			while (resolution + step <= current) {
-				resolution += step;
-				cntSteps++;
-			}
-		} else {
-			while (resolution >= current + step) {
-				current += step;
-				cntSteps++;
-			}
-		}
-		return cntSteps;
-	};
-	//todo
-//	auto currentSize = glview->getDesignResolutionSize();
-//	auto current = currentSize.height / currentSize.width;
-//	auto large = largeResolutionSize.size.height / largeResolutionSize.size.width;
-//	auto frame = frameResolutionSize.size.height / frameResolutionSize.size.width;
-//	auto first = findClosest(current, frame);
-//	auto second = findClosest(current, large);
-//	if (findClosest(current, frame) < findClosest(current, large)) {
-//		glview->setDesignResolutionSize(frameResolutionSize.size.width, frameResolutionSize.size.height, ResolutionPolicy::EXACT_FIT);
-//	} else {
-//		glview->setDesignResolutionSize(largeResolutionSize.size.width, largeResolutionSize.size.height, ResolutionPolicy::EXACT_FIT);
-//	}
+	glView->setDesignResolutionSize(currentResolution->size.width, currentResolution->size.height, ResolutionPolicy::EXACT_FIT);
 #endif
 
 	register_all_packages();
