@@ -46,10 +46,11 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	auto setting = GET_RESOLUTION_SETTING();
 	setting->load();
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
-	auto currentResolution = setting->getCurrentSize(false, "frameResolution");
+	setting->init(false, "largeResolution");
 #else
-	auto currentResolution = setting->getCurrentSize(true);
+	setting->init(true);
 #endif
+	auto currentResolution = setting->getCurrentSize();
 	auto director = Director::getInstance();
 	auto glView = director->getOpenGLView();
 	if (!glView) {
