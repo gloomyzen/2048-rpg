@@ -14,7 +14,7 @@ namespace sr {
 		class battleCore : public common::coreModule::nodeProperties, public cocos2d::Node, public taskHolder {
 		public:
 			battleCore();
-			~battleCore() = default;
+			~battleCore();
 			CREATE_FUNC(battleCore);
 
 			std::deque<nodeTasks> getTasks() override;

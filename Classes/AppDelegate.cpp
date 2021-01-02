@@ -8,11 +8,10 @@
 #include "common/coreModule/resources/settings/settingManager.h"
 #include "metaModule/metaTabs.h"
 
- #define USE_AUDIO_ENGINE 1
+#define USE_AUDIO_ENGINE 1
 
 #if USE_AUDIO_ENGINE
-#include "audio/include/AudioEngine.h"
-//using namespace cocos2d::experimental;
+#include "editor-support/cocostudio/SimpleAudioEngine.h"
 #endif
 
 USING_NS_CC;
@@ -23,7 +22,7 @@ AppDelegate::AppDelegate() {
 
 AppDelegate::~AppDelegate() {
 #if USE_AUDIO_ENGINE
-	AudioEngine::end();
+	CocosDenshion::SimpleAudioEngine::getInstance()->end();
 #endif
 }
 
@@ -110,7 +109,7 @@ void AppDelegate::applicationDidEnterBackground() {
 	Director::getInstance()->stopAnimation();
 
 #if USE_AUDIO_ENGINE
-	AudioEngine::pauseAll();
+	CocosDenshion::SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
 #endif
 }
 
@@ -119,6 +118,6 @@ void AppDelegate::applicationWillEnterForeground() {
 	Director::getInstance()->startAnimation();
 
 #if USE_AUDIO_ENGINE
-	AudioEngine::resumeAll();
+	CocosDenshion::SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
 #endif
 }
