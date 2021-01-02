@@ -27,7 +27,7 @@ std::deque<nodeTasks> battleCore::getTasks() {
 	std::deque<nodeTasks> result;
 
 	result.emplace_back([this]() {
-		CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("sounds/game.wav", true);
+		CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("sounds/game.mp3", true);
 
 		questList = dynamic_cast<questPool*>(findNode("questList"));
 		if (!questList) {
