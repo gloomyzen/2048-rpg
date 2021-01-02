@@ -7,6 +7,7 @@
 #include "common/coreModule/scenes/scenesFactory/scenesFactoryInstance.h"
 #include "common/coreModule/resources/settings/settingManager.h"
 #include "metaModule/metaTabs.h"
+#include "menuModule/menuNode.h"
 
 #define USE_AUDIO_ENGINE 1
 
@@ -89,17 +90,13 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	});
 
 	GET_SCENES_FACTORY().registerState(common::coreModule::eGameStates::MAIN_MENU, [](Layer* node)->Layer*{
-		auto _background = cocos2d::Sprite::create("images/background.png");
-		_background->setName("background");
-		_background->setAnchorPoint(Vec2(0.f, 0.f));
-		node->addChild(_background);
-		auto meta = new sr::metaModule::metaTabs();
-		node->addChild(meta);
+		auto _menuScene = new sr::menuModule::menuNode();
+		node->addChild(_menuScene);
 
 		return node;
 	});
 
-	GET_GAME_MANAGER().run(common::coreModule::eGameStates::BATTLE_SCENE);
+	GET_GAME_MANAGER().run(common::coreModule::eGameStates::MAIN_MENU);
 
 	return true;
 }
