@@ -1,5 +1,4 @@
 #include "cocostudio/SimpleAudioEngine.h"
-#include "ui/CocosGUI.h"
 #include "scrollHolder.h"
 
 using namespace sr::roomModule;
@@ -16,6 +15,11 @@ std::deque<nodeTasks> scrollHolder::getTasks() {
 	std::deque<nodeTasks> result;
 	result.emplace_back([this]() {
 		CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("sounds/menu.wav", true);
+		scrollView = dynamic_cast<ui::ScrollView*>(findNode("scrollContainer"));
+		auto bg = dynamic_cast<Sprite*>(findNode("bg"));
+		scrollView->setInnerContainerSize( cocos2d::Size(bg->getBoundingBox().size.width, bg->getBoundingBox().size.height));
+		scrollView->jumpToPercentBothDirection(Vec2(50.f, 50.f));
+		bg->setMarkDirty();
 
 		return eTasksStatus::STATUS_OK;
 	});
