@@ -13,8 +13,7 @@
       "stretch": [ 1.0, 1.0 ]
     },
     "scrollViewComponent": {
-      "direction": "both",
-      "bounce": true
+      "direction": "both"
     }
   },
   "bg": {
