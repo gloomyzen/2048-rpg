@@ -1,16 +1,16 @@
 [submodule "lib/imgui"]
 	path = lib/imgui
-	url = git@gitlab.com:gloomyzen/cocos2d-x-imgui.git
+	url = git@github.com:gloomyzen/cocos2d-x-imgui.git
 	branch = master
 [submodule "lib/dragonBones"]
 	path = lib/dragonBones
-	url = git@gitlab.com:gloomyzen/cocos2d-dragonbones.git
+	url = git@github.com:gloomyzen/cocos2d-dragonbones.git
 	branch = master
 [submodule "cocos2d"]
 	path = cocos2d
-	url = git@gitlab.com:gloomyzen/cocos2d.git
+	url = git@github.com:gloomyzen/cocos2d.git
 	branch = master
 [submodule "Classes/common"]
 	path = Classes/common
-	url = git@gitlab.com:gloomyzen/cocos2d-common.git
+	url = git@github.com:gloomyzen/cocos2d-common.git
 	branch = master

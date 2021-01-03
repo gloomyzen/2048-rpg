@@ -2,7 +2,7 @@
 
 #### First of all, be sure to clone all submodules:
 ```bash
-git clone --recurse-submodules git@gitlab.com:gloomyzen/2048-rpg.git 2048-rpg 
+git clone --recurse-submodules git@github.com:gloomyzen/2048-rpg.git 2048-rpg 
 cd 2048-rpg
 ```
 
