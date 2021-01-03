@@ -1,0 +1,16 @@
+{
+  "type": "node",
+  "name": "scrollHolder",
+  "child": [
+    {
+      "type": "scrollView",
+      "name": "scrollContainer",
+      "child": [
+        {
+          "type": "sprite",
+          "name": "bg"
+        }
+      ]
+    }
+  ]
+}

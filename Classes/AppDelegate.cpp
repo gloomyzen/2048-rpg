@@ -7,7 +7,7 @@
 #include "common/coreModule/scenes/scenesFactory/scenesFactoryInstance.h"
 #include "common/coreModule/resources/settings/settingManager.h"
 #include "metaModule/metaTabs.h"
-#include "menuModule/menuNode.h"
+#include "roomModule/scrollHolder.h"
 
 #define USE_AUDIO_ENGINE 1
 
@@ -90,8 +90,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	});
 
 	GET_SCENES_FACTORY().registerState(common::coreModule::eGameStates::MAIN_MENU, [](Layer* node)->Layer*{
-		auto _menuScene = new sr::menuModule::menuNode();
-		node->addChild(_menuScene);
+		auto _roomScene = new sr::roomModule::scrollHolder();
+		node->addChild(_roomScene);
 
 		return node;
 	});

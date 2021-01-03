@@ -1,0 +1,31 @@
+{
+  "scrollHolder": {
+    "transformComponent": {
+      "anchor": [ 0.5, 0.5 ],
+      "pivot": [ 0.5, 0.5 ],
+      "stretch": [ 1.0, 1.0 ]
+    }
+  },
+  "scrollContainer": {
+    "transformComponent": {
+      "anchor": [ 0.5, 0.5 ],
+      "pivot": [ 0.5, 0.5 ],
+      "stretch": [ 1.0, 1.0 ]
+    },
+    "scrollViewComponent": {
+      "direction": "both",
+      "bounce": false
+    }
+  },
+  "bg": {
+    "transformComponent": {
+      "anchor": [ 0.5, 0.5 ],
+      "pivot": [ 0.5, 0.5 ],
+      "scale": 3
+    },
+    "spriteComponent": {
+      "image": "images/menuScene/bgMenuScene.jpg",
+      "pixel": true
+    }
+  }
+}
