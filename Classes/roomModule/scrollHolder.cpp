@@ -17,7 +17,7 @@ std::deque<nodeTasks> scrollHolder::getTasks() {
 		CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("sounds/menu.wav", true);
 		scrollView = dynamic_cast<ui::ScrollView*>(findNode("scrollContainer"));
 		auto bg = dynamic_cast<Sprite*>(findNode("bg"));
-		scrollView->setInnerContainerSize( cocos2d::Size(bg->getBoundingBox().size.width, bg->getBoundingBox().size.height));
+		scrollView->setInnerContainerSize( cocos2d::Size(bg->getBoundingBox().size.width - (bg->getBoundingBox().size.width / 100 * 80), bg->getBoundingBox().size.height - (bg->getBoundingBox().size.height / 100 * 80)));
 		scrollView->jumpToPercentBothDirection(Vec2(50.f, 50.f));
 		bg->setMarkDirty();
 
