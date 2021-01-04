@@ -9,6 +9,7 @@ namespace sr {
 	namespace databaseModule {
 		class tilesDB;
 		class gameModesDB;
+		class battleLevelsDB;
 
 		class databaseManager {
 		public:
@@ -18,10 +19,12 @@ namespace sr {
 
 			tilesDB& getTileDatabase() { return *tileDatabaseInstance; }
 			gameModesDB& getGameModesDB() { return *gameModesDatabaseInstance; }
+			battleLevelsDB& getBattleLevelsDB() { return *battleLevelsDatabaseInstance; }
 
 		private:
 			tilesDB* tileDatabaseInstance = nullptr;
 			gameModesDB* gameModesDatabaseInstance = nullptr;
+			battleLevelsDB* battleLevelsDatabaseInstance = nullptr;
 		};
 	}
 }
