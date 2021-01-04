@@ -7,7 +7,7 @@
 #include "common/coreModule/scenes/scenesFactory/scenesFactoryInstance.h"
 #include "common/coreModule/resources/settings/settingManager.h"
 #include "metaModule/metaTabs.h"
-#include "roomModule/scrollHolder.h"
+#include "mapModule/scrollHolder.h"
 
 #define USE_AUDIO_ENGINE 1
 
@@ -89,14 +89,14 @@ bool AppDelegate::applicationDidFinishLaunching() {
 		return node;
 	});
 
-	GET_SCENES_FACTORY().registerState(common::coreModule::eGameStates::MAIN_MENU, [](Layer* node)->Layer*{
-		auto _roomScene = new sr::roomModule::scrollHolder();
+	GET_SCENES_FACTORY().registerState(common::coreModule::eGameStates::MAP_SCENE, [](Layer* node)->Layer*{
+		auto _roomScene = new sr::mapModule::scrollHolder();
 		node->addChild(_roomScene);
 
 		return node;
 	});
 
-	GET_GAME_MANAGER().run(common::coreModule::eGameStates::MAIN_MENU);
+	GET_GAME_MANAGER().run(common::coreModule::eGameStates::MAP_SCENE);
 
 	return true;
 }

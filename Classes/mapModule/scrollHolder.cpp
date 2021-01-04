@@ -1,12 +1,12 @@
 #include "cocostudio/SimpleAudioEngine.h"
 #include "scrollHolder.h"
 
-using namespace sr::roomModule;
+using namespace sr::mapModule;
 using namespace cocos2d;
 
 scrollHolder::scrollHolder() {
 	this->setName("scrollHolder");
-	loadProperty("roomScene/" + this->getName(), this);
+	loadProperty("mapScene/" + this->getName(), this);
 }
 
 scrollHolder::~scrollHolder() {}
@@ -16,10 +16,11 @@ std::deque<nodeTasks> scrollHolder::getTasks() {
 	result.emplace_back([this]() {
 		CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("sounds/menu.wav", true);
 		scrollView = dynamic_cast<ui::ScrollView*>(findNode("scrollContainer"));
-		auto bg = dynamic_cast<Sprite*>(findNode("bg"));
-		scrollView->setInnerContainerSize( cocos2d::Size(bg->getBoundingBox().size.width - (bg->getBoundingBox().size.width / 100 * 80), bg->getBoundingBox().size.height - (bg->getBoundingBox().size.height / 100 * 80)));
-		scrollView->jumpToPercentBothDirection(Vec2(50.f, 50.f));
-		bg->setMarkDirty();
+		//todo scroll by progress
+//		auto bg = dynamic_cast<Sprite*>(findNode("bg"));
+//		scrollView->setInnerContainerSize( cocos2d::Size(bg->getBoundingBox().size.width, bg->getBoundingBox().size.height));
+//		scrollView->jumpToPercentBothDirection(Vec2(50.f, 50.f));
+//		bg->setMarkDirty();
 
 		return eTasksStatus::STATUS_OK;
 	});

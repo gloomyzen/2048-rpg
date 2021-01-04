@@ -6,7 +6,7 @@
 #include "ui/CocosGUI.h"
 
 namespace sr {
-	namespace roomModule {
+	namespace mapModule {
 
 		class scrollHolder : public common::coreModule::nodeProperties, public cocos2d::Node, public taskHolder {
 		public:
