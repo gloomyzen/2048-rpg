@@ -15,6 +15,7 @@ namespace sr {
 			std::string name;
 			cocos2d::Vec2 pos;
 			bool isBoss = false;
+			bool load(const std::string& path);
 		};
 
 		class battleLevelsDB : public databaseInterface {

@@ -1,5 +1,7 @@
 #include "cocostudio/SimpleAudioEngine.h"
 #include "scrollHolder.h"
+#include "databaseModule/databaseManager.h"
+#include "databaseModule/databases/battleLevelsDB.h"
 
 using namespace sr::mapModule;
 using namespace cocos2d;
@@ -21,6 +23,8 @@ std::deque<nodeTasks> scrollHolder::getTasks() {
 //		scrollView->setInnerContainerSize( cocos2d::Size(bg->getBoundingBox().size.width, bg->getBoundingBox().size.height));
 //		scrollView->jumpToPercentBothDirection(Vec2(50.f, 50.f));
 //		bg->setMarkDirty();
+		auto battleDB = GET_DATABASE_MANAGER().getBattleLevelsDB();
+		battleDB.executeLoadData();
 
 		return eTasksStatus::STATUS_OK;
 	});

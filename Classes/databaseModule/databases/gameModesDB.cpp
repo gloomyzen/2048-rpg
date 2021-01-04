@@ -19,11 +19,11 @@ gameModesDB::~gameModesDB() = default;
 
 void gameModesDB::load(const rapidjson::Document &data) {
 	if (!data.IsArray()) {
-		LOG_ERROR("gameModesDB::load: Array not found!!");
+		LOG_ERROR("gameModesDB::load: Array not found!");
 	}
 	for (auto it = data.Begin(); it != data.End(); ++it) {
 		if (!it->IsObject()) {
-			LOG_ERROR("gameModesDB::load: Next data is not object!!!");
+			LOG_ERROR("gameModesDB::load: Next data is not object!");
 		}
 		auto item = new sGameModeData();
 
