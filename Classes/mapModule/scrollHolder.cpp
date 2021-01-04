@@ -14,7 +14,7 @@ scrollHolder::~scrollHolder() {}
 std::deque<nodeTasks> scrollHolder::getTasks() {
 	std::deque<nodeTasks> result;
 	result.emplace_back([this]() {
-		CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("sounds/menu.wav", true);
+//		CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("sounds/menu.wav", true);
 		scrollView = dynamic_cast<ui::ScrollView*>(findNode("scrollContainer"));
 		//todo scroll by progress
 //		auto bg = dynamic_cast<Sprite*>(findNode("bg"));
