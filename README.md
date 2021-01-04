@@ -1,5 +1,13 @@
 # swipe-rpg (2048-rpg)
 
+#### Project submodules structure:
+
+- [root] [Current game project]([https://github.com/gloomyzen/2048-rpg])
+- [Classes/common] [Common modules for all games]([https://github.com/gloomyzen/cocos2d-common])
+- [cocos2d] [Modified core]([https://github.com/gloomyzen/cocos2d])
+- [lib/dragonbones] [dragonBones for cocos2d v4]([https://github.com/gloomyzen/cocos2d-dragonbones])
+- [lib/imgui] [ImGui for cocos2d v4]([https://github.com/gloomyzen/cocos2d-x-imgui])
+
 #### First of all, be sure to clone all submodules:
 ```bash
 git clone --recurse-submodules git@github.com:gloomyzen/2048-rpg.git 2048-rpg 
