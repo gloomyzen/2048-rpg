@@ -21,13 +21,14 @@ void battleLevelsDB::load(const rapidjson::Document &data) {
 		LOG_ERROR("battleLevelsDB::load: Object not found!");
 	}
 	for (auto it = data.MemberBegin(); it != data.MemberEnd(); ++it) {
-		auto id = it->name.GetString();
+		std::string locationName = it->name.GetString();
 		std::string propertyPath = it->value.GetString();
 
 		if (!propertyPath.empty() && cocos2d::FileUtils::getInstance()->isFileExist(propertyPath)) {
 			auto item = new sLevelData();
-			if (item->load(propertyPath)) {
-				levelsMap.insert({std::stoi(id), item});
+			if (item->load(propertyPath)
+			&& levelTypesMap.find(locationName) != levelTypesMap.end()) {
+				levelsMap.insert({levelTypesMap.find(locationName)->second, item});
 			}
 		} else {
 			LOG_ERROR(cocos2d::StringUtils::format("battleLevelsDB::load: Level %d has invalid property path.", std::stoi(id)));
