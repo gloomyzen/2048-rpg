@@ -19,9 +19,8 @@ namespace sr {
 		};
 
 		struct sLevelData {
-			std::string name;
+			std::string property;
 			cocos2d::Vec2 pos;
-			bool isBoss = false;
 			bool load(const std::string& path);
 		};
 

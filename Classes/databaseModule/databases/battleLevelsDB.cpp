@@ -24,14 +24,14 @@ void battleLevelsDB::load(const rapidjson::Document &data) {
 		std::string locationName = it->name.GetString();
 		std::string propertyPath = it->value.GetString();
 
-		if (!propertyPath.empty() && cocos2d::FileUtils::getInstance()->isFileExist(propertyPath)) {
+		if (!propertyPath.empty()) {
 			auto item = new sLevelData();
 			if (item->load(propertyPath)
 			&& levelTypesMap.find(locationName) != levelTypesMap.end()) {
 				levelsMap.insert({levelTypesMap.find(locationName)->second, item});
 			}
 		} else {
-			LOG_ERROR(cocos2d::StringUtils::format("battleLevelsDB::load: Level %d has invalid property path.", std::stoi(id)));
+			LOG_ERROR(cocos2d::StringUtils::format("battleLevelsDB::load: Level '%s' has invalid property path.", locationName.c_str()));
 		}
 	}
 }
@@ -41,6 +41,18 @@ bool sLevelData::load(const std::string& path) {
 	if (json.HasParseError() || !json.IsObject()) {
 		LOG_ERROR("nodeProperties::loadProperty Json file '" + path + "' has erroes or not found!");
 		return false;
+	}
+	std::map<std::string, std::string> typePath;
+	auto typesIt = json.FindMember("types");
+	if (typesIt != json.MemberEnd() && typesIt->value.IsArray()) {
+		for (auto type = typesIt->value.Begin(); type != typesIt->value.End(); ++type) {
+			auto name = type->FindMember("name");
+			auto property = type->FindMember("property");
+			if (name->value.IsString() && property->value.IsString()) {
+				//wip this
+			}
+		}
+		//todo parse
 	}
 	//wip this
 	return false;

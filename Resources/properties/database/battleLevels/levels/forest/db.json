@@ -1,0 +1,13 @@
+{
+  "types": [
+    {
+      "name": "forest_grass",
+      "property": "mapTiles/forest_grass"
+    }
+  ],
+  "map": [
+    {"x": 0, "y": 5},
+    {"x": 0, "y": 15},
+    {"x": 0, "y": 25}
+  ]
+}
