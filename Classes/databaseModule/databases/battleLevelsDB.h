@@ -11,6 +11,13 @@
 namespace sr {
 	namespace databaseModule {
 
+		enum class eBattleLevelsTypes {
+			FOREST_LEVEL,
+			CAVE_LEVEL,
+			CRYSTAL_LEVEL,
+			LAVA_LEVEL,
+		};
+
 		struct sLevelData {
 			std::string name;
 			cocos2d::Vec2 pos;
@@ -25,7 +32,7 @@ namespace sr {
 			void load(const rapidjson::Document &) override;
 
 		private:
-			std::map<int, sLevelData*> levelsMap;
+			std::map<eBattleLevelsTypes, sLevelData*> levelsMap;
 
 		};
 	}
