@@ -19,8 +19,8 @@ namespace sr {
 		};
 
 		struct sLevelData {
-			std::string property;
-			cocos2d::Vec2 pos;
+			std::string locationName;
+			std::map<cocos2d::Vec2, std::string> currentMap;
 			bool load(const std::string& path);
 		};
 

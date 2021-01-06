@@ -39,21 +39,41 @@ void battleLevelsDB::load(const rapidjson::Document &data) {
 bool sLevelData::load(const std::string& path) {
 	auto json = GET_JSON(path);
 	if (json.HasParseError() || !json.IsObject()) {
-		LOG_ERROR("nodeProperties::loadProperty Json file '" + path + "' has erroes or not found!");
+		LOG_ERROR(STRING_FORMAT("sLevelData::load Json file '%s' contains errors or not found!", path.c_str()));
 		return false;
+	}
+	auto locNameIt = json.FindMember("name");
+	if (locNameIt != json.MemberEnd()) {
+		this->locationName = locNameIt->value.GetString();
+	} else {
+		LOG_ERROR(STRING_FORMAT("sLevelData::load Json file '%s' does not have property 'name'.", path.c_str()));
 	}
 	std::map<std::string, std::string> typePath;
 	auto typesIt = json.FindMember("types");
 	if (typesIt != json.MemberEnd() && typesIt->value.IsArray()) {
 		for (auto type = typesIt->value.Begin(); type != typesIt->value.End(); ++type) {
 			auto name = type->FindMember("name");
-			auto property = type->FindMember("property");
-			if (name->value.IsString() && property->value.IsString()) {
-				//wip this
+			auto prop = type->FindMember("property");
+			if (name->value.IsString() && prop->value.IsString()) {
+				typePath.insert({name->value.GetString(), prop->value.GetString()});
 			}
 		}
-		//todo parse
 	}
+
+	auto mapIt = json.FindMember("map");
+	if (mapIt != json.MemberEnd() && mapIt->value.IsArray()) {
+		for (auto row = mapIt->value.Begin(); row != mapIt->value.End(); ++row) {
+			auto x = row->FindMember("x");
+			auto y = row->FindMember("y");
+			auto type = row->FindMember("type");
+			if (x->value.IsString() && y->value.IsString() && y->value.IsString()) {
+				//wip
+//				currentMap.insert()
+			}
+		}
+	}
+
+//	std::map<cocos2d::Vec2, std::string>
 	//wip this
 	return false;
 }

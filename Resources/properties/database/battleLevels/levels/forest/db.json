@@ -1,4 +1,5 @@
 {
+  "name": "location.forest.name",
   "types": [
     {
       "name": "forest_grass",
@@ -6,8 +7,8 @@
     }
   ],
   "map": [
-    {"x": 0, "y": 5},
-    {"x": 0, "y": 15},
-    {"x": 0, "y": 25}
+    {"x": 0, "y": 5,  "type": "forest_grass"},
+    {"x": 0, "y": 15, "type": "forest_grass"},
+    {"x": 0, "y": 25, "type": "forest_grass"}
   ]
 }
