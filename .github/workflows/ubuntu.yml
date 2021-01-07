@@ -39,6 +39,9 @@ jobs:
         shell: bash
         run: |
           cd ..
+          echo $REPO_NAME
+          ls
+          mkdir temp
           mv $REPO_NAME temp
           mkdir $REPO_NAME
           mv temp $REPO_NAME/$REPO_NAME
