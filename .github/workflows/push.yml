@@ -27,13 +27,13 @@ jobs:
 
     steps:
 
-      - name: Get repository name.
-        run: echo ::set-env name=REPO_NAME::$(echo $GITHUB_REF | awk -F / '{print $3}')
-
       - name: Clone.
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
         with:
           submodules: recursive
+
+      - name: Get repository name.
+        run: echo ::set-env name=REPO_NAME::${GITHUB_REPOSITORY##*/}
 
       - name: Disable man for further package installs.
         run: |
