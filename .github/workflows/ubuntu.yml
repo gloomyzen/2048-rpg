@@ -51,7 +51,7 @@ jobs:
       - name: Setup vars
         shell: bash
         run: |
-          if [[ ""== "{{ EVENT_PAYLOAD.pull_request.html_url }}" ]]; then
+          if [[ "{{ EVENT_PAYLOAD.pull_request.html_url }}" ]]; then
             echo "BUILD_PULL_REQUEST_TEXT='Pull request - {{ EVENT_PAYLOAD.pull_request.html_url }}'" >> $GITHUB_ENV
           fi
 
