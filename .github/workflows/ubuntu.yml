@@ -51,14 +51,22 @@ jobs:
       - name: Build. 🔨
         shell: bash
         run: |
-          echo "BUILD_SUCCESS=true" >> $GITHUB_ENV
-          echo $BUILD_SUCCESS
+#          if [[ $string =~ "My" ]]; then
+#             echo "It's there!"
+#          fi
           rm -rf build
           mkdir build
           cd build
           cmake ../
           make -j 4
+          echo "BUILD_SUCCESS=true" >> $GITHUB_ENV
 #          make test todo
+      - name: Update vars
+        shell: bash
+        run: |
+          echo "BUILD_PULL_REQUEST_ID={{ EVENT_PAYLOAD.pull_request.id }}" >> $GITHUB_ENV
+          echo "BUILD_PULL_REQUEST_URL={{ EVENT_PAYLOAD.pull_request.html_url }}" >> $GITHUB_ENV
+
 
       - name: Discord succes notification
         if: env.BUILD_SUCCESS == 'true'
