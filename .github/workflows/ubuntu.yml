@@ -69,17 +69,33 @@ jobs:
 
 
       - name: Discord succes notification
-        if: env.BUILD_SUCCESS == 'true'
+        if: env.BUILD_SUCCESS == 'true' && env.BUILD_PULL_REQUEST_URL != ""
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         uses: Ilshidur/action-discord@master
         with:
-          args: '[SUCCESS](Linux Tests) The project {{ EVENT_PAYLOAD.repository.full_name }} was built with errors.'
+          args: '✅[SUCCESS](Linux Tests) The project {{ EVENT_PAYLOAD.repository.full_name }} has been built. Pull request - $BUILD_PULL_REQUEST_URL'
+
+      - name: Discord succes notification
+        if: env.BUILD_SUCCESS == 'true' && env.BUILD_PULL_REQUEST_URL == ""
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@master
+        with:
+          args: '✅[SUCCESS](Linux Tests) The project {{ EVENT_PAYLOAD.repository.full_name }} has been built.'
 
       - name: Discord fail notification
-        if: env.BUILD_SUCCESS != 'true'
+        if: env.BUILD_SUCCESS != 'true' && env.BUILD_PULL_REQUEST_URL != ""
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         uses: Ilshidur/action-discord@master
         with:
-          args: '[FAIL](Linux Tests) The project {{ EVENT_PAYLOAD.repository.full_name }} has not been built and deployed.'
+          args: '❌[FAIL](Linux Tests) The project {{ EVENT_PAYLOAD.repository.full_name }} was built with errors. Pull request - $BUILD_PULL_REQUEST_URL'
+
+      - name: Discord fail notification
+        if: env.BUILD_SUCCESS != 'true' && env.BUILD_PULL_REQUEST_URL == ""
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@master
+        with:
+          args: '❌[FAIL](Linux Tests) The project {{ EVENT_PAYLOAD.repository.full_name }} was built with errors.'
