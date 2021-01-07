@@ -49,7 +49,7 @@ jobs:
 
       - name: CMake.
         run: |
-          cd $LIB_PATH
+          mkdir $LIB_PATH && cd $LIB_PATH
           file=cmake-$CMAKE_VER-Linux-x86_64.sh
           wget $GIT/Kitware/CMake/releases/download/v$CMAKE_VER/$file
           sudo mkdir /opt/cmake
