@@ -26,6 +26,7 @@ jobs:
       LIB_PATH: "/var/temp"
       MANUAL_CACHING: "6"
       AUTO_CACHING: "1"
+      BUILD_SUCCESS: "false"
 
     steps:
 
@@ -48,10 +49,8 @@ jobs:
       - name: Build.
         shell: bash
         run: |
-          ls
-          cd $REPO_NAME
-          echo $REPO_NAME
-          ls
+          $BUILD_SUCCESS="true"
+          echo $BUILD_SUCCESS
           rm -rf build
           mkdir build
           cd build
