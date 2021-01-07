@@ -1,3 +1,4 @@
+![Linux Tests](https://github.com/gloomyzen/2048-rpg/workflows/Linux%20Tests/badge.svg?branch=master)
 # swipe-rpg (2048-rpg)
 
 #### Project submodules structure:

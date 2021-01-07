@@ -56,7 +56,7 @@ jobs:
           make -j 4
 #          make test todo
 
-      - name: Discord notification
+      - name: Discord succes notification
         if: env.BUILD_SUCCESS == 'true'
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
@@ -64,7 +64,7 @@ jobs:
         with:
           args: '[SUCCESS](Linux Tests) The project {{ EVENT_PAYLOAD.repository.full_name }} was built with errors.'
 
-      - name: Discord notification
+      - name: Discord fail notification
         if: env.BUILD_SUCCESS != 'true'
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
