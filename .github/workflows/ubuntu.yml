@@ -22,6 +22,8 @@ jobs:
     env:
       GIT: "https://github.com"
       CMAKE_VER: "3.18.4"
+      REPO_NAME: "2048-rpg"
+      LIB_PATH: "/var/temp"
       MANUAL_CACHING: "6"
       AUTO_CACHING: "1"
 
@@ -32,21 +34,9 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Get repository name.
-        run: echo ::set-output name=REPO_NAME::${GITHUB_REPOSITORY##*/}
-
       - name: First set up.
         shell: bash
         run: |
-          cd ..
-          echo $REPO_NAME
-          ls
-          mkdir temp
-          mv $REPO_NAME temp
-          mkdir $REPO_NAME
-          mv temp $REPO_NAME/$REPO_NAME
-          cd $REPO_NAME
-
           sudo apt-get update
           sudo apt-get upgrade -y
           sudo apt-get install -y --fix-missing \
@@ -59,7 +49,7 @@ jobs:
 
       - name: CMake.
         run: |
-          cd $LibrariesPath
+          cd $LIB_PATH
           file=cmake-$CMAKE_VER-Linux-x86_64.sh
           wget $GIT/Kitware/CMake/releases/download/v$CMAKE_VER/$file
           sudo mkdir /opt/cmake
