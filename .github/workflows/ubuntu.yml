@@ -33,7 +33,7 @@ jobs:
           submodules: recursive
 
       - name: Get repository name.
-        run: echo ::set-env name=REPO_NAME::${GITHUB_REPOSITORY##*/}
+        run: echo ::set-output name=REPO_NAME::${GITHUB_REPOSITORY##*/}
 
       - name: Disable man for further package installs.
         run: |
