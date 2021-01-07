@@ -24,9 +24,13 @@ void questsDB::load(const rapidjson::Document &data) {
 			//wip error, one condition have array of objects, not object
 			if (condition != it->value.MemberEnd()) {
 				for (auto conditionIt = condition->value.MemberBegin(); conditionIt != condition->value.MemberEnd(); ++conditionIt) {
-					if (!conditionIt->name.IsString() || !conditionIt->value.IsObject()) {
+					if (!conditionIt->name.IsString() || !conditionIt->value.IsArray()) {
 						LOG_ERROR(STRING_FORMAT("questsDB::load: Quest '%s' has invalid condition.", id.c_str()));
 						continue;
+					}
+					for (auto object = conditionIt->value.GetArray().Begin(); object != conditionIt->value.GetArray().End(); ++object) {
+//						auto test = object->GetObjectJ();
+//						test.
 					}
 					auto questType = questTypeList.find(static_cast<std::string>(conditionIt->name.GetString()));
 					if (questType == questTypeList.end()) {
