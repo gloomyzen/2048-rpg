@@ -1,0 +1,96 @@
+name: Linux Build
+
+on:
+  push:
+    paths-ignore:
+      - 'docs/**'
+      - '*.md'
+      - '.gitignore'
+  pull_request:
+    paths-ignore:
+      - 'docs/**'
+      - '*.md'
+      - '.gitignore'
+
+jobs:
+
+  build:
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
+    name: Ubuntu 18.04
+    runs-on: ubuntu-latest
+
+    env:
+      GIT: "https://github.com"
+      CMAKE_VER: "3.18.4"
+      MANUAL_CACHING: "6"
+      AUTO_CACHING: "1"
+
+    steps:
+
+      - name: Get repository name.
+        run: echo ::set-env name=REPO_NAME::${GITHUB_REPOSITORY##*/}
+
+      - name: Clone.
+        uses: actions/checkout@v1
+        with:
+          submodules: recursive
+
+      - name: Disable man for further package installs.
+        run: |
+          cfgFile="/etc/dpkg/dpkg.cfg.d/no_man"
+          sudo touch $cfgFile
+          p() {
+            sudo echo "path-exclude=/usr/share/$1/*" >> $cfgFile
+          }
+          p man
+          p locale
+          p doc
+
+      - name: First set up.
+        shell: bash
+        run: |
+          cd ..
+          mv $REPO_NAME temp
+          mkdir $REPO_NAME
+          mv temp $REPO_NAME/$REPO_NAME
+          cd $REPO_NAME
+
+          sudo apt-get update
+          sudo apt-get upgrade -y
+          sudo apt-get install -y --fix-missing \
+          build-essential clang git wget autoconf python-minimal g++ libgdk-pixbuf2.0-dev \
+          python-pip libx11-dev libxmu-dev libglu1-mesa-dev libgl2ps-dev libxi-dev libzip-dev \
+          libpng-dev libcurl4-gnutls-dev libfontconfig1-dev libsqlite3-dev libglew-dev \
+          libssl-dev libgtk-3-dev libglfw3 libglfw3-dev xorg-dev
+
+
+
+      - name: CMake.
+        run: |
+          cd $LibrariesPath
+          file=cmake-$CMAKE_VER-Linux-x86_64.sh
+          wget $GIT/Kitware/CMake/releases/download/v$CMAKE_VER/$file
+          sudo mkdir /opt/cmake
+          sudo sh $file --prefix=/opt/cmake --skip-license
+          sudo ln -s /opt/cmake/bin/cmake /usr/local/bin/cmake
+          cmake --version
+
+      - name: Build.
+        shell: bash
+        run: |
+          ls
+          cd $REPO_NAME
+          echo $REPO_NAME
+          ls
+          rm -rf build
+          mkdir build
+          cd build
+          cmake ../
+          make -j 4
+
+#      - name: Discord notification
+#        env:
+#          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+#        uses: Ilshidur/action-discord@master
+#        with:
+#          args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed.'
