@@ -39,7 +39,6 @@ jobs:
         shell: bash
         run: |
           sudo apt-get update
-          sudo apt-get upgrade -y
           sudo apt-get install -y --fix-missing \
           build-essential clang git wget autoconf python-minimal g++ libgdk-pixbuf2.0-dev \
           python-pip libx11-dev libxmu-dev libglu1-mesa-dev libgl2ps-dev libxi-dev libzip-dev \
@@ -49,7 +48,7 @@ jobs:
       - name: Build.
         shell: bash
         run: |
-          $BUILD_SUCCESS="true"
+          echo "BUILD_SUCCESS=true" >> $GITHUB_ENV
           echo $BUILD_SUCCESS
           rm -rf build
           mkdir build
