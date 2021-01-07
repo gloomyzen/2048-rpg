@@ -31,7 +31,7 @@ void battleLevelsDB::load(const rapidjson::Document &data) {
 				levelsMap.insert({levelTypesMap.find(locationName)->second, item});
 			}
 		} else {
-			LOG_ERROR(cocos2d::StringUtils::format("battleLevelsDB::load: Level '%s' has invalid property path.", locationName.c_str()));
+			LOG_ERROR(STRING_FORMAT("battleLevelsDB::load: Level '%s' has invalid property path.", locationName.c_str()));
 		}
 	}
 }
