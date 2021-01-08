@@ -21,23 +21,31 @@ void questsDB::load(const rapidjson::Document &data) {
 		std::string id = it->name.GetString();
 		if (it->value.IsObject()) {
 			auto condition = it->value.FindMember("condition");
-			//wip error, one condition have array of objects, not object
 			if (condition != it->value.MemberEnd()) {
 				for (auto conditionIt = condition->value.MemberBegin(); conditionIt != condition->value.MemberEnd(); ++conditionIt) {
 					if (!conditionIt->name.IsString() || !conditionIt->value.IsArray()) {
 						LOG_ERROR(STRING_FORMAT("questsDB::load: Quest '%s' has invalid condition.", id.c_str()));
 						continue;
 					}
-					for (auto object = conditionIt->value.GetArray().Begin(); object != conditionIt->value.GetArray().End(); ++object) {
-//						auto test = object->GetObjectJ();
-//						test.
-					}
 					auto questType = questTypeList.find(static_cast<std::string>(conditionIt->name.GetString()));
 					if (questType == questTypeList.end()) {
 						LOG_ERROR(STRING_FORMAT("questsDB::load: Quest '%s' has invalid type '%s'.", id.c_str(), conditionIt->name.GetString()));
 						continue;
 					}
-//						questType->second
+					auto item = new questItem();
+					for (auto object = conditionIt->value.GetArray().Begin(); object != conditionIt->value.GetArray().End(); ++object) {
+						auto questID = object->GetObjectJ().FindMember("id");
+						auto questCount = object->GetObjectJ().FindMember("count");
+						if (questID != object->GetObjectJ().MemberEnd() && questCount != object->GetObjectJ().MemberEnd()
+							&& questID->value.IsUint()
+							&& questCount->value.IsInt()) {
+							item->objectives.insert({questType->second, {questID->value.GetUint(), questCount->value.GetInt()}});
+						} else {
+							LOG_ERROR(STRING_FORMAT("questsDB::load: Quest '%s' has invalid properties in object '%s'.", id.c_str(), conditionIt->name.GetString()));
+						}
+					}
+					if (!item->objectives.empty())
+						questList.insert({static_cast<unsigned int>(std::stoi(id)), item});
 				}
 			}
 		}
