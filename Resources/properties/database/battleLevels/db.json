@@ -1,4 +1,3 @@
 {
-  "forest": "properties/database/battleLevels/levels/forest/db",
-  "cave": "properties/database/battleLevels/levels/cave/db"
+  "forest": "properties/database/battleLevels/levels/forest/db"
 }

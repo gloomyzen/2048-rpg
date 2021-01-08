@@ -2,6 +2,7 @@
 #include "scrollHolder.h"
 #include "databaseModule/databaseManager.h"
 #include "databaseModule/databases/battleLevelsDB.h"
+#include "databaseModule/databases/questsDB.h"
 
 using namespace sr::mapModule;
 using namespace cocos2d;
@@ -30,19 +31,12 @@ std::deque<nodeTasks> scrollHolder::getTasks() {
 	});
 
 	result.emplace_back([this]() {
-//		ui::ScrollView* scrollView = ui::ScrollView::create();
-//		scrollView->setDirection(ui::ScrollView::Direction::BOTH);
-//		scrollView->setContentSize( cocos2d::Size(300, 340) );
-//
-////		scrollView->setBackGroundImage("images/menuScene/bgMenuScene.jpg");
-//		scrollView->setBounceEnabled(true);
-//		scrollView->setAnchorPoint( Vec2( 0.5, 0.5 ) );
-//		scrollView->setPosition( Vec2( 250, 150 ) );
-//		auto sprite = Sprite::create();
-//		sprite->initWithFile("images/menuScene/bgMenuScene.jpg");
-//		sprite->setScale(2);
-//		scrollView->addChild(sprite);
-//		addChild(scrollView);
+		auto battleDB = GET_DATABASE_MANAGER().getBattleLevelsDB();
+		battleDB.executeLoadData();
+//		auto test = battleDB.
+
+		auto questsDB = GET_DATABASE_MANAGER().getQuestsDB();
+		questsDB.executeLoadData();
 
 		return eTasksStatus::STATUS_OK;
 	});

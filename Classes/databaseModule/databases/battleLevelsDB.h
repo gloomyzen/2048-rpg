@@ -30,6 +30,8 @@ namespace sr {
 			~battleLevelsDB();
 			void load(const rapidjson::Document &) override;
 
+			std::map<eBattleLevelsTypes, sLevelData*> getLevelsData() { return levelsMap; }
+
 		private:
 			std::map<eBattleLevelsTypes, sLevelData*> levelsMap;
 

@@ -2,11 +2,15 @@ name: Linux Tests
 
 on:
   push:
+    branches:
+      - 'master'
     paths-ignore:
       - 'docs/**'
       - '*.md'
       - '.gitignore'
   pull_request:
+    branches:
+      - 'master'
     paths-ignore:
       - 'docs/**'
       - '*.md'
@@ -44,16 +48,25 @@ jobs:
           libpng-dev libcurl4-gnutls-dev libfontconfig1-dev libsqlite3-dev libglew-dev \
           libssl-dev libgtk-3-dev libglfw3 libglfw3-dev xorg-dev cmake
 
+      - name: Setup vars
+        shell: bash
+        run: |
+          if test -z "{{ EVENT_PAYLOAD.pull_request.html_url }}"
+          then
+            echo "BUILD_PULL_REQUEST_TEXT=''" >> $GITHUB_ENV
+          else
+            echo "BUILD_PULL_REQUEST_TEXT='Pull request - {{ EVENT_PAYLOAD.pull_request.html_url }}'" >> $GITHUB_ENV
+          fi
+
       - name: Build. 🔨
         shell: bash
         run: |
-          echo "BUILD_SUCCESS=true" >> $GITHUB_ENV
-          echo $BUILD_SUCCESS
           rm -rf build
           mkdir build
           cd build
           cmake ../
           make -j 4
+          echo "BUILD_SUCCESS=true" >> $GITHUB_ENV
 #          make test todo
 
       - name: Discord succes notification
@@ -62,7 +75,7 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         uses: Ilshidur/action-discord@master
         with:
-          args: '[SUCCESS](Linux Tests) The project {{ EVENT_PAYLOAD.repository.full_name }} was built with errors.'
+          args: '✅[SUCCESS](Linux Tests) The project {{ EVENT_PAYLOAD.repository.full_name }} has been built. $BUILD_PULL_REQUEST_TEXT'
 
       - name: Discord fail notification
         if: env.BUILD_SUCCESS != 'true'
@@ -70,4 +83,4 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         uses: Ilshidur/action-discord@master
         with:
-          args: '[FAIL](Linux Tests) The project {{ EVENT_PAYLOAD.repository.full_name }} has not been built and deployed.'
+          args: '❌[FAIL](Linux Tests) The project {{ EVENT_PAYLOAD.repository.full_name }} was built with errors. $BUILD_PULL_REQUEST_TEXT'

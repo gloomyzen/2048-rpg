@@ -31,7 +31,7 @@ void battleLevelsDB::load(const rapidjson::Document &data) {
 				levelsMap.insert({levelTypesMap.find(locationName)->second, item});
 			}
 		} else {
-			LOG_ERROR(cocos2d::StringUtils::format("battleLevelsDB::load: Level '%s' has invalid property path.", locationName.c_str()));
+			LOG_ERROR(STRING_FORMAT("battleLevelsDB::load: Level '%s' has invalid property path.", locationName.c_str()));
 		}
 	}
 }
@@ -66,14 +66,14 @@ bool sLevelData::load(const std::string& path) {
 			auto x = row->FindMember("x");
 			auto y = row->FindMember("y");
 			auto type = row->FindMember("type");
-			if (x->value.IsString() && y->value.IsString() && y->value.IsString()) {
-				//wip
-//				currentMap.insert()
+			if (x->value.IsInt() && y->value.IsInt() && type->value.IsString()) {
+				auto prop = typePath.find(type->value.GetString());
+				if (prop != typePath.end()) {
+					currentMap.insert({cocos2d::Vec2(x->value.GetFloat(), y->value.GetFloat()), prop->second});
+				}
 			}
 		}
 	}
 
-//	std::map<cocos2d::Vec2, std::string>
-	//wip this
-	return false;
+	return true;
 }
