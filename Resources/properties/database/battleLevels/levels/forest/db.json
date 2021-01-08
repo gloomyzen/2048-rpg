@@ -7,8 +7,8 @@
     }
   ],
   "map": [
-    {"x": 0, "y": 5,  "type": "forest_grass"},
-    {"x": 0, "y": 15, "type": "forest_grass"},
-    {"x": 0, "y": 25, "type": "forest_grass"}
+    {"id": 1, "row": 1, "x": 0, "y": 5,  "type": "forest_grass"},
+    {"id": 2, "row": 1, "x": 0, "y": 15, "type": "forest_grass", "quests": [20001, 20002]},
+    {"id": 3, "row": 1, "x": 0, "y": 25, "type": "forest_grass", "quests": [20001, 20002]}
   ]
 }

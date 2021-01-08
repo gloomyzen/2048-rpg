@@ -63,13 +63,31 @@ bool sLevelData::load(const std::string& path) {
 	auto mapIt = json.FindMember("map");
 	if (mapIt != json.MemberEnd() && mapIt->value.IsArray()) {
 		for (auto row = mapIt->value.Begin(); row != mapIt->value.End(); ++row) {
+			auto id = row->FindMember("id");
+			auto rowNum = row->FindMember("row");
 			auto x = row->FindMember("x");
 			auto y = row->FindMember("y");
 			auto type = row->FindMember("type");
-			if (x->value.IsInt() && y->value.IsInt() && type->value.IsString()) {
+			auto quests = row->FindMember("quests");
+			std::vector<unsigned int> questVec;
+			if (quests->value.IsArray()) {
+				auto questArray = quests->value.GetArray();
+				for (auto item = questArray.Begin(); item != questArray.End(); ++item) {
+					if (item->IsUint()) {
+						questVec.push_back(item->GetUint());
+					}
+				}
+			}
+			if (id->value.IsInt() && rowNum->value.IsInt() && x->value.IsInt() && y->value.IsInt() && type->value.IsString()) {
 				auto prop = typePath.find(type->value.GetString());
 				if (prop != typePath.end()) {
-					currentMap.insert({cocos2d::Vec2(x->value.GetFloat(), y->value.GetFloat()), prop->second});
+					auto piece = new sLevelDataPiece();
+					piece->id = id->value.GetInt();
+					piece->row = rowNum->value.GetInt();
+					piece->position = cocos2d::Vec2(x->value.GetFloat(), y->value.GetFloat());
+					piece->property = prop->second;
+					piece->quests = questVec;
+					currentMap.insert({id->value.GetInt(), piece});
 				}
 			}
 		}

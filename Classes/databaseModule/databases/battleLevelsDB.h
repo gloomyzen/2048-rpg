@@ -7,6 +7,7 @@
 #include "json/ostreamwrapper.h"
 #include <string>
 #include <map>
+#include <vector>
 
 namespace sr {
 	namespace databaseModule {
@@ -18,9 +19,17 @@ namespace sr {
 			LAVA_LEVEL,
 		};
 
+		struct sLevelDataPiece {
+			int id;
+			int row;
+			cocos2d::Vec2 position;
+			std::string property;
+			std::vector<unsigned int> quests;
+		};
+
 		struct sLevelData {
 			std::string locationName;
-			std::map<cocos2d::Vec2, std::string> currentMap;
+			std::map<int, sLevelDataPiece*> currentMap; //id + struct
 			bool load(const std::string& path);
 		};
 

@@ -75,7 +75,7 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         uses: Ilshidur/action-discord@master
         with:
-          args: '✅[SUCCESS](Linux Tests) The project {{ EVENT_PAYLOAD.repository.full_name }} has been built. $BUILD_PULL_REQUEST_TEXT'
+          args: '✅[SUCCESS](Linux Tests) The project {{ EVENT_PAYLOAD.repository.full_name }} has been built. {{ $BUILD_PULL_REQUEST_TEXT }}'
 
       - name: Discord fail notification
         if: env.BUILD_SUCCESS != 'true'
@@ -83,4 +83,4 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         uses: Ilshidur/action-discord@master
         with:
-          args: '❌[FAIL](Linux Tests) The project {{ EVENT_PAYLOAD.repository.full_name }} was built with errors. $BUILD_PULL_REQUEST_TEXT'
+          args: '❌[FAIL](Linux Tests) The project {{ EVENT_PAYLOAD.repository.full_name }} was built with errors. {{ $BUILD_PULL_REQUEST_TEXT }}'
