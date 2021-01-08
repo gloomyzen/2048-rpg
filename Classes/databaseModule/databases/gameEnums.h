@@ -7,6 +7,13 @@
 namespace sr {
 	namespace databaseModule {
 
+		enum class eBattleLevelsTypes {
+			FOREST_LEVEL,
+			CAVE_LEVEL,
+			CRYSTAL_LEVEL,
+			LAVA_LEVEL,
+		};
+
 		enum class eQuestEntities {
 			FIND_ITEM,
 			KILL_ENEMY

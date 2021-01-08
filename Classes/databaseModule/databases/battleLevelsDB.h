@@ -5,19 +5,13 @@
 #include "databaseInterface.h"
 #include "json/document.h"
 #include "json/ostreamwrapper.h"
+#include "databaseModule/databases/gameEnums.h"
 #include <string>
 #include <map>
 #include <vector>
 
 namespace sr {
 	namespace databaseModule {
-
-		enum class eBattleLevelsTypes {
-			FOREST_LEVEL,
-			CAVE_LEVEL,
-			CRYSTAL_LEVEL,
-			LAVA_LEVEL,
-		};
 
 		struct sLevelDataPiece {
 			int id;
