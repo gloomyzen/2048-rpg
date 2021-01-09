@@ -2,6 +2,9 @@
 #define SWIPE_RPG_USERDATATOOL_H
 
 #include "databaseModule/databases/gameEnums.h"
+#include "databaseModule/databases/databaseInterface.h"
+#include "json/document.h"
+#include "json/ostreamwrapper.h"
 #include <map>
 #include <string>
 #include <vector>
@@ -24,11 +27,15 @@ namespace sr {
 			std::map<eBattleLevelsTypes, sUserProfileLocationProgress*> location;
 		};
 
-		class userDataTool {
+		class userDataTool : public databaseInterface {
 		public:
-			userDataTool();
+			userDataTool(const std::string &);
 			~userDataTool();
+			void load(const rapidjson::Document &) override;
+			static userDataTool &getInstance();
 
+		private:
+			sUserProfileStruct* userData;
 		};
 	}
 }
