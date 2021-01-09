@@ -1,10 +1,16 @@
 {
   "location": {
-    "forest": {
-      "1": {"20001": [{
-        "id": 10001,
-        "count": 1
-      }]}
-    }
+    "forest": [
+      {
+        "id": 1,
+        "quest": 20001,
+        "questProgress": [
+          {
+            "id": 10001,
+            "count": 1
+          }
+        ]
+      }
+    ]
   }
 }
