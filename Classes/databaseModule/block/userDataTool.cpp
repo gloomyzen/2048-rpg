@@ -31,12 +31,22 @@ void userDataTool::load(const rapidjson::Document& data) {
 sUserProfileStruct *userDataTool::getUserProfile() {
 	if (isLoaded()) return userData;
 
-	auto profile = cocos2d::UserDefault::getInstance()->getStringForKey("profile", "");
-	if (!profile.empty()) {
-		//todo load local profile
+	const std::string &jsonStr = cocos2d::FileUtils::getInstance()->getStringFromFile(getPath());
+	rapidjson::Document data;
+	data.Parse<0>(jsonStr.c_str());
+	if (!isValidJson(data)) {
+		LOG_ERROR("userDataTool::getUserProfile: default profile json is not valid!");
 	} else {
-		//todo load new profile
+		auto profile = cocos2d::UserDefault::getInstance()->getStringForKey("profile", std::string());
+		loadProfile(data, profile);
 	}
-	return nullptr;
+
+	return userData;
+}
+
+void userDataTool::executeLoadData() {}
+
+void userDataTool::loadProfile(const rapidjson::Document& data, const std::string& profileJson) {
+
 }
 

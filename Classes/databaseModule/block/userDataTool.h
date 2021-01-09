@@ -35,7 +35,9 @@ namespace sr {
 			sUserProfileStruct* getUserProfile();
 
 		private:
+			void loadProfile(const rapidjson::Document&, const std::string&);
 			void load(const rapidjson::Document &) override;
+			void executeLoadData() override;
 			sUserProfileStruct* userData;
 		};
 	}

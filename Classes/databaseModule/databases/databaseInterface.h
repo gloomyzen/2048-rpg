@@ -12,11 +12,11 @@ namespace sr {
 		class databaseInterface {
 		public:
 			virtual ~databaseInterface() = default;
-			void executeLoadData() {
+			virtual void executeLoadData() {
 				if (isLoaded()) return;
-				const std::string &regionStr = cocos2d::FileUtils::getInstance()->getStringFromFile(jsonPath);
+				const std::string &jsonStr = cocos2d::FileUtils::getInstance()->getStringFromFile(jsonPath);
 				rapidjson::Document data;
-				data.Parse<0>(regionStr.c_str());
+				data.Parse<0>(jsonStr.c_str());
 				if (isValidJson(data)) {
 					load(data);
 					setLoaded(true);
@@ -34,6 +34,9 @@ namespace sr {
 					return false;
 				}
 				return true;
+			}
+			std::string getPath() const {
+				return jsonPath;
 			}
 
 		protected:
