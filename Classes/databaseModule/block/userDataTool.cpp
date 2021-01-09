@@ -19,6 +19,24 @@ userDataTool &userDataTool::getInstance() {
 }
 
 void userDataTool::load(const rapidjson::Document& data) {
-	//
+	if (!data.IsObject()) {
+		LOG_ERROR("userDataTool::load: Object not found!");
+	}
+
+	for (auto it = data.MemberBegin(); it != data.MemberEnd(); ++it) {
+		//
+	}
+}
+
+sUserProfileStruct *userDataTool::getUserProfile() {
+	if (isLoaded()) return userData;
+
+	auto profile = cocos2d::UserDefault::getInstance()->getStringForKey("profile", "");
+	if (!profile.empty()) {
+		//todo load local profile
+	} else {
+		//todo load new profile
+	}
+	return nullptr;
 }
 

@@ -31,10 +31,11 @@ namespace sr {
 		public:
 			userDataTool(const std::string &);
 			~userDataTool();
-			void load(const rapidjson::Document &) override;
 			static userDataTool &getInstance();
+			sUserProfileStruct* getUserProfile();
 
 		private:
+			void load(const rapidjson::Document &) override;
 			sUserProfileStruct* userData;
 		};
 	}
