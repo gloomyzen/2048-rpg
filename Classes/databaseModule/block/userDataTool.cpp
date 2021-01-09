@@ -11,6 +11,10 @@ userDataTool::userDataTool(const std::string& path) {
 
 userDataTool::~userDataTool() {}
 
+void userDataTool::load(const rapidjson::Document&) {}
+
+void userDataTool::executeLoadData() {}
+
 userDataTool &userDataTool::getInstance() {
 	if (currentUserDataInstance == nullptr) {
 		currentUserDataInstance = new userDataTool("config/user_profile.json");
@@ -18,19 +22,10 @@ userDataTool &userDataTool::getInstance() {
 	return *currentUserDataInstance;
 }
 
-void userDataTool::load(const rapidjson::Document& data) {
-	if (!data.IsObject()) {
-		LOG_ERROR("userDataTool::load: Object not found!");
-	}
-
-	for (auto it = data.MemberBegin(); it != data.MemberEnd(); ++it) {
-		//
-	}
-}
-
 sUserProfileStruct *userDataTool::getUserProfile() {
 	if (isLoaded()) return userData;
 
+	//todo need reformat class to module
 	const std::string &jsonStr = cocos2d::FileUtils::getInstance()->getStringFromFile(getPath());
 	rapidjson::Document data;
 	data.Parse<0>(jsonStr.c_str());
@@ -44,9 +39,13 @@ sUserProfileStruct *userDataTool::getUserProfile() {
 	return userData;
 }
 
-void userDataTool::executeLoadData() {}
-
 void userDataTool::loadProfile(const rapidjson::Document& data, const std::string& profileJson) {
+	if (!data.IsObject()) {
+		LOG_ERROR("userDataTool::load: Object not found!");
+	}
 
+	for (auto it = data.MemberBegin(); it != data.MemberEnd(); ++it) {
+		//
+	}
 }
 
