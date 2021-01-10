@@ -1,7 +1,7 @@
 #include "profileManager.h"
 
 using namespace sr;
-using namespace sr::databaseModule;
+using namespace sr::profileModule;
 
 profileManager *profileMgrInstance = nullptr;
 

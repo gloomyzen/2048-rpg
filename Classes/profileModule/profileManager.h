@@ -2,7 +2,7 @@
 #define SWIPE_RPG_PROFILEMANAGER_H
 
 namespace sr {
-	namespace databaseModule {
+	namespace profileModule {
 
 		class profileManager {
 		public:

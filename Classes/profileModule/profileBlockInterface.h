@@ -5,7 +5,7 @@
 #include "json/ostreamwrapper.h"
 
 namespace sr {
-	namespace databaseModule {
+	namespace profileModule {
 
 		class profileBlockInterface {
 		public:
