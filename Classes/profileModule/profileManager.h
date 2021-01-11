@@ -6,19 +6,21 @@
 #include <string>
 #include <functional>
 
+#define GET_PROFILE() sr::profileModule::profileManager::getInstance()
+
 namespace sr {
 	namespace profileModule {
 
 		class profileManager {
 		public:
-			static profileManager &getInstance();
-		private:
 			profileManager();
 			~profileManager();
+			static profileManager &getInstance();
+		private:
 
 			void load();
 			void save();
-			void loadProfile(const rapidjson::Document& data, const std::string& profileJson);
+			void loadProfile(const rapidjson::Document& defaultData, const rapidjson::Document& localData);
 			void registerBlocks();
 
 			std::map<std::string, std::function<profileBlockInterface*()>> profileBlocks;

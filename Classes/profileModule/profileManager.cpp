@@ -2,6 +2,8 @@
 #include "common/debugModule/logManager.h"
 #include "profileManager.h"
 #include "profileModule/blocks/locationProfile.h"
+#include "common/coreModule/resources/resourceManager.h"
+#include "common/coreModule/resources/loaders/jsonLoader.h"
 
 using namespace sr;
 using namespace sr::profileModule;
@@ -25,29 +27,26 @@ profileManager &profileManager::getInstance() {
 }
 
 void profileManager::load() {
-	const std::string& path = "config/user_profile.json";
-	const std::string& jsonStr = cocos2d::FileUtils::getInstance()->getStringFromFile(path);
-	rapidjson::Document data;
-	data.Parse<0>(jsonStr.c_str());
-	if (data.HasParseError() || data.IsNull()) {
-		LOG_ERROR("profileManager::load: default profile json is not valid!");
-	}
-
+	const std::string& path = "config/user_profile";
+	auto defaultProfile = GET_JSON_MANAGER()->loadJson(path);
 	auto profile = cocos2d::UserDefault::getInstance()->getStringForKey("profile", std::string());
+	auto localProfile = GET_JSON_MANAGER()->stringToJson(profile);
+
 	registerBlocks();
-	loadProfile(data, profile);
+	loadProfile(defaultProfile, localProfile);
 }
 
 void profileManager::save() {
 	//
 }
 
-void profileManager::loadProfile(const rapidjson::Document &data, const std::string &profileJson) {
-	if (!data.IsObject()) {
-		LOG_ERROR("userDataTool::load: Object not found!");
+void profileManager::loadProfile(const rapidjson::Document &defaultData, const rapidjson::Document &localData) {
+	if (!defaultData.IsObject() || defaultData.HasParseError() || defaultData.IsNull()) {
+		LOG_ERROR("profileManager::loadProfile: Object not found! Profile not loaded!");
+		return;
 	}
 
-	for (auto it = data.MemberBegin(); it != data.MemberEnd(); ++it) {
+	for (auto it = defaultData.MemberBegin(); it != defaultData.MemberEnd(); ++it) {
 		//
 	}
 }
