@@ -12,8 +12,8 @@ namespace sr {
 		public:
 			locationProfile();
 			~locationProfile() override;
-			bool load(const rapidjson::Document &) override;
-			bool save(rapidjson::Document &) override;
+			bool load(const rapidjson::GenericValue<rapidjson::UTF8<char>>::ConstObject &) override;
+			bool save(rapidjson::GenericValue<rapidjson::UTF8<char>>::ConstObject &) override;
 		};
 
 	}

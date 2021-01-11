@@ -11,6 +11,7 @@ using namespace sr::profileModule;
 profileManager *profileMgrInstance = nullptr;
 
 profileManager::profileManager() {
+	registerBlocks();
 	load();
 }
 
@@ -32,12 +33,11 @@ void profileManager::load() {
 	auto profile = cocos2d::UserDefault::getInstance()->getStringForKey("profile", std::string());
 	auto localProfile = GET_JSON_MANAGER()->stringToJson(profile);
 
-	registerBlocks();
 	loadProfile(defaultProfile, localProfile);
 }
 
 void profileManager::save() {
-	//
+	//todo
 }
 
 void profileManager::loadProfile(const rapidjson::Document &defaultData, const rapidjson::Document &localData) {
@@ -45,10 +45,27 @@ void profileManager::loadProfile(const rapidjson::Document &defaultData, const r
 		LOG_ERROR("profileManager::loadProfile: Object not found! Profile not loaded!");
 		return;
 	}
+	auto localProfileValid = !localData.HasParseError() && !localData.IsNull() && localData.IsObject();
 
 	for (auto it = defaultData.MemberBegin(); it != defaultData.MemberEnd(); ++it) {
-		//
+		if (it->name.IsString() && it->value.IsObject()) {
+			auto key = it->name.GetString();
+			auto blockIt = profileBlocks.find(key);
+			auto findBlock = blockIt != profileBlocks.end();
+
+			if (localProfileValid && findBlock) {
+				auto localIt = localData.FindMember(key);
+				if (localIt != localData.MemberEnd()) {
+					blockIt->second()->load(localIt->value.GetObjectJ());
+					continue;
+				}
+			}
+			blockIt->second()->load(it->value.GetObjectJ());
+
+		}
 	}
+
+
 }
 
 void profileManager::registerBlocks() {

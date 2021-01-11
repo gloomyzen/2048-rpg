@@ -10,8 +10,8 @@ namespace sr {
 		class profileBlockInterface {
 		public:
 			virtual ~profileBlockInterface() = default;
-			virtual bool load(const rapidjson::Document &) = 0;
-			virtual bool save(rapidjson::Document &) = 0;
+			virtual bool load(const rapidjson::GenericValue<rapidjson::UTF8<char>>::ConstObject &) = 0;
+			virtual bool save(rapidjson::GenericValue<rapidjson::UTF8<char>>::ConstObject &) = 0;
 		};
 	}
 }
