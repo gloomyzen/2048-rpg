@@ -10,12 +10,15 @@
 
 namespace sr {
 	namespace profileModule {
+		class locationProfile;
 
 		class profileManager {
 		public:
 			profileManager();
 			~profileManager();
 			static profileManager &getInstance();
+
+			locationProfile* getLocationBlock() { return locationBlock; }
 		private:
 
 			void load();
@@ -24,6 +27,8 @@ namespace sr {
 			void registerBlocks();
 
 			std::map<std::string, std::function<profileBlockInterface*()>> profileBlocks;
+
+			locationProfile* locationBlock = nullptr;
 		};
 	}
 }

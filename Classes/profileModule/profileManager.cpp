@@ -69,5 +69,6 @@ void profileManager::loadProfile(const rapidjson::Document &defaultData, const r
 }
 
 void profileManager::registerBlocks() {
-	profileBlocks["location"] = [](){ return new locationProfile(); };
+	locationBlock = new locationProfile();
+	profileBlocks["location"] = [this](){ return locationBlock; };
 }

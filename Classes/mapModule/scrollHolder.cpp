@@ -29,7 +29,7 @@ std::deque<nodeTasks> scrollHolder::getTasks() {
 //		auto battleDB = GET_DATABASE_MANAGER().getBattleLevelsDB();
 //		battleDB.executeLoadData();
 
-		auto profile = GET_PROFILE();
+		auto locationBlock = GET_PROFILE().getLocationBlock();
 
 		return eTasksStatus::STATUS_OK;
 	});
