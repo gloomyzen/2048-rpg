@@ -11,12 +11,17 @@ namespace sr {
 
 		class profileManager {
 		public:
+			static profileManager &getInstance();
+		private:
 			profileManager();
 			~profileManager();
-			static profileManager &getInstance();
 
-		private:
-			std::map<std::string, std::function<void()>> profileBlocks;
+			void load();
+			void save();
+			void loadProfile(const rapidjson::Document& data, const std::string& profileJson);
+			void registerBlocks();
+
+			std::map<std::string, std::function<profileBlockInterface*()>> profileBlocks;
 		};
 	}
 }
