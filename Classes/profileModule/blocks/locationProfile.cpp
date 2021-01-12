@@ -9,8 +9,6 @@ locationProfile::locationProfile() {}
 locationProfile::~locationProfile() {}
 
 bool locationProfile::load(const rapidjson::GenericValue<rapidjson::UTF8<char>>::ConstObject &data) {
-	//todo, wip load data
-//	auto first = data.FindMember("forest");
 	for (auto it = data.MemberBegin(); it != data.MemberEnd(); ++it) {
 		if (!it->name.IsString() || !it->value.IsObject()) {
 			LOG_ERROR("locationProfile::load: not valid data from json.");
@@ -18,12 +16,12 @@ bool locationProfile::load(const rapidjson::GenericValue<rapidjson::UTF8<char>>:
 		}
 		auto name = databaseModule::levelTypesMap.find(it->name.GetString());
 		auto loc = new sLocationLog();
-		if (loc->load(it->name.GetObjectJ()) && name != databaseModule::levelTypesMap.end()) {
+		if (loc->load(it->value.GetObjectJ()) && name != databaseModule::levelTypesMap.end()) {
 			location.insert({name->second, loc});
 		}
 	}
 
-	return false;
+	return true;
 }
 
 bool locationProfile::save(rapidjson::GenericValue<rapidjson::UTF8<char>>::ConstObject &) {
@@ -37,8 +35,20 @@ bool sLocationLog::load(const rapidjson::GenericValue<rapidjson::UTF8<char>>::Co
 	if (idIt->value.IsInt() && questIdIt->value.IsUint() && questLogIt->value.IsArray()) {
 		id = idIt->value.GetInt();
 		questId = questIdIt->value.GetUint();
-		auto array = questLogIt->value.GetArray();
-//		for todo
+		auto _array = questLogIt->value.GetArray();
+		for (auto it = _array.Begin(); it != _array.End(); ++it) {
+			if (it->IsObject()) {
+				auto _id = it->FindMember("id");
+				auto _count = it->FindMember("count");
+				if (_id->value.IsUint() && _count->value.IsInt()) {
+					auto item = new sQuestLog();
+					item->itemId = _id->value.GetUint();
+					item->count = _count->value.GetInt();
+					questLog.push_back(item);
+				}
+			}
+		}
+		return true;
 	}
 	return false;
 }
