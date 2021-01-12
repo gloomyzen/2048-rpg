@@ -32,18 +32,19 @@ std::vector<sLocationLog*> userDataTool::getLevelProfile(eBattleLevelsTypes type
 	auto levelBlueprint = battleDB.getDataByLevel(type);
 
 
-//	for (const auto& item : levelBlueprint->currentMap) {
-//		auto [_, data] = item;
-//		item.second.
-//	}
-	//todo foreach by levelBlueprint
-//	if (currentLvl->questId == 0u) {
-//		levelBlueprint->currentMap.
-//	}
-
-
-//	questsDB.getQuestById(this is id...)
-
+	for (const auto& item : levelBlueprint->currentMap) {
+		auto data = item.second;
+		auto profileLvl = std::find_if(currentLvl.begin(), currentLvl.end(), [data](sLocationLog* log){
+			return log->id = data->id;
+		});
+		if (profileLvl != currentLvl.end()) {
+			if ((*profileLvl)->questId == 0u) {
+				//todo generate random quest
+			}
+		} else {
+			//todo insert a new row to profile
+		}
+	}
 
 	return currentLvl;
 }

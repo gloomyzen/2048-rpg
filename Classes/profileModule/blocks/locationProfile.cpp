@@ -37,11 +37,14 @@ bool locationProfile::save(rapidjson::GenericValue<rapidjson::UTF8<char>>::Const
 	return false;
 }
 
-std::vector<sLocationLog*> locationProfile::getLogByLevel(databaseModule::eBattleLevelsTypes type) {
+std::vector<sLocationLog*>& locationProfile::getLogByLevel(databaseModule::eBattleLevelsTypes type) {
 	auto fnd = location.find(type);
 	if (fnd != location.end()) return fnd->second;
+
 	LOG_ERROR(STRING_FORMAT("locationProfile::getLogByLevel: can't find location by type '%d'.", static_cast<int>(type)));
-	return std::vector<sLocationLog*>();
+	std::vector<sLocationLog*> levelLoc;
+	location.insert({type, levelLoc});
+	return location[type];
 }
 
 bool sLocationLog::load(const rapidjson::GenericValue<rapidjson::UTF8<char>>::ConstObject& data) {

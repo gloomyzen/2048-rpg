@@ -34,7 +34,7 @@ namespace sr {
 			bool load(const rapidjson::GenericValue<rapidjson::UTF8<char>>::ConstObject &) override;
 			bool save(rapidjson::GenericValue<rapidjson::UTF8<char>>::ConstObject &) override;
 
-			std::vector<sLocationLog*> getLogByLevel(databaseModule::eBattleLevelsTypes);
+			std::vector<sLocationLog*>& getLogByLevel(databaseModule::eBattleLevelsTypes);
 			std::map<databaseModule::eBattleLevelsTypes, std::vector<sLocationLog*>> getAllLog() { return location; }
 
 		private:
