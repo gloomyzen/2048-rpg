@@ -10,15 +10,24 @@ locationProfile::~locationProfile() {}
 
 bool locationProfile::load(const rapidjson::GenericValue<rapidjson::UTF8<char>>::ConstObject &data) {
 	for (auto it = data.MemberBegin(); it != data.MemberEnd(); ++it) {
-		if (!it->name.IsString() || !it->value.IsObject()) {
+		if (!it->name.IsString() || !it->value.IsArray()) {
 			LOG_ERROR("locationProfile::load: not valid data from json.");
 			continue;
 		}
 		auto name = databaseModule::levelTypesMap.find(it->name.GetString());
-		auto loc = new sLocationLog();
-		if (loc->load(it->value.GetObjectJ()) && name != databaseModule::levelTypesMap.end()) {
-			location.insert({name->second, loc});
+		std::vector<sLocationLog*> locList;
+		auto locationArray = it->value.GetArray();
+		for (auto item = locationArray.Begin(); item != locationArray.End(); ++item) {
+			if (item->IsObject()) {
+				auto loc = new sLocationLog();
+				if (loc->load(item->GetObjectJ()) && name != databaseModule::levelTypesMap.end()) {
+					locList.push_back(loc);
+				}
+			} else {
+				LOG_ERROR(STRING_FORMAT("locationProfile::load: data by key '%s' is not object.", name->first.c_str()));
+			}
 		}
+		location.insert({name->second, locList});
 	}
 
 	return true;
@@ -28,10 +37,11 @@ bool locationProfile::save(rapidjson::GenericValue<rapidjson::UTF8<char>>::Const
 	return false;
 }
 
-sLocationLog *locationProfile::getLogByLevel(databaseModule::eBattleLevelsTypes type) {
+std::vector<sLocationLog*> locationProfile::getLogByLevel(databaseModule::eBattleLevelsTypes type) {
 	auto fnd = location.find(type);
 	if (fnd != location.end()) return fnd->second;
-	return nullptr;
+	LOG_ERROR(STRING_FORMAT("locationProfile::getLogByLevel: can't find location by type '%d'.", static_cast<int>(type)));
+	return std::vector<sLocationLog*>();
 }
 
 bool sLocationLog::load(const rapidjson::GenericValue<rapidjson::UTF8<char>>::ConstObject& data) {

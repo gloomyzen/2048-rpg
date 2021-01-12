@@ -25,6 +25,7 @@ namespace sr {
 			std::string locationName;
 			std::map<int, sLevelDataPiece*> currentMap; //id + struct
 			bool load(const std::string& path);
+			sLevelDataPiece* getDataPieceById(int);
 		};
 
 		class battleLevelsDB : public databaseInterface {
@@ -34,6 +35,7 @@ namespace sr {
 			void load(const rapidjson::Document &) override;
 
 			std::map<eBattleLevelsTypes, sLevelData*> getLevelsData() { return levelsMap; }
+			sLevelData* getDataByLevel(databaseModule::eBattleLevelsTypes);
 
 		private:
 			std::map<eBattleLevelsTypes, sLevelData*> levelsMap;

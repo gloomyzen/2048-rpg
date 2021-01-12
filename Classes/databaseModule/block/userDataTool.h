@@ -18,7 +18,7 @@ namespace sr {
 			userDataTool();
 			~userDataTool();
 			static userDataTool &getInstance();
-			profileModule::sLocationLog* getLevelProfile(databaseModule::eBattleLevelsTypes);
+			std::vector<profileModule::sLocationLog*> getLevelProfile(databaseModule::eBattleLevelsTypes);
 
 		};
 	}

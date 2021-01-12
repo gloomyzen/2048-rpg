@@ -4,6 +4,7 @@
 #include "databaseModule/databases/battleLevelsDB.h"
 #include "databaseModule/databases/questsDB.h"
 #include "profileModule/profileManager.h"
+#include "databaseModule/block/userDataTool.h"
 
 using namespace sr::mapModule;
 using namespace cocos2d;
@@ -30,6 +31,8 @@ std::deque<nodeTasks> scrollHolder::getTasks() {
 //		battleDB.executeLoadData();
 
 //		auto locationBlock = GET_PROFILE().getLocationBlock();
+
+		auto data = databaseModule::userDataTool::getInstance().getLevelProfile(databaseModule::eBattleLevelsTypes::FOREST_LEVEL);
 
 		return eTasksStatus::STATUS_OK;
 	});

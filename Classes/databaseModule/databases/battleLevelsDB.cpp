@@ -29,6 +29,13 @@ void battleLevelsDB::load(const rapidjson::Document &data) {
 	}
 }
 
+sLevelData* battleLevelsDB::getDataByLevel(eBattleLevelsTypes type) {
+	auto find = levelsMap.find(type);
+	if (find != levelsMap.end()) return find->second;
+	LOG_ERROR(STRING_FORMAT("battleLevelsDB::getDataByLevel: can't find data by type '%d'.", static_cast<int>(type)));
+	return nullptr;
+}
+
 bool sLevelData::load(const std::string& path) {
 	auto json = GET_JSON(path);
 	if (json.HasParseError() || !json.IsObject()) {
@@ -87,4 +94,11 @@ bool sLevelData::load(const std::string& path) {
 	}
 
 	return true;
+}
+
+sLevelDataPiece* sLevelData::getDataPieceById(int _id) {
+	auto find = currentMap.find(_id);
+	if (find != currentMap.end()) return find->second;
+	LOG_ERROR(STRING_FORMAT("sLevelData::getDataPieceById: can't find data piece from map by '%d'.", _id));
+	return nullptr;
 }
