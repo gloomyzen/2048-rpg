@@ -28,6 +28,12 @@ bool locationProfile::save(rapidjson::GenericValue<rapidjson::UTF8<char>>::Const
 	return false;
 }
 
+sLocationLog *locationProfile::getLogByLevel(databaseModule::eBattleLevelsTypes type) {
+	auto fnd = location.find(type);
+	if (fnd != location.end()) return fnd->second;
+	return nullptr;
+}
+
 bool sLocationLog::load(const rapidjson::GenericValue<rapidjson::UTF8<char>>::ConstObject& data) {
 	auto idIt = data.FindMember("id");
 	auto questIdIt = data.FindMember("quest");

@@ -22,6 +22,7 @@ namespace sr {
 			void load(const rapidjson::Document&) override;
 
 			std::map<unsigned int, questItem*> getAllQuest() { return questList; }
+			questItem* getQuestById(unsigned int);
 
 		private:
 			std::map<unsigned int, questItem*> questList;

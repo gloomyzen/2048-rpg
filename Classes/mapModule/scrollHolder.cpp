@@ -29,18 +29,18 @@ std::deque<nodeTasks> scrollHolder::getTasks() {
 //		auto battleDB = GET_DATABASE_MANAGER().getBattleLevelsDB();
 //		battleDB.executeLoadData();
 
-		auto locationBlock = GET_PROFILE().getLocationBlock();
+//		auto locationBlock = GET_PROFILE().getLocationBlock();
 
 		return eTasksStatus::STATUS_OK;
 	});
 
 	result.emplace_back([this]() {
-		auto battleDB = GET_DATABASE_MANAGER().getBattleLevelsDB();
-		battleDB.executeLoadData();
+//		auto battleDB = GET_DATABASE_MANAGER().getBattleLevelsDB();
+//		battleDB.executeLoadData();
 //		auto test = battleDB.
 
-		auto questsDB = GET_DATABASE_MANAGER().getQuestsDB();
-		questsDB.executeLoadData();
+//		auto questsDB = GET_DATABASE_MANAGER().getQuestsDB();
+//		questsDB.executeLoadData();
 
 		return eTasksStatus::STATUS_OK;
 	});
