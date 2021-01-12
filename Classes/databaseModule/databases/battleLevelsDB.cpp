@@ -3,13 +3,6 @@
 
 using namespace sr::databaseModule;
 
-std::map<std::string, eBattleLevelsTypes> levelTypesMap = {
-		{"forest",	eBattleLevelsTypes::FOREST_LEVEL},
-		{"cave",	eBattleLevelsTypes::CAVE_LEVEL},
-		{"crystal",	eBattleLevelsTypes::CRYSTAL_LEVEL},
-		{"lava",	eBattleLevelsTypes::LAVA_LEVEL},
-};
-
 battleLevelsDB::battleLevelsDB(const std::string &path) {
 	setPath(path);
 }

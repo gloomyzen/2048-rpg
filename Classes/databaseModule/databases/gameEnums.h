@@ -24,6 +24,14 @@ namespace sr {
 				{"kill_enemy", eQuestEntities::KILL_ENEMY},
 		};
 
+
+		static const std::map<std::string, eBattleLevelsTypes> levelTypesMap = {
+				{"forest",	eBattleLevelsTypes::FOREST_LEVEL},
+				{"cave",	eBattleLevelsTypes::CAVE_LEVEL},
+				{"crystal",	eBattleLevelsTypes::CRYSTAL_LEVEL},
+				{"lava",	eBattleLevelsTypes::LAVA_LEVEL},
+		};
+
 		enum class eSwipeDirection {
 			UNDEFINED = 0,
 			UP = 1,
