@@ -1,7 +1,9 @@
-name: Windows.
+name: Windows
 
 on:
   push:
+    branches:
+      - 'master'
     paths-ignore:
       - 'proj.android'
       - 'proj.ios_mac'
@@ -10,6 +12,8 @@ on:
       - '.github/**'
       - '!.github/workflows/win.yml'
   pull_request:
+    branches:
+      - 'master'
     paths-ignore:
       - 'proj.android'
       - 'proj.ios_mac'
@@ -21,6 +25,7 @@ on:
 jobs:
 
   windows:
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
     name: Windows
     runs-on: windows-latest
 

@@ -5,6 +5,7 @@
 #include "databaseModule/databases/questsDB.h"
 #include "profileModule/profileManager.h"
 #include "databaseModule/block/userDataTool.h"
+#include "common/debugModule/logManager.h"
 
 using namespace sr::mapModule;
 using namespace cocos2d;
@@ -31,20 +32,29 @@ std::deque<nodeTasks> scrollHolder::getTasks() {
 //		battleDB.executeLoadData();
 
 //		auto locationBlock = GET_PROFILE().getLocationBlock();
-
-		auto data = databaseModule::userDataTool::getInstance().getLevelProfile(databaseModule::eBattleLevelsTypes::FOREST_LEVEL);
+//		auto questsDB = GET_DATABASE_MANAGER().getQuestsDB();
+//		questsDB.executeLoadData();
 
 		return eTasksStatus::STATUS_OK;
 	});
 
 	result.emplace_back([this]() {
-//		auto battleDB = GET_DATABASE_MANAGER().getBattleLevelsDB();
-//		battleDB.executeLoadData();
-//		auto test = battleDB.
+		//this is draft, only for prototype
+		auto currentType = databaseModule::eBattleLevelsTypes::FOREST_LEVEL;
 
-//		auto questsDB = GET_DATABASE_MANAGER().getQuestsDB();
-//		questsDB.executeLoadData();
+		auto profileData = databaseModule::userDataTool::getInstance().getLevelProfile(currentType);
+		auto battleDB = GET_DATABASE_MANAGER().getBattleLevelsDB();
+		battleDB.executeLoadData();
+		auto levelBlueprint = battleDB.getDataByLevel(currentType);
 
+
+		for (auto it = profileData.rbegin(); it != profileData.rend(); ++it) {
+			auto currentPiece = levelBlueprint->getDataPieceById((*it)->id);
+			auto node = new Node();
+			node->setName(STRING_FORMAT("mapPiece_%d_row%d", currentPiece->id, currentPiece->row));
+			scrollView->addChild(node);
+			piecesList.push_back(new sMapPiece(currentPiece, *it, node));
+		}
 		return eTasksStatus::STATUS_OK;
 	});
 
