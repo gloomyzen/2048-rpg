@@ -1,0 +1,16 @@
+{
+  "location": {
+    "forest": [
+      {
+        "id": 1,
+        "quest": 20001,
+        "questProgress": [
+          {
+            "id": 10001,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  }
+}

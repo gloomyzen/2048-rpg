@@ -51,3 +51,9 @@ void questsDB::load(const rapidjson::Document &data) {
 		}
 	}
 }
+
+questItem *questsDB::getQuestById(unsigned int id) {
+	auto fnd = questList.find(id);
+	if (fnd != questList.end()) return fnd->second;
+	return nullptr;
+}

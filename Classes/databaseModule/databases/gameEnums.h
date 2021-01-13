@@ -7,6 +7,13 @@
 namespace sr {
 	namespace databaseModule {
 
+		enum class eBattleLevelsTypes {
+			FOREST_LEVEL,
+			CAVE_LEVEL,
+			CRYSTAL_LEVEL,
+			LAVA_LEVEL,
+		};
+
 		enum class eQuestEntities {
 			FIND_ITEM,
 			KILL_ENEMY
@@ -15,6 +22,14 @@ namespace sr {
 		static const std::map<std::string, eQuestEntities> questTypeList {
 				{"find_item", eQuestEntities::FIND_ITEM},
 				{"kill_enemy", eQuestEntities::KILL_ENEMY},
+		};
+
+
+		static const std::map<std::string, eBattleLevelsTypes> levelTypesMap = {
+				{"forest",	eBattleLevelsTypes::FOREST_LEVEL},
+				{"cave",	eBattleLevelsTypes::CAVE_LEVEL},
+				{"crystal",	eBattleLevelsTypes::CRYSTAL_LEVEL},
+				{"lava",	eBattleLevelsTypes::LAVA_LEVEL},
 		};
 
 		enum class eSwipeDirection {
