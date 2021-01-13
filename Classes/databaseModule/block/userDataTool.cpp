@@ -3,6 +3,7 @@
 #include "databaseModule/databaseManager.h"
 #include "databaseModule/databases/battleLevelsDB.h"
 #include "databaseModule/databases/questsDB.h"
+#include "common/utilityModule/randomUtility.h"
 
 using namespace sr::databaseModule;
 using namespace sr::profileModule;
@@ -39,9 +40,13 @@ std::vector<sLocationLog*> userDataTool::getLevelProfile(eBattleLevelsTypes type
 		});
 		if (profileLvl != currentLvl.end()) {
 			if ((*profileLvl)->questId == 0u) {
-				//todo generate random quest
+				(*profileLvl)->questId = common::utilityModule::randomUtility::getRandomVector<unsigned int>(data->quests);
 			}
 		} else {
+			auto newLvl = new sLocationLog();
+			newLvl->questId = common::utilityModule::randomUtility::getRandomVector<unsigned int>(data->quests);
+			newLvl->id = data->id;
+			currentLvl.push_back(newLvl);
 			//todo insert a new row to profile
 		}
 	}
