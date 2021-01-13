@@ -36,7 +36,7 @@ std::vector<sLocationLog*> userDataTool::getLevelProfile(eBattleLevelsTypes type
 	for (const auto& item : levelBlueprint->currentMap) {
 		auto data = item.second;
 		auto profileLvl = std::find_if(currentLvl.begin(), currentLvl.end(), [data](sLocationLog* log){
-			return log->id = data->id;
+			return log->id == data->id;
 		});
 		if (profileLvl != currentLvl.end()) {
 			if ((*profileLvl)->questId == 0u) {
@@ -47,7 +47,6 @@ std::vector<sLocationLog*> userDataTool::getLevelProfile(eBattleLevelsTypes type
 			newLvl->questId = common::utilityModule::randomUtility::getRandomVector<unsigned int>(data->quests);
 			newLvl->id = data->id;
 			currentLvl.push_back(newLvl);
-			//todo insert a new row to profile
 		}
 	}
 
