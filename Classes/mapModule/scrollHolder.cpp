@@ -50,10 +50,10 @@ std::deque<nodeTasks> scrollHolder::getTasks() {
 
 		for (auto it = profileData.rbegin(); it != profileData.rend(); ++it) {
 			auto currentPiece = levelBlueprint->getDataPieceById((*it)->id);
-			auto node = new Node();
+			auto node = new nodeProperties<Node>();
 			node->setName(STRING_FORMAT("mapPiece_%d_row%d", currentPiece->id, currentPiece->row));
 			node->setPosition(currentPiece->position);
-			auto test = currentPiece->property;
+			node->loadProperty(currentPiece->property);
 			scrollView->addChild(node);
 			piecesList.push_back(new sMapPiece(currentPiece, *it, node));
 		}
