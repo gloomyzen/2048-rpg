@@ -52,6 +52,8 @@ std::deque<nodeTasks> scrollHolder::getTasks() {
 			auto currentPiece = levelBlueprint->getDataPieceById((*it)->id);
 			auto node = new Node();
 			node->setName(STRING_FORMAT("mapPiece_%d_row%d", currentPiece->id, currentPiece->row));
+			node->setPosition(currentPiece->position);
+			auto test = currentPiece->property;
 			scrollView->addChild(node);
 			piecesList.push_back(new sMapPiece(currentPiece, *it, node));
 		}

@@ -11,7 +11,7 @@
 namespace sr {
 	namespace mapModule {
 
-		class scrollHolder : public common::coreModule::nodeProperties, public cocos2d::Node, public taskHolder {
+		class scrollHolder : public common::coreModule::nodeProperties<cocos2d::Node>, public taskHolder {
 			struct sMapPiece {
 				databaseModule::sLevelDataPiece* pieceData = nullptr;
 				profileModule::sLocationLog* quest = nullptr;

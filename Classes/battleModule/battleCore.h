@@ -11,7 +11,7 @@
 namespace sr {
 	namespace battleModule {
 
-		class battleCore : public common::coreModule::nodeProperties, public cocos2d::Node, public taskHolder {
+		class battleCore : public common::coreModule::nodeProperties<cocos2d::Node>, public taskHolder {
 		public:
 			battleCore();
 			~battleCore();

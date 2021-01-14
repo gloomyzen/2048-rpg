@@ -10,7 +10,7 @@ namespace sr {
 		using namespace cocos2d;
 		using namespace ui;
 
-	class menuButton : public Button, public common::coreModule::nodeProperties {
+	class menuButton : public common::coreModule::nodeProperties<cocos2d::ui::Button> {
 		public:
 			menuButton();
 			~menuButton();

@@ -22,7 +22,7 @@ namespace sr {
 			std::string title;
 		};
 
-		class metaTabs : public coreModule::nodeProperties, public Node {
+		class metaTabs : public coreModule::nodeProperties<cocos2d::Node> {
 		public:
 			metaTabs();
 			~metaTabs();

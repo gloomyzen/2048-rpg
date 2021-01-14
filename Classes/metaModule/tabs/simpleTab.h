@@ -11,7 +11,7 @@ namespace sr {
 		using namespace ui;
 		using namespace common;
 
-	class simpleTab : public coreModule::nodeProperties, public Layout {
+	class simpleTab : public coreModule::nodeProperties<cocos2d::ui::Layout> {
 		public:
 			simpleTab();
 			~simpleTab();
