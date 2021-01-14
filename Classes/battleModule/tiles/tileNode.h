@@ -11,7 +11,7 @@
 namespace sr {
 	namespace battleModule {
 
-	class tileNode : public common::coreModule::nodeProperties, public cocos2d::Node {
+	class tileNode : public common::coreModule::nodeProperties<cocos2d::Node> {
 		public:
 			tileNode();
 			~tileNode() = default;

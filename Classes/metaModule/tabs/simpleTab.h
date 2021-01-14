@@ -7,18 +7,15 @@
 
 namespace sr {
 	namespace metaModule {
-		using namespace cocos2d;
-		using namespace ui;
-		using namespace common;
 
-	class simpleTab : public coreModule::nodeProperties, public Layout {
+	class simpleTab : public common::coreModule::nodeProperties<cocos2d::ui::Layout> {
 		public:
 			simpleTab();
 			~simpleTab();
 			CREATE_FUNC(simpleTab);
-			static Layout *createNode() { return simpleTab::create(); }
+			static cocos2d::ui::Layout *createNode() { return simpleTab::create(); }
 			bool init() {
-				if (!Layout::init()) {
+				if (!cocos2d::ui::Layout::init()) {
 					return false;
 				}
 				return true;

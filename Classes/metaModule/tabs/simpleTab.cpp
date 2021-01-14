@@ -6,8 +6,8 @@ using namespace sr::metaModule;
 simpleTab::simpleTab() {
 	this->setName("simpleTab");
 	loadProperty("menuScene/tabs/" + this->getName(), dynamic_cast<Node *>(this));
-	auto visibleSize = Director::getInstance()->getVisibleSize();
-	if (auto label = dynamic_cast<Label *>(findNode("comingSoon"))) {
+	auto visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
+	if (auto label = dynamic_cast<cocos2d::Label *>(findNode("comingSoon"))) {
 		label->setPosition(visibleSize / 2);
 	}
 

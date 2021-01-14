@@ -7,16 +7,14 @@
 
 namespace sr {
 	namespace metaModule {
-		using namespace cocos2d;
-		using namespace ui;
 
-	class menuButton : public Button, public common::coreModule::nodeProperties {
+	class menuButton : public common::coreModule::nodeProperties<cocos2d::ui::Button> {
 		public:
 			menuButton();
 			~menuButton();
 			CREATE_FUNC(menuButton);
 			bool init() override {
-				if (!Button::init()) {
+				if (!cocos2d::ui::Button::init()) {
 					return false;
 				}
 				return true;

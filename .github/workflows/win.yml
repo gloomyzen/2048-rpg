@@ -1,0 +1,87 @@
+name: Windows
+
+on:
+  push:
+    branches:
+      - 'master'
+    paths-ignore:
+      - 'proj.android'
+      - 'proj.ios_mac'
+      - 'proj.linux'
+      - '**.md'
+      - '.github/**'
+      - '!.github/workflows/win.yml'
+  pull_request:
+    branches:
+      - 'master'
+    paths-ignore:
+      - 'proj.android'
+      - 'proj.ios_mac'
+      - 'proj.linux'
+      - '**.md'
+      - '.github/**'
+      - '!.github/workflows/win.yml'
+
+jobs:
+
+  windows:
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
+    name: Windows
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        defines:
+          - ""
+    env:
+      SDK: "10.0.18362.0"
+      VC: "call vcvars32.bat && cd Libraries"
+      GIT: "https://github.com"
+      UPLOAD_ARTIFACT: "false"
+      ONLY_CACHE: "false"
+      MANUAL_CACHING: "2"
+      AUTO_CACHING: "1"
+
+    defaults:
+      run:
+        shell: cmd
+
+    steps:
+      - name: Get repository name.
+        shell: bash
+        run: echo "REPO_NAME=${GITHUB_REPOSITORY##*/}" >> $GITHUB_ENV
+
+      - name: Set up environment paths.
+        shell: bash
+        run: |
+          echo "C:\\Strawberry\\perl\\bin\\" >> $GITHUB_PATH
+          echo "C:\\Program Files\\NASM\\" >> $GITHUB_PATH
+          echo "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\VC\\Auxiliary\\Build\\" >> $GITHUB_PATH
+          mkdir Libraries && cd Libraries
+          echo "Convert unix path to win path."
+          p=`pwd | sed 's#^/[d]#d:#g' |sed 's#/#\\\\#g'`
+          echo "LibrariesPath=$p" >> $GITHUB_ENV
+      - name: Save msbuild version.
+        run: |
+          call vcvars32.bat
+          msbuild -version > CACHE_KEY.txt
+      - name: Clone.
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+          path: ${{ env.REPO_NAME }}
+
+      - name: Choco installs.
+        run: choco install --no-progress -y nasm yasm jom ninja
+
+      - name: Find any version of Python 2.
+        shell: bash
+        run: |
+          echo "Find any version of Python 2."
+          p=`ls /c/hostedtoolcache/windows/python | grep 2 | tail -1`
+          if [ -z "$p" ]; then
+            echo "Python 2 is not found."
+            exit 1
+          fi
+          echo "PY2=C:\\hostedtoolcache\\windows\\Python\\$p\\x64" >> $GITHUB_ENV
+          echo "Found $p."

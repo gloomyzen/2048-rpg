@@ -11,9 +11,6 @@
 
 namespace sr {
 	namespace metaModule {
-		using namespace cocos2d;
-		using namespace ui;
-		using namespace common;
 
 		struct tabsElement {
 			int index;
@@ -22,14 +19,14 @@ namespace sr {
 			std::string title;
 		};
 
-		class metaTabs : public coreModule::nodeProperties, public Node {
+	class metaTabs : public common::coreModule::nodeProperties<cocos2d::Node> {
 		public:
 			metaTabs();
 			~metaTabs();
 			CREATE_FUNC(metaTabs);
-			static Node *createNode() { return metaTabs::create(); }
+			static cocos2d::Node *createNode() { return metaTabs::create(); }
 			bool init() override {
-				if (!Node::init()) {
+				if (!cocos2d::Node::init()) {
 					return false;
 				}
 				return true;
@@ -37,8 +34,8 @@ namespace sr {
 
 		private:
 			void createPageView();
-			PageView* pageView = nullptr;
-			Node* buttonHolder = nullptr;
+			cocos2d::ui::PageView* pageView = nullptr;
+			cocos2d::Node* buttonHolder = nullptr;
 			std::vector<tabsElement*> tabs{};
 
 		};

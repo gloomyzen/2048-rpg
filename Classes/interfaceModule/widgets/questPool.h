@@ -8,7 +8,7 @@
 
 namespace sr {
 	namespace interfaceModule {
-		class questPool : public common::coreModule::nodeProperties, public cocos2d::Node {
+		class questPool : public common::coreModule::nodeProperties<cocos2d::Node> {
 		public:
 			questPool();
 			~questPool() = default;

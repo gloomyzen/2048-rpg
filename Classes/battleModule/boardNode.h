@@ -40,7 +40,7 @@ namespace sr {
 		typedef std::function<std::vector<databaseModule::sTileData*>()> spawnCallback;
 		typedef std::function<bool(tileNode*)> heroMatchCallback;
 
-		class boardNode : public common::coreModule::nodeProperties, public cocos2d::Node, public taskHolder {
+		class boardNode : public common::coreModule::nodeProperties<cocos2d::Node>, public taskHolder {
 		public:
 			boardNode();
 			~boardNode();

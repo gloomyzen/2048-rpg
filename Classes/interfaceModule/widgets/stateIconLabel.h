@@ -8,7 +8,7 @@
 namespace sr {
 	namespace interfaceModule {
 
-		class stateIconLabel : public common::coreModule::nodeProperties, public cocos2d::Node {
+		class stateIconLabel : public common::coreModule::nodeProperties<cocos2d::Node> {
 		public:
 			stateIconLabel();
 			~stateIconLabel() = default;
