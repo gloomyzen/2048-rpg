@@ -5,7 +5,7 @@
       "pivot": [ 0.5, 0.5 ]
     },
     "spriteComponent": {
-      "image": "images/mapScene/mapTiles/grass.png",
+      "image": "images/mapTiles/grass.png",
       "pixel": true
     }
   }
