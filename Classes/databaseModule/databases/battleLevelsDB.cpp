@@ -69,6 +69,7 @@ bool sLevelData::load(const std::string& path) {
 			auto y = row->FindMember("y");
 			auto type = row->FindMember("type");
 			auto quests = row->FindMember("quests");
+			auto startHero = row->FindMember("heroStart");
 			std::vector<unsigned int> questVec;
 			if (quests->value.IsArray()) {
 				auto questArray = quests->value.GetArray();
@@ -87,6 +88,9 @@ bool sLevelData::load(const std::string& path) {
 					piece->position = cocos2d::Vec2(x->value.GetFloat(), y->value.GetFloat());
 					piece->property = prop->second;
 					piece->quests = questVec;
+					if (startHero->value.IsBool()) {
+						piece->heroStart = startHero->value.GetBool();
+					}
 					currentMap.insert({id->value.GetInt(), piece});
 				}
 			}

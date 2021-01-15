@@ -22,18 +22,6 @@ std::deque<nodeTasks> scrollHolder::getTasks() {
 	result.emplace_back([this]() {
 //		CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("sounds/menu.wav", true);
 		scrollView = dynamic_cast<ui::ScrollView*>(findNode("scrollContainer"));
-		//todo scroll by progress
-//		auto bg = dynamic_cast<Sprite*>(findNode("bg"));
-//		scrollView->setInnerContainerSize( cocos2d::Size(bg->getBoundingBox().size.width, bg->getBoundingBox().size.height));
-//		scrollView->jumpToPercentBothDirection(Vec2(50.f, 50.f));
-//		bg->setMarkDirty();
-
-//		auto battleDB = GET_DATABASE_MANAGER().getBattleLevelsDB();
-//		battleDB.executeLoadData();
-
-//		auto locationBlock = GET_PROFILE().getLocationBlock();
-//		auto questsDB = GET_DATABASE_MANAGER().getQuestsDB();
-//		questsDB.executeLoadData();
 
 		return eTasksStatus::STATUS_OK;
 	});

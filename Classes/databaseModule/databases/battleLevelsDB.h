@@ -18,6 +18,7 @@ namespace sr {
 			int row;
 			cocos2d::Vec2 position;
 			std::string property;
+			bool heroStart = false;
 			std::vector<unsigned int> quests;
 		};
 
