@@ -47,7 +47,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	setting->load();
 	cocos2d::FileUtils::getInstance()->setPopupNotify(false);
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
-	setting->init(false, "largeResolution");
+	setting->init(false, "frameResolution");
 #else
 	setting->init(true);
 #endif
@@ -96,7 +96,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 		return node;
 	});
 
-	GET_GAME_MANAGER().run(common::coreModule::eGameStates::BATTLE_SCENE);
+	GET_GAME_MANAGER().run(common::coreModule::eGameStates::MAP_SCENE);
 
 	return true;
 }

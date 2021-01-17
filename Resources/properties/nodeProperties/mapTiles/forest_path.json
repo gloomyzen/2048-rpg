@@ -1,12 +1,12 @@
 {
-  "forest_grass": {
+  "forest_path": {
     "transformComponent": {
       "anchor": [ 0.5, 0.5 ],
       "pivot": [ 0.5, 0.5 ],
       "size": [170, 194]
     },
     "spriteComponent": {
-      "image": "images/mapTiles/grass.png",
+      "image": "images/mapTiles/path.png",
       "pixel": true
     }
   }
