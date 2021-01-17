@@ -1,4 +1,10 @@
 {
-  "type": "sprite",
-  "name": "forest_grass"
+  "type": "node",
+  "name": "forest_grass",
+  "child": [
+    {
+      "type": "button",
+      "name": "button"
+    }
+  ]
 }

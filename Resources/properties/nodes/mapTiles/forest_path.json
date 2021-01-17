@@ -1,4 +1,10 @@
 {
-  "type": "sprite",
-  "name": "forest_path"
+  "type": "node",
+  "name": "forest_path",
+  "child": [
+    {
+      "type": "button",
+      "name": "button"
+    }
+  ]
 }
