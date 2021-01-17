@@ -96,7 +96,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 		return node;
 	});
 
-	GET_GAME_MANAGER().run(common::coreModule::eGameStates::MAP_SCENE);
+	GET_GAME_MANAGER().run(common::coreModule::eGameStates::BATTLE_SCENE);
 
 	return true;
 }

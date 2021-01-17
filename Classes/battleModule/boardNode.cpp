@@ -89,9 +89,9 @@ void boardNode::generateBoardBg(Vec2 pos) {
 	auto sliceX = BOARD_COUNT_PATTERN_X % BOARD_COUNT_X / 2;
 	auto sliceY = BOARD_COUNT_PATTERN_Y % BOARD_COUNT_Y / 2;
 	boardBgPos = Vec2(pos.x - sliceX * boardTileWH, pos.y - sliceY * boardTileWH);
-	boardBg = new Sprite();
+	boardBg = new nodeProperties<Sprite>();
 	boardBg->setName("bg");
-	loadComponent("battleScene/" + this->getName(), dynamic_cast<Sprite*>(boardBg));
+	loadComponent("battleScene/" + this->getName(), boardBg);
 	boardBg->setPosition(boardBgPos);
 	boardBg->setContentSize(cocos2d::Size(BOARD_COUNT_PATTERN_X * boardTileWH, BOARD_COUNT_PATTERN_Y * boardTileWH));
 	addChild(boardBg, -1);
