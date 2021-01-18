@@ -18,6 +18,7 @@ namespace sr {
 			bool isClickable() const { return clickable; }
 			void setClickCallback(std::function<void()>);
 		private:
+			std::function<void()> soundCallback = nullptr;
 			std::function<void()> onClickCallback = nullptr;
 			bool clickable = true;
 			cocos2d::EventListenerTouchOneByOne* listener = nullptr;
