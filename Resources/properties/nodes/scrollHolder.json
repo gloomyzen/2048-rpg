@@ -4,7 +4,13 @@
   "child": [
     {
       "type": "scrollView",
-      "name": "scrollContainer"
+      "name": "scrollContainer",
+      "child": [
+        {
+          "type": "soundButton",
+          "name": "testBtn"
+        }
+      ]
     }
   ]
 }
