@@ -1,10 +1,4 @@
 {
-  "type": "node",
-  "name": "forest_path",
-  "child": [
-    {
-      "type": "button",
-      "name": "button"
-    }
-  ]
+  "type": "soundButton",
+  "name": "forest_path"
 }

@@ -18,15 +18,5 @@
       "containerSize": [640, 1235],
       "scrollPosPercent": [50, 50]
     }
-  },
-  "testBtn": {
-    "transformComponent": {
-      "anchor": [ 0.5, 0.5 ],
-      "pivot": [ 0.5, 0.5 ]
-    },
-    "spriteComponent": {
-      "image": "images/tiles/bg/tile_dark.png",
-      "pixel": true
-    }
   }
 }

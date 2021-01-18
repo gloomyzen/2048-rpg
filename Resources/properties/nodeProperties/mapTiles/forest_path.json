@@ -4,16 +4,10 @@
       "anchor": [ 0.5, 0.5 ],
       "pivot": [ 0.5, 0.5 ],
       "size": [170, 194]
-    }
-  },
-  "button": {
-    "transformComponent": {
-      "anchor": [ 0.5, 0.5 ],
-      "pivot": [ 0.5, 0.5 ],
-      "size": [170, 194]
     },
-    "buttonComponent": {
-      "normalImage": "images/mapTiles/path.png"
+    "spriteComponent": {
+      "image": "images/mapTiles/path.png",
+      "pixel": true
     }
   }
 }

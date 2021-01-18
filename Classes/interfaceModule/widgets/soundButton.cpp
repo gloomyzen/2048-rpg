@@ -31,7 +31,7 @@ void soundButton::setClickCallback(std::function<void()> clb) {
 
 		return true;
 	};
-	listener->onTouchEnded = [this](cocos2d::Touch* touch, cocos2d::Event* event){
+	listener->onTouchEnded = [this](cocos2d::Touch*, cocos2d::Event*){
 		if (!clickable)
 			return false;
 

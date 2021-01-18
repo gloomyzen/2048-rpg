@@ -1,10 +1,4 @@
 {
-  "type": "node",
-  "name": "forest_grass",
-  "child": [
-    {
-      "type": "button",
-      "name": "button"
-    }
-  ]
+  "type": "soundButton",
+  "name": "forest_grass"
 }

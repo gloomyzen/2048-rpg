@@ -6,6 +6,7 @@
 #include "profileModule/profileManager.h"
 #include "databaseModule/block/userDataTool.h"
 #include "common/debugModule/logManager.h"
+#include "interfaceModule/widgets/soundButton.h"
 
 using namespace sr::mapModule;
 using namespace cocos2d;
@@ -38,7 +39,7 @@ std::deque<nodeTasks> scrollHolder::getTasks() {
 
 		for (auto it = profileData.rbegin(); it != profileData.rend(); ++it) {
 			auto currentPiece = levelBlueprint->getDataPieceById((*it)->id);
-			auto node = new nodeProperties<Node>();
+			auto node = new nodeProperties<interfaceModule::soundButton>();
 			node->setName(STRING_FORMAT("mapPiece_%d_row%d", currentPiece->id, currentPiece->row));
 			node->setPosition(currentPiece->position);
 			node->loadProperty(currentPiece->property);
