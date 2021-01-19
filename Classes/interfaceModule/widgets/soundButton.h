@@ -21,7 +21,7 @@ namespace sr {
 			std::function<void()> soundCallback = nullptr;
 			std::function<void()> onClickCallback = nullptr;
 			bool clickable = true;
-			cocos2d::EventListenerTouchOneByOne* listener = nullptr;
+//			cocos2d::EventListenerTouchAllAtOnce* listener = nullptr;
 
 		};
 
