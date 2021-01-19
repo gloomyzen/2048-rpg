@@ -3,13 +3,14 @@
 
 #include "cocos2d.h"
 #include "common/coreModule/nodes/nodeProperties.h"
+#include "common/coreModule/nodes/eventNode.h"
 #include <string>
 #include <functional>
 
 namespace sr {
 	namespace interfaceModule {
 
-		class soundButton : public common::coreModule::nodeProperties<cocos2d::Sprite> {
+		class soundButton : public common::coreModule::nodeProperties<cocos2d::Sprite>, public eventNode {
 		public:
 			soundButton();
 			~soundButton() override;
