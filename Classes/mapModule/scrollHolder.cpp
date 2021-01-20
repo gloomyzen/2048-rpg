@@ -39,12 +39,16 @@ std::deque<nodeTasks> scrollHolder::getTasks() {
 
 		for (auto it = profileData.rbegin(); it != profileData.rend(); ++it) {
 			auto currentPiece = levelBlueprint->getDataPieceById((*it)->id);
-			auto node = new nodeProperties<interfaceModule::soundButton>();
-			node->setName(STRING_FORMAT("mapPiece_%d_row%d", currentPiece->id, currentPiece->row));
-			node->setPosition(currentPiece->position);
-			node->loadProperty(currentPiece->property);
-			scrollView->addChild(node);
-			piecesList.push_back(new sMapPiece(currentPiece, *it, node));
+			if (!currentPiece->quests.empty()) {
+				auto node = new nodeProperties<interfaceModule::soundButton>();
+				node->setName(STRING_FORMAT("mapPiece_%d_row%d", currentPiece->id, currentPiece->row));
+				node->setPosition(currentPiece->position);
+				node->loadProperty(currentPiece->property);
+				piecesList.push_back(new sMapPiece(currentPiece, *it, node));
+				scrollView->addChild(node);
+			} else {
+				piecesList.push_back(new sMapPiece(currentPiece, *it, nullptr));
+			}
 		}
 		return eTasksStatus::STATUS_OK;
 	});
