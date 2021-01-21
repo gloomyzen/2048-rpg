@@ -86,6 +86,7 @@ bool sLevelData::load(const std::string& path) {
 					piece->id = id->value.GetInt();
 					piece->row = rowNum->value.GetInt();
 					piece->position = cocos2d::Vec2(x->value.GetFloat(), y->value.GetFloat());
+					piece->nodeName = prop->first;
 					piece->property = prop->second;
 					piece->quests = questVec;
 					if (startHero->value.IsBool()) {
