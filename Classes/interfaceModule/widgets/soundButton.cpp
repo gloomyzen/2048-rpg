@@ -14,25 +14,29 @@ sr::interfaceModule::soundButton::soundButton() {
 }
 
 soundButton::~soundButton() {
-	cocos2d::Director::getInstance()->getEventDispatcher()->removeEventListener(listener);
+	this->getEventDispatcher()->removeEventListener(listener);
 	Sprite::~Sprite();
 }
 
 void soundButton::setClickCallback(std::function<void()> clb) {
 	onClickCallback = std::move(clb);
-	listener->setSwallowTouches(false);
+	listener->setSwallowTouches(true);
 	listener->onTouchBegan = [this](cocos2d::Touch* touch, cocos2d::Event* event){
+//		cocos2d::Vec2 touchPos = GET_GAME_MANAGER().getMainScene()->convertTouchToNodeSpace(touch);
+		bool correctNode = this->getBoundingBox().containsPoint(touch->getLocation());
+		if (correctNode) {
+			if (!clickable)
+				return false;
+
+			if (soundCallback)
+				soundCallback();
+
+			event->getCurrentTarget()->runAction(cocos2d::TintTo::create(0.1f, cocos2d::Color3B(0, 0, 0)));
+		}
 		auto test = this->getName();
 		auto test2 = event->getCurrentTarget()->getName();
-		if (!clickable)
-			return false;
 
-		if (soundCallback)
-			soundCallback();
-
-		event->getCurrentTarget()->runAction(cocos2d::TintTo::create(0.1f, cocos2d::Color3B(0, 0, 0)));
-
-		return true;
+		return correctNode;
 	};
 	listener->onTouchEnded = [this](cocos2d::Touch*, cocos2d::Event* event){
 		if (!clickable)
@@ -49,5 +53,5 @@ void soundButton::setClickCallback(std::function<void()> clb) {
 
 		return true;
 	};
-	cocos2d::Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
+	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
 }
