@@ -22,10 +22,7 @@ void soundButton::setClickCallback(std::function<void()> clb) {
 	onClickCallback = std::move(clb);
 	listener->setSwallowTouches(true);
 	listener->onTouchBegan = [this](cocos2d::Touch* touch, cocos2d::Event* event){
-//		auto test3 = this->getPhysicsBody()->getShapes();
-//		auto shape = this->getPhysicsBody()->getFirstShape();
-//		auto poly = dynamic_cast<cocos2d::PhysicsShapePolygon*>(shape);
-//		bool correctNode = poly->containsPoint(touch->getLocation());
+
 		bool correctNode = this->getBoundingBox().containsPoint(touch->getLocation());
 		if (correctNode) {
 			if (!clickable)
