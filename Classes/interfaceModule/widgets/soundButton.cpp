@@ -22,7 +22,6 @@ void soundButton::setClickCallback(std::function<void()> clb) {
 	onClickCallback = std::move(clb);
 	listener->setSwallowTouches(true);
 	listener->onTouchBegan = [this](cocos2d::Touch* touch, cocos2d::Event* event){
-
 		bool correctNode = this->getBoundingBox().containsPoint(touch->getLocation());
 		if (correctNode) {
 			if (!clickable)
@@ -55,3 +54,4 @@ void soundButton::setClickCallback(std::function<void()> clb) {
 	};
 	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
 }
+
