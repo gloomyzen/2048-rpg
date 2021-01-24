@@ -1,0 +1,10 @@
+{
+  "type": "node",
+  "name": "scrollHolder",
+  "child": [
+    {
+      "type": "scrollView",
+      "name": "scrollContainer"
+    }
+  ]
+}

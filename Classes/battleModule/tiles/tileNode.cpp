@@ -124,7 +124,7 @@ void tileNode::updateTileFromData() {
 	}
 	//set icon
 	if (!currentUpgrade->icon.empty()) {
-		auto icon = new Sprite();
+		auto icon = new nodeProperties<Sprite>();
 		icon->initWithFile(currentUpgrade->icon);
 		common::coreModule::spriteParameters::setCorrectPixelartTexture(icon);
 		imgSlot->removeAllChildren();

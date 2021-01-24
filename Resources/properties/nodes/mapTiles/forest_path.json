@@ -1,0 +1,10 @@
+{
+  "type": "sprite",
+  "name": "forest_path",
+  "child": [
+    {
+      "type": "soundButton",
+      "name": "button"
+    }
+  ]
+}
