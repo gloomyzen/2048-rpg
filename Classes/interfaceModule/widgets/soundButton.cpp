@@ -31,10 +31,8 @@ void soundButton::setClickCallback(std::function<void()> clb) {
 			if (soundCallback)
 				soundCallback();
 
-			event->getCurrentTarget()->runAction(cocos2d::TintTo::create(0.1f, cocos2d::Color3B(0, 0, 0)));
+			event->getCurrentTarget()->runAction(cocos2d::TintTo::create(0.1f, cocos2d::Color3B(245, 245, 245)));
 		}
-		auto test = this->getName();
-		auto test2 = event->getCurrentTarget()->getName();
 
 		return correctNode;
 	};
