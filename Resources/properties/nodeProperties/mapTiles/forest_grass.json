@@ -6,8 +6,7 @@
     },
     "spriteComponent": {
       "image": "images/mapTiles/grass.png",
-      "pixel": true,
-      "size": [170, 194]
+      "pixel": true
     }
   }
 }
