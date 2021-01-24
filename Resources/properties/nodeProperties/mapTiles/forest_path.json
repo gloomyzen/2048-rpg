@@ -6,7 +6,8 @@
     },
     "spriteComponent": {
       "image": "images/mapTiles/path.png",
-      "pixel": true
+      "pixel": true,
+      "size": [170, 194]
     }
   }
 }
