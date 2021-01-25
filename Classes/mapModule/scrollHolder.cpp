@@ -6,7 +6,6 @@
 #include "profileModule/profileManager.h"
 #include "databaseModule/block/userDataTool.h"
 #include "common/debugModule/logManager.h"
-#include "interfaceModule/widgets/soundButton.h"
 
 using namespace sr::mapModule;
 using namespace cocos2d;
