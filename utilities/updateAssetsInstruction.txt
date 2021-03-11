@@ -1,5 +1,0 @@
-Данный скрипт нужен для синхронизации данных с google drive
-Для запуска необходим python3
-Перед первым запуском необходимо устаносить зависимости:
-pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
-todo информация по добавления локального токена

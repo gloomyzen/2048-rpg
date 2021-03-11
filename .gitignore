@@ -88,12 +88,17 @@ proj.android/app/libs/armeabi/
 proj.android/app/.cxx/ndk_locator_record.json
 proj.android/app/local.properties
 proj.android/*/build/
+proj.android/build/
 cocos2d/cocos/platform/android/libcocos2dx/build/
 
 # proj.ios_mac
 cocos2d/build/build/
 cocos2d/build/cocos2d_libs.xcodeproj/xcuserdata/
 proj.ios_mac/build/
+proj.ios_mac/mac/CMakeScripts/
+proj.ios_mac/mac/engine/
+proj.ios_mac/mac/lib/
+proj.ios_mac/mac/build/
 proj.ios_mac/mac/*.xcodeproj/project.xcworkspace
 proj.ios_mac/mac/*.xcodeproj/xcuserdata/
 proj.ios_mac/mac/*.build/
@@ -106,11 +111,13 @@ proj.ios_mac/ios/CMakeScripts
 proj.ios_mac/ios/Debug-*
 proj.ios_mac/ios/engine
 proj.ios_mac/ios/lib
+proj.ios_mac/ios/build/
 !*.pch
 .cxx
 
 
 # proj.linux
+proj.linux/build/
 
 # proj.win32
 cocos2d/cocos/2d/Debug.*/
@@ -127,6 +134,7 @@ proj.win32/*.sdf
 proj.win32/*.opensdf
 proj.win32/Debug.*/
 proj.win32/Release.*/
+proj.win32/build/
 
 # proj.win8.1-universal
 

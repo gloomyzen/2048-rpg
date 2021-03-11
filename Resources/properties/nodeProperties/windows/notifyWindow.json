@@ -1,0 +1,107 @@
+{
+  "notifyWindow": {
+    "transformComponent": {
+      "anchor": [ 0.5, 0.5 ],
+      "pivot": [ 0.5, 0.5 ]
+    }
+  },
+  "bg": {
+    "transformComponent": {
+      "anchor": [ 0.5, 0.5 ],
+      "pivot": [ 0.5, 0.5 ],
+      "size": [572, 300]
+    },
+    "scale9spriteComponent": {
+      "image": "images/general/whiteBg.png",
+      "slice9": {
+        "x": 34,
+        "y": 34,
+        "width": 1,
+        "height": 1
+      }
+    },
+    "colorComponent": {
+      "color": [255, 255, 255]
+    }
+  },
+  "windowText": {
+    "transformComponent": {
+      "pivot": [ 0.5, 0.75 ],
+      "anchor": [ 0.5, 0.5 ],
+      "position": [0, -40]
+    },
+    "labelComponent": {
+      "text": "Are you sure you want to delete the profile for this course?",
+      "fontType": "ttf",
+      "fontSize": 24.0,
+      "fontFile": "fonts/SFProText_Regular.ttf",
+      "bold": true,
+      "italics": false,
+      "alight": "center",
+      "maxLineWidth": 1000
+    },
+    "colorComponent": {
+      "color": [0, 0, 0]
+    }
+  },
+  "closeBtn": {
+    "transformComponent": {
+      "anchor": [ 0.5, 0.5 ],
+      "pivot": [ 0.7, 0.25 ],
+      "position": [0, 0]
+    },
+    "spriteComponent": {
+      "image": "images/windows/notifyWindow/whiteBtn.png"
+    }
+  },
+  "closeBtnLbl": {
+    "transformComponent": {
+      "anchor": [ 0.5, 0.5 ],
+      "pivot": [ 0.5, 1.0 ],
+      "position": [0, -40]
+    },
+    "labelComponent": {
+      "text": "Close",
+      "fontType": "ttf",
+      "fontSize": 24.0,
+      "fontFile": "fonts/SFProText_Regular.ttf",
+      "bold": true,
+      "italics": false,
+      "alight": "center",
+      "maxLineWidth": 300
+    },
+    "colorComponent": {
+      "color": [0, 0, 0]
+    }
+  },
+  "proceedBtn": {
+    "transformComponent": {
+      "anchor": [ 0.5, 0.5 ],
+      "pivot": [ 0.3, 0.25 ],
+      "position": [0, 0]
+    },
+    "spriteComponent": {
+      "image": "images/windows/notifyWindow/redBtn.png"
+    }
+  },
+  "proceedBtnLbl": {
+    "transformComponent": {
+      "anchor": [ 0.5, 0.5 ],
+      "pivot": [ 0.5, 1.0 ],
+      "position": [0, -40]
+    },
+    "labelComponent": {
+      "text": "Delete",
+      "fontType": "ttf",
+      "fontSize": 24.0,
+      "fontFile": "fonts/SFProText_Regular.ttf",
+      "bold": true,
+      "italics": false,
+      "alight": "center",
+      "maxLineWidth": 300
+    },
+    "colorComponent": {
+      "color": [255, 255, 255]
+    }
+  }
+}

@@ -10,7 +10,7 @@
 	path = cocos2d
 	url = git@github.com:gloomyzen/cocos2d.git
 	branch = master
-[submodule "Classes/common"]
-	path = Classes/common
+[submodule "src/common"]
+	path = src/common
 	url = git@github.com:gloomyzen/cocos2d-common.git
 	branch = master

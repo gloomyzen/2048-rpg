@@ -4,7 +4,7 @@
 #### Project submodules structure:
 
 - (root) [Current game project](https://github.com/gloomyzen/2048-rpg)
-- (Classes/common) [Common modules for all games](https://github.com/gloomyzen/cocos2d-common)
+- (src/common) [Common modules for all games](https://github.com/gloomyzen/cocos2d-common)
 - (cocos2d) [Modified core](https://github.com/gloomyzen/cocos2d)
 - (lib/dragonbones) [dragonBones for cocos2d v4](https://github.com/gloomyzen/cocos2d-dragonbones)
 - (lib/imgui) [ImGui for cocos2d v4](https://github.com/gloomyzen/cocos2d-x-imgui)
@@ -16,8 +16,7 @@ cd 2048-rpg
 ```
 
 #### Install cocos2d v4:
-1. Install CMake on your system
-2. Install Python 2.7 on your system
+1. Install Boost, CMake and Python 2.7 on your system
 2. Install VS for win32 or XCode for macOS
 3. Download Cocos2d-x (cocos2d-x-4.0.zip) from www.cocos2d-x.org and unzip it in a folder that you want.
 For example, for Win32 -> unzip to C:/bin/cocos2dx, for MacOs /Application/Develpment/cocos2dx
@@ -25,7 +24,7 @@ For example, for Win32 -> unzip to C:/bin/cocos2dx, for MacOs /Application/Devel
 
 #### Build from sources :
 ```bash
-cd 2048-rpg
+mkdir build && cd build
 cmake .. -DDEBUG=1
 make -j$(nproc)
 ```
@@ -34,14 +33,14 @@ make -j$(nproc)
 
 For XCode - mac project
 ```bash
-cd 2048-rpg/proj.ios_mac/mac/
+cd proj.ios_mac/mac/
 cmake ../.. -GXcode -DDEBUG=1
 sudo xcode-select --reset
 ```
 
 For XCode - ios project
 ```bash
-cd 2048-rpg/proj.ios_mac/ios/
+cd proj.ios_mac/ios/
 cmake ../.. -GXcode -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_SYSROOT=iphoneos
 sudo xcode-select --reset
 ```
@@ -50,7 +49,7 @@ For Visual Studio Community 2019
 ```bash
 mkdir build && cd build
 cmake .. -G"Visual Studio 16 2019" -Tv142 -A Win32 -DDEBUG=1
-and open .sln file from `proj.win32` folder
+and open .sln file from `build` folder
 ```
 
 For Android studio:

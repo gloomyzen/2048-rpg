@@ -4,16 +4,6 @@
       "position": [ 200, 200 ],
       "size": [ 128, 128 ],
       "scale": 1
-    },
-    "gridComponent": {
-      "marginX": [ 5, 5 ],
-      "marginY": [ 5, 5 ],
-      "paddingX": [ 5, 5 ],
-      "paddingY": [ 5, 5 ],
-      "col": 1,
-      "row": 4,
-      "direction": "horizontal",
-      "align": "left"
     }
   },
   "spriteNode": {
@@ -37,7 +27,7 @@
       "fontSize": 24.0,
       "fontFile": "fonts/arial.ttf",
       "bold": true,
-      "italics": true,
+      "italic": true,
       "alight": "center",
       "maxLineWidth": 200
     }

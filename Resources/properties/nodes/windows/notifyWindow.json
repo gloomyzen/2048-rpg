@@ -1,0 +1,36 @@
+{
+  "type": "node",
+  "name": "notifyWindow",
+  "child": [
+    {
+      "type": "scale9sprite",
+      "name": "bg",
+      "child": [
+        {
+          "type": "label",
+          "name": "windowText"
+        },
+        {
+          "type": "soundButton",
+          "name": "proceedBtn",
+          "child": [
+            {
+              "type": "label",
+              "name": "proceedBtnLbl"
+            }
+          ]
+        },
+        {
+          "type": "soundButton",
+          "name": "closeBtn",
+          "child": [
+            {
+              "type": "label",
+              "name": "closeBtnLbl"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

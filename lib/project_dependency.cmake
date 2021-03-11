@@ -1,18 +1,4 @@
-#------------------------------------------------------------------------------
-#                       General Projects Settings
-#------------------------------------------------------------------------------
-include(${CMAKE_SOURCE_DIR}/cmake/StandardProjectSettings.cmake)
-# General dependency target
-add_library(project_dependency ${CMAKE_SOURCE_DIR}/lib/empty.h ${CMAKE_SOURCE_DIR}/lib/empty.cpp)
-#add_library(project_options ${CMAKE_SOURCE_DIR}/lib/empty.cpp)
-#add_library(project_warning ${CMAKE_SOURCE_DIR}/lib/empty.h ${CMAKE_SOURCE_DIR}/lib/empty.cpp)
-
-#------------------------------------------------------------------------------
-#                         CMake modules and options
-#------------------------------------------------------------------------------
-
 include(ExternalProject)
-
 # sanitizer options if supported by compiler
 #include(${CMAKE_SOURCE_DIR}/cmake/Sanitizers.cmake)
 #enable_sanitizers(project_options)
@@ -23,6 +9,22 @@ include(ExternalProject)
 
 # allow for static analysis options
 include(${CMAKE_SOURCE_DIR}/cmake/StaticAnalyzers.cmake)
+
+include(${CMAKE_SOURCE_DIR}/cmake/CompilerWarnings.cmake)
+#------------------------------------------------------------------------------
+#                       General Projects Settings
+#------------------------------------------------------------------------------
+include(${CMAKE_SOURCE_DIR}/cmake/StandardProjectSettings.cmake)
+# General dependency target
+add_library(project_dependency ${CMAKE_SOURCE_DIR}/lib/empty.h ${CMAKE_SOURCE_DIR}/lib/empty.cpp)
+#add_library(project_options ${CMAKE_SOURCE_DIR}/lib/empty.cpp)
+#add_library(project_warning ${CMAKE_SOURCE_DIR}/lib/empty.h ${CMAKE_SOURCE_DIR}/lib/empty.cpp)
+#set_project_warnings(project_dependency warning)
+
+#------------------------------------------------------------------------------
+#                         CMake modules and options
+#------------------------------------------------------------------------------
+
 
 #TODO change target to project files
 # Add as many warning as possible in debug:
@@ -53,11 +55,13 @@ if (${DEBUG})
     include(${CMAKE_SOURCE_DIR}/lib/imgui/CMakeLists.txt)
     add_definitions(-DIMGUI_ENABLED) # <- new cast definition
     target_link_libraries(project_dependency INTERFACE cc_imgui)
+#    set_project_warnings(cc_imgui warning)
 endif ()
 
 #------------------------------------------------------------------------------
 #                               deprecated: Rapidjson
 #------------------------------------------------------------------------------
+# This is not used, because cocos2d have rapidjson
 #if (NOT EXISTS ${CMAKE_SOURCE_DIR}/lib/rapidjson/include)
 #    message(FATAL_ERROR "Rapidjson not found, download lib/rapidjson or use 'git submodules update'.")
 #endif()
@@ -74,12 +78,9 @@ if (NOT EXISTS ${CMAKE_SOURCE_DIR}/lib/dragonBones/DragonBonesHeaders.h)
     message(FATAL_ERROR "DragonBones not found, check folder lib/dragonBones.")
 endif()
 include(${CMAKE_SOURCE_DIR}/cmake/DragonBones.cmake)
-
-#target_include_directories(dragonbones_target INTERFACE
-#        $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/lib/dragonBones/>
-#        )
 target_link_libraries(dragonbones_target PRIVATE cocos2d)
 target_link_libraries(project_dependency INTERFACE dragonbones_target)
+#set_project_warnings(dragonbones_target warning)
 
 #------------------------------------------------------------------------------
 #                               Build Interface for all dependency
