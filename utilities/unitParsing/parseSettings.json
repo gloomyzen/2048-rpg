@@ -1,0 +1,122 @@
+{
+  "spreadsheetId": "1DiBTgsxEeixZEBp7g3QeuZdpqwz0UpSoewHUiLoGjqo",
+  "dbFile": "../Resources/properties/database/characters/db.json",
+  "pages": [
+    {
+      "sheetId": 0,
+      "findDiapason": "A2:K",
+      "name": "heroes",
+      "output": "../Resources/properties/database/characters/heroes/db.json",
+      "dataStruct": [
+        {
+          "index": 0,
+          "output": "id"
+        },
+        {
+          "index": 1,
+          "output": "code"
+        },
+        {
+          "index": 2,
+          "output": "class"
+        },
+        {
+          "index": 3,
+          "output": "health"
+        },
+        {
+          "index": 4,
+          "output": "mana"
+        },
+        {
+          "index": 5,
+          "output": "armor"
+        },
+        {
+          "index": 6,
+          "output": "defense"
+        },
+        {
+          "index": 7,
+          "output": "spellPower"
+        },
+        {
+          "index": 8,
+          "output": "stamina"
+        },
+        {
+          "index": 9,
+          "output": "intelligence"
+        },
+        {
+          "index": 10,
+          "output": "spirit"
+        }
+      ]
+    },
+    {
+      "sheetId": 1,
+      "findDiapason": "A2:F",
+      "name": "statsValues",
+      "output": "../Resources/properties/database/characters/stats/db.json",
+      "dataStruct": [
+        {
+          "index": 0,
+          "output": "class"
+        },
+        {
+          "index": 1,
+          "output": "defence"
+        },
+        {
+          "index": 2,
+          "output": "spellPower"
+        },
+        {
+          "index": 3,
+          "output": "stamina"
+        },
+        {
+          "index": 4,
+          "output": "intelligence"
+        },
+        {
+          "index": 5,
+          "output": "spirit"
+        }
+      ]
+    },
+    {
+      "sheetId": 2,
+      "findDiapason": "A2:F",
+      "name": "levelUpStats",
+      "output": "../Resources/properties/database/characters/levelUp/db.json",
+      "dataStruct": [
+        {
+          "index": 0,
+          "output": "class"
+        },
+        {
+          "index": 1,
+          "output": "defence"
+        },
+        {
+          "index": 2,
+          "output": "spellPower"
+        },
+        {
+          "index": 3,
+          "output": "stamina"
+        },
+        {
+          "index": 4,
+          "output": "intelligence"
+        },
+        {
+          "index": 5,
+          "output": "spirit"
+        }
+      ]
+    }
+  ]
+}
