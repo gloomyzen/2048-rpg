@@ -1,12 +1,12 @@
 {
   "spreadsheetId": "1DiBTgsxEeixZEBp7g3QeuZdpqwz0UpSoewHUiLoGjqo",
-  "dbFile": "../Resources/properties/database/characters/db.json",
+  "dbFile": "../../Resources/properties/database/characters/db.json",
   "pages": [
     {
       "sheetId": 0,
       "findDiapason": "A2:K",
       "name": "heroes",
-      "output": "../Resources/properties/database/characters/heroes/db.json",
+      "output": "../../Resources/properties/database/characters/heroes/db.json",
       "dataStruct": [
         {
           "index": 0,
@@ -58,7 +58,7 @@
       "sheetId": 1,
       "findDiapason": "A2:F",
       "name": "statsValues",
-      "output": "../Resources/properties/database/characters/stats/db.json",
+      "output": "../../Resources/properties/database/characters/stats/db.json",
       "dataStruct": [
         {
           "index": 0,
@@ -90,7 +90,7 @@
       "sheetId": 2,
       "findDiapason": "A2:F",
       "name": "levelUpStats",
-      "output": "../Resources/properties/database/characters/levelUp/db.json",
+      "output": "../../Resources/properties/database/characters/levelUp/db.json",
       "dataStruct": [
         {
           "index": 0,
