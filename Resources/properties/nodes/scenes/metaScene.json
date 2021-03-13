@@ -1,0 +1,10 @@
+{
+  "type": "node",
+  "name": "metaScene",
+  "child": [
+    {
+      "type": "sprite",
+      "name": "spriteNode"
+    }
+  ]
+}
