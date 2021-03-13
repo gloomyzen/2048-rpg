@@ -1,0 +1,9 @@
+#include "metaScene.h"
+
+using namespace sr::metaModule;
+
+
+metaScene::metaScene() {
+    this->setName("metaScene");
+    loadProperty("scenes/" + this->getName(), dynamic_cast<Node*>(this));
+}

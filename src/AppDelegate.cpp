@@ -11,6 +11,7 @@
 //widgets
 #include "interfaceModule/customNodeTypes.h"
 //all scenes
+#include "metaModule/metaScene.h"
 //todo
 
 #define USE_AUDIO_ENGINE 1
@@ -100,8 +101,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     sr::interfaceModule::customNodeTypes::registerAllCustomNodes();
     // register all states
     GET_SCENES_FACTORY().registerState("metaScene", [](Layer* node)->Layer*{
-//           auto scene = new sr::metaScene::metaScene();
-//           node->addChild(scene);
+           auto scene = new sr::metaModule::metaScene();
+           node->addChild(scene);
            return node;
     });
 
